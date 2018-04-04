@@ -1,3 +1,10 @@
+---
+lang: en
+otherlangs: he
+ucharclcasses: true
+hebrewfont: Cardo
+...
+
 # Creating the Conversational Hebrew Vocabulary List (CHVL)
 
 

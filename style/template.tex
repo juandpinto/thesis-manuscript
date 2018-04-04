@@ -150,6 +150,14 @@ $if(lang)$
 \else
   \usepackage[$lang$]{babel}
 \fi
+\ifxetex
+  \usepackage{ucharclasses}
+
+  \newfontfamily{\hebrewfont}[Script=Hebrew]{Cardo}
+
+  \setTransitionTo{Hebrew}{\begingroup\hebrewfont}
+  \setTransitionFrom{Hebrew}{\endgroup}
+\fi
 $endif$
 
 $if(title)$
