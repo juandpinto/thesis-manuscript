@@ -1,8 +1,8 @@
 # Appendix 2: Scripts {.unnumbered}
 
-## Appendix 2.1: HebrewLemmaCount.py
+## Appendix 2.1: HebrewLemmaCount.py {.unnumbered}
 
-``` {#HebrewLemmaCount.py .python .numberLines}
+``` {#HebrewLemmaCount .python .numberLines}
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -223,10 +223,10 @@ result.close()
 
 
 
+\newpage
+## Appendix 2.2: OMDb-fetch.py {.unnumbered}
 
-## Appendix 2.2: OMDb-fetch.py
-
-``` {#OMDb-fetch.py .python .numberLines}
+``` {#OMDb-fetch .python .numberLines}
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -287,4 +287,35 @@ for i in dirs:
         print(doc['title'] + '\t' +
               doc['year'] + '\t' +
               doc['language'])
+```
+
+
+
+
+\newpage
+## Appendix 2.3: single_file_extract.py {.unnumbered}
+
+``` {#single_file_extract .python .numberLines}
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import shutil
+import os
+
+source = '../OpenSubtitles2018_parsed'
+destination = './OpenSubtitles2018_parsed_single'
+
+# Copy the directory tree into a new location
+shutil.copytree(source, destination, ignore=shutil.ignore_patterns('*.*'))
+
+# Copy the first file in each folder into the new tree
+for dirName, subdirList, fileList in os.walk(source):
+    for fname in fileList:
+        if fname == '.DS_Store':
+            fileList.remove(fname)
+    if len(fileList) > 0:
+        del fileList[1:]
+        src = dirName + '/' + fileList[0]
+        dst = destination + dirName[27:] + '/'
+        shutil.copy2(src, dst)
 ```
