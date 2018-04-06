@@ -161,17 +161,17 @@ def open_and_read(file_loc):
 ```
 
 ``` {#HebrewLemmaCount .python .numberLines startFrom="44"}
-# Search for lemmas and add counts to "lemma_by_corpus_dict{}".
+# Search for lemmas and add counts to "lemma_by_file_dict{}".
 def find_and_count(doc):
-    corpus = str(f)[38:-4]
+    file = str(f)[40:-3]
     match_pattern = re.findall(r'lemma="[א-ת]+"', doc)
     for word in match_pattern:
-        if word[7:-1] in lemma_by_corpus_dict:
-            count = lemma_by_corpus_dict[word[7:-1]].get(corpus, 0)
-            lemma_by_corpus_dict[word[7:-1]][corpus] = count + 1
+        if word[7:-1] in lemma_by_file_dict:
+            count = lemma_by_file_dict[word[7:-1]].get(file, 0)
+            lemma_by_file_dict[word[7:-1]][file] = count + 1
         else:
-            lemma_by_corpus_dict[word[7:-1]] = {}
-            lemma_by_corpus_dict[word[7:-1]][corpus] = 1
+            lemma_by_file_dict[word[7:-1]] = {}
+            lemma_by_file_dict[word[7:-1]][file] = 1
 ```
 
 We then run both of these functions for each XML file in the corpus directory (defined earlier in `corpus_path`).
@@ -183,40 +183,112 @@ for dirName, subdirList, fileList in os.walk(corpus_path):
         find_and_count(open_and_read(f))
 ```
 
-The `find_and_count()`{.python} function finds each instance of the string described above using a regular expression, then adds the Hebrew part of the string—the lemma itself—to a dictionary. The dictionary is named `lemma_by_corpus_dict`, and its structure looks like this:
+The `find_and_count()`{.python} function finds each instance of the string described above using a regular expression, then adds the Hebrew part of the string—the lemma itself—to a dictionary. The dictionary is named `lemma_by_file_dict`, and its structure looks like this:
 
 ```{.sh}
 'lemma': {'path of file': 'frequency of lemma in file'}
 ```
 
-A dictionary is essentially a list of key:value pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
+A dictionary is at its core a list of key:value pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
 
 After the script reads each file, it returns a complete dictionary. Here is a sample:
 
 ```
 'ב': {
-        '/he/0/5753574/6853341.xm': 168,
-        '/he/0/3607000/5764778.xm': 94},
+        '/he/0/5753574/6853341.xml': 168,
+        '/he/0/3607000/5764778.xml': 94},
 'פרק': {
-        '/he/0/5753574/6853341.xm': 3},
+        '/he/0/5753574/6853341.xml': 3},
 'קודם': {
-        '/he/0/5753574/6853341.xm': 6,
-        '/he/0/3607000/5764778.xm': 2,
-        '/he/0/1278351/3777598.xm': 1}
+        '/he/0/5753574/6853341.xml': 6,
+        '/he/0/3607000/5764778.xml': 2,
+        '/he/0/1278351/3777598.xml': 1}
 ```
 
 Throughout the rest of the script, this nested dictionary serves as the basis for all of the calculations needed.
 
 
-## Calculations, sorting, and export
+## Calculations
 
-The final word list needs to be sorted by U~DP~ (dispersion), and it needs to also include range and raw frequency for each lemma. Let's look at each of these in turn.
+For each lemma, the CHVL includes three measures: frequency, range, and U~DP~ (dispersion). It uses dispersion as its sorting value. Let's look at how each of these is calculated. Range will be addressed in the export section, since the script calculates it on the spot as the list is created.
+
 
 ### Frequency
 
+Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straight forward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, {'lemma1':'frequency1', 'lemma2':'frequency2', . . . }
 
+``` {#HebrewLemmaCount .python .numberLines startFrom="116"}
+for lemma in lemma_by_file_dict:
+    lemma_totals_dict[lemma] = sum(lemma_by_file_dict[lemma].values())
+```
+
+This returns Using the short example given above, this would result in the following dictionary:
+
+```
+262:'ב',
+3:'פרק',
+9:'קודם'
+```
 
 
 ### U~DP~ (dispersion)
 
-Dispersion, as a combined measure of frequency and range, needs to take the latter two into account.
+Dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. There is no agreed-upon, single way to calculate dispersion, and different researchers will use the words in slightly different contexts.<!-- source --> The model of dispersion I have chosen to follow for this project is Gries' dispersion coefficient, or U~DP~, (<!-- source -->) calculated from Gries' DP. (<!-- source -->)
+
+In order to calculate Gries' DP for lemma~x~, we must first make two calculations for each file in the corpus (file~i~): the lemma's *expected frequency* if it were perfectly distributed, and its *observed frequency*—or its actual frequency.
+
+$$\textbf{expected frequency}\ =\ \frac{tokens\ in\ file_i}{tokens\ in\ corpus}$$
+
+$$\textbf{observed frequency}\ =\ \frac{frequency\ of\ lemma_x\ in\ file_i}{frequency\ of\ lemma_x\ in\ corpus}$$
+
+We must then subtract the lemma's observed frequency from its expected frequency, which will return a value between -1 and 1. We can normalize this result by finding the absolute value. Now the closer the result is to 0, the closer that lemma's frequency is in that particular file to what we would expect if it were perfectly distributed throughout the corpus. A higher number (closer to 1), would indicate a heavier load in that file that we would expect.
+
+By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values originally in both directions), we now have Gries' DP. Where `n` is the number of files:
+
+$$\textbf{DP}\ =\ 0.5 \sum_{i=1}^{n} |\ \text{expected frequency}\ -\ \text{observed frequency}\ |$$
+
+A DP of 0 represents a perfectly even dispersion, and a DP close to 1 means a more uneven distribution, where fewer files contain a larger load of the lemma's overall frequency. A DP of 1 is not actually possible.
+
+Gries' usage coefficient, or U~DP~, is an attempt to make this number more useful. DP is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for U~DP~ is as follows:
+
+$$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
+
+In order to calculate this, the script must first find the number of tokens in each file. Like before, this is done by creating a dictionary, `token_count_dict`, which contains the key:value pairs of file:tokens. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="120"}
+for lemma in lemma_by_file_dict:
+    for file in lemma_by_file_dict[lemma]:
+        token_count_dict[file] = token_count_dict.get(
+            file, 0) + lemma_by_file_dict[lemma][file]
+```
+
+We also need to know the total number of tokens in the entire corpus. This is a simple matter of adding all the values in the `token_count_dict` dictionary. The final count is saved into an integer variable, `total_tokens_int`.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="126"}
+for file in token_count_dict:
+    total_tokens_int = total_tokens_int + token_count_dict.get(file, 0)
+```
+
+Finally, the script uses all these measures to calculate DP and then U~DP~ for each lemma, and places them into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="129"}
+# Calculate DPs
+for lemma in lemma_by_file_dict.keys():
+    for file in lemma_by_file_dict[lemma].keys():
+        lemma_DPs_dict[lemma] = lemma_DPs_dict[lemma] + abs(
+            (token_count_dict[file] /
+             total_tokens_int) -
+            (lemma_by_file_dict[lemma][file] /
+             lemma_totals_dict[lemma]))
+lemma_DPs_dict = {lemma: DP/2 for (lemma, DP) in lemma_DPs_dict.items()}
+
+# Calculate UDPs
+lemma_UDPs_dict = {lemma: 1-DP for (lemma, DP) in lemma_DPs_dict.items()}
+```
+
+With these values all calculated for each lemma, the only thing left is to sort and create the final list.
+
+
+## Sort and export
+
+By using U~DP~ as its sorting value, the CHVL takes into account both relevant measures of frequency and dispersion. This leads to a more objective list that doesn't require discarding high-frequency words based on an arbitrary value of dispersion deemed as too low, as some have suggested.<!-- sources -->

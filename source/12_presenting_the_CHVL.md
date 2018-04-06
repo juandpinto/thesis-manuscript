@@ -1,4 +1,4 @@
-# Presenting the CHVL: A vocabulary list of conversational Modern Hebrew
+# The CHVL: A vocabulary list of conversational Modern Hebrew
 
 ## Organization
 
