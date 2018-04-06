@@ -93,7 +93,7 @@ Zipped folder in GZ format
            └── Zipped XML in GZ format
 ```
 
-This organization is straight-forward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [Open Subtitles]() project (hence the name of the corpus).<!-- reference --> Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true.
+This organization is straight-forward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [Open Subtitles]() project (hence the name of the corpus).<!-- reference --> Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
 
 Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [Appendix 3.3](link?). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
@@ -131,8 +131,92 @@ for dirName, subdirList, fileList in os.walk(source):
         shutil.copy2(src, dst)
 ```
 
+With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of that entire process can be found in section [4.4.1 - using original-language movies exclusively]().
+
 
 ## Reading data
 
+Before calculating any measures such as frequency, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case we would be creating a list of all *values* in the `'lemma'` *key* within each `<w>` *tag*. The value that corresponds to the `'lemma'` tag below for the word אומר is אמר.
 
-## Counting and calculating
+``` {.xml}
+<w xpos="VERB" head="0" feats="Gender=Masc|HebBinyan=PAAL|Number=Sing|
+    Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" misc="SpaceAfter=No"
+    lemma="אמר" id="49.3" deprel="root">אומר</w>
+```
+
+A different approach is to use *regular expressions* to search for a specific string of characters and extract every instance of that string. This is a more brute-force approach, since it ignores the structure of the XML file and treats it all simply as raw text. To find a lemma, a very simple regular expression is sufficient: `lemma="[א-ת]+"`. This will search for any instance of the characters `lemma="`, followed by a combination of any number of Hebrew letters (at least one), followed by the character `"`.
+
+Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmaticized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
+
+I will now explain the code in the script used to create the CHVL. As with the other code, the entire script in its entirety can be found in the appendix ([2.1]()).
+
+After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="37"}
+# Open XML file and read it.
+def open_and_read(file_loc):
+    with gzip.open(file_loc, 'rt', encoding='utf-8') as f:
+        read_data = f.read()
+    return read_data
+```
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="44"}
+# Search for lemmas and add counts to "lemma_by_corpus_dict{}".
+def find_and_count(doc):
+    corpus = str(f)[38:-4]
+    match_pattern = re.findall(r'lemma="[א-ת]+"', doc)
+    for word in match_pattern:
+        if word[7:-1] in lemma_by_corpus_dict:
+            count = lemma_by_corpus_dict[word[7:-1]].get(corpus, 0)
+            lemma_by_corpus_dict[word[7:-1]][corpus] = count + 1
+        else:
+            lemma_by_corpus_dict[word[7:-1]] = {}
+            lemma_by_corpus_dict[word[7:-1]][corpus] = 1
+```
+
+We then run both of these functions for each XML file in the corpus directory (defined earlier in `corpus_path`).
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="64"}
+for dirName, subdirList, fileList in os.walk(corpus_path):
+    if len(fileList) > 0:
+        f = dirName + '/' + fileList[0]
+        find_and_count(open_and_read(f))
+```
+
+The `find_and_count()`{.python} function finds each instance of the string described above using a regular expression, then adds the Hebrew part of the string—the lemma itself—to a dictionary. The dictionary is named `lemma_by_corpus_dict`, and its structure looks like this:
+
+```{.sh}
+'lemma': {'path of file': 'frequency of lemma in file'}
+```
+
+A dictionary is essentially a list of key:value pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
+
+After the script reads each file, it returns a complete dictionary. Here is a sample:
+
+```
+'ב': {
+        '/he/0/5753574/6853341.xm': 168,
+        '/he/0/3607000/5764778.xm': 94},
+'פרק': {
+        '/he/0/5753574/6853341.xm': 3},
+'קודם': {
+        '/he/0/5753574/6853341.xm': 6,
+        '/he/0/3607000/5764778.xm': 2,
+        '/he/0/1278351/3777598.xm': 1}
+```
+
+Throughout the rest of the script, this nested dictionary serves as the basis for all of the calculations needed.
+
+
+## Calculations, sorting, and export
+
+The final word list needs to be sorted by U~DP~ (dispersion), and it needs to also include range and raw frequency for each lemma. Let's look at each of these in turn.
+
+### Frequency
+
+
+
+
+### U~DP~ (dispersion)
+
+Dispersion, as a combined measure of frequency and range, needs to take the latter two into account.

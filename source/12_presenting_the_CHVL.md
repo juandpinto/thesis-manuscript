@@ -12,7 +12,7 @@
 ## Challenges and future direction
 
 
-#### Using original-language movies exclusively
+### Using original-language movies exclusively
 
 One of the potential downsides of using the OpenSubtitles2018 corpus is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as well as an original script?
 
