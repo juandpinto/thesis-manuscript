@@ -2,8 +2,30 @@
 
 # Methods: Creating the Conversational Hebrew Vocabulary List (CHVL)
 
-
 ## Overview
+
+As we have seen, the brunt of the effort in high-quality vocabulary frequency list creation has been in the creation of *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, the quality of lists is difficult to assess, if they exist at all. Why have not more educators—those who may benefit from these lists the most—decided to undertake such a task?
+
+This need not be a project that one starts from scratch every time. Many tools already exist to make the process smoother. Still, with the rapid pace at which technology changes, these tools tend to quickly become obsolete. They are also usually restrictive to the specific preferences of their creators.
+
+Rather than using these tools, I chose to create a series of (almost embarrassingly-) simple scripts to create the Conversational Hebrew Vocabulary List.
+
+I wrote all of these scripts using the programming language Python. Python was created specifically to be
+
+
+
+<!-- - Python: readable, easy to learn
+- Educators can modify scripts with only rudimentary knowledge of Python.
+- Repository, reproducibility, open-source.
+    - List as well.
+- Educators working together. -->
+
+
+
+
+Beyond explaining the theory behind the decisions that have gone into creating the Conversational Hebrew Vocabulary List, this thesis aims to make the process as reproducible as possible.
+
+
 
 ## The corpus
 
@@ -293,4 +315,42 @@ With these values all calculated for each lemma, the only thing left is to sort 
 
 ## Sort and export
 
-By using U~DP~ as its sorting value, the CHVL takes into account both relevant measures of frequency and dispersion. This leads to a more objective list that doesn't require discarding high-frequency words based on an arbitrary value of dispersion deemed as too low, as some have suggested.<!-- sources -->
+In order to ensure that the words on the list do not have an abnormally high frequency in some subcorpora (movies) and are nearly absent in others, some have suggested setting a minimum range or dispersion.<!-- sources --> All words that fall below this threshold are discarded, and the remaining words can then be sorted by frequency.
+
+Though this is a more systematic approach than that used to create many early frequency lists, it still depends on a subjective decision and the whim of the researcher.<!-- sources -->
+
+Rather than setting an arbitrary bar, the CHVL is sorted entirely by Gries' usage coefficient of dispersion (U~DP~). This *modus operandi* ensures that the order of words itself—not just which words make it onto the list and which don't—is decided by a combination of both relevant measures: frequency and dispersion. This approach also has the added benefit of being entirely objective.
+
+Since we've already calculated the U~DP~ for each lemma, sorting the list is simple.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="148"}
+UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
+    lemma_UDPs_dict, key=lemma_UDPs_dict.__getitem__,
+    reverse=True)]
+```
+
+A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its overall frequency, its range, and its U~DP~. This table is already sorted by U~DP~ as it's being created.
+
+Because the script has not calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly counts the number of files included in the `lemma_by_file_dict`. Here is the resulting code:
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="153"}
+for k, v in UDP_sorted_list[:list_size_int]:
+    table_list.append((k, lemma_totals_dict[k], sum(
+        1 for count in lemma_by_file_dict[k].values() if count > 0),
+        v))
+```
+
+Lastly, now that everything is organized into a table, the script opens (or creates, if it doesn't yet exist) a CSV file, writes a header line into it (`LEMMA, FREQUENCY, RANGE, UDP`), and exports the entire table into the file. It then closes it to clear the computer's memory cache.
+
+``` {#HebrewLemmaCount .python .numberLines startFrom="199"}
+result = open('./export/WordList.csv', 'w')
+result.write('LEMMA, FREQUENCY, RANGE, UDP\n')
+for i in range(list_size_int):
+    result.write(str(table_list[i][0]) + ', ' +
+                 str(table_list[i][1]) + ', ' +
+                 str(table_list[i][2]) + ', ' +
+                 str(table_list[i][3]) + '\n')
+result.close()
+```
+
+The list is now complete. The next section will explore the list itself more in-depth.
