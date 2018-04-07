@@ -1,3 +1,5 @@
+\newpage
+
 # The CHVL: A vocabulary list of conversational Modern Hebrew
 
 ## Organization

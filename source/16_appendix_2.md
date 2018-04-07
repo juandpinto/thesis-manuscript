@@ -1,3 +1,5 @@
+\newpage
+
 # Appendix 2: Scripts {.unnumbered}
 
 ## Appendix 2.1: HebrewLemmaCount.py {.unnumbered}

@@ -33,8 +33,8 @@ pdf:
 	--csl="$(STYLEDIR)/ref_format.csl" \
 	--highlight-style pygments \
 	-V fontsize=12pt \
-	-V papersize=a4paper \
-	-V documentclass=report \
+	-V papersize=letterpaper \
+	-V documentclass=article \
 	-N \
 	--pdf-engine=xelatex \
 	--verbose
@@ -45,7 +45,7 @@ tex:
 	-H "$(STYLEDIR)/preamble.tex" \
 	--bibliography="$(BIBFILE)" \
 	-V fontsize=12pt \
-	-V papersize=a4paper \
+	-V papersize=letterpaper \
 	-V documentclass=report \
 	-N \
 	--csl="$(STYLEDIR)/ref_format.csl" \

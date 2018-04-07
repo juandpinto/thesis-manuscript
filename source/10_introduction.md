@@ -1,3 +1,6 @@
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 # Introduction
 
 <!--

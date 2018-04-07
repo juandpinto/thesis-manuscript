@@ -1,3 +1,5 @@
+\newpage
+
 # Methods: Creating the Conversational Hebrew Vocabulary List (CHVL)
 
 

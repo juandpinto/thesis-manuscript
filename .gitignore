@@ -58,3 +58,9 @@ target/
 
 # Node modules
 node_modules/
+
+# Extras
+.travis.yml
+Gruntfile.js
+fabfile.py
+package.json
