@@ -4,27 +4,21 @@
 
 ## Overview
 
-As we have seen, the brunt of the effort in high-quality vocabulary frequency list creation has been in the creation of *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, the quality of lists is difficult to assess, if they exist at all. Why have not more educators—those who may benefit from these lists the most—decided to undertake such a task?
+As we have seen, the brunt of the work in high-quality vocabulary frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it's difficult to find well-researched word lists, if they exist at all. Why have not more educators—those who may benefit from these lists the most—decided to undertake such a task?
 
 This need not be a project that one starts from scratch every time. Many tools already exist to make the process smoother. Still, with the rapid pace at which technology changes, these tools tend to quickly become obsolete. They are also usually restrictive to the specific preferences of their creators.
 
-Rather than using these tools, I chose to create a series of (almost embarrassingly-) simple scripts to create the Conversational Hebrew Vocabulary List.
+Rather than using these tools, I chose to create a series of simple scripts to create the Conversational Hebrew Vocabulary List.
 
-I wrote all of these scripts using the programming language Python. Python was created specifically to be
+The two most widely-used languages for the type of data analysis involved in a word list creation are Python and R. I chose to use Python for this project. Python was designed specifically to be a very readable programming language. That is, it is easy to read and understand the purpose and flow of the code. This was one of my primary reasons for choosing to use it, since it increases the ease with which this project can be reproduced by other researchers and educators to create their own word lists. R, on the other hand, requires a deeper familiarity with the syntax and conventions of the language in order to understand.
 
+The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
 
+Though all of the code is included in this thesis (appendix 2), it can also be found in an online repository at <https://github.com/juandpinto/opus-lemmas>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
 
-<!-- - Python: readable, easy to learn
-- Educators can modify scripts with only rudimentary knowledge of Python.
-- Repository, reproducibility, open-source.
-    - List as well.
-- Educators working together. -->
+Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Conversational Hebrew Vocabulary List, in its entirety, can also be found in the repository.
 
-
-
-
-Beyond explaining the theory behind the decisions that have gone into creating the Conversational Hebrew Vocabulary List, this thesis aims to make the process as reproducible as possible.
-
+This thesis, then, beyond explaining the theory behind the creation of the CHVL, aims to make the process as reproducible as possible. This section contributes to that aim by carefully documenting each step of the process.
 
 
 ## The corpus
@@ -89,7 +83,9 @@ All of the data used to create the CHVL came from a monolingual parsed corpus of
 
 ## Cleaning the corpus
 
-Once downloaded, the files inside the zipped folder are organized as follows:
+Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant cleaning by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list.
+
+The files inside the downloaded folder are organized as follows:
 
 ```
 Zipped folder in GZ format
