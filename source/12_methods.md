@@ -81,9 +81,9 @@ A parsed corpus contains much more information for each token. The data included
 All of the data used to create the CHVL came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically using <!-- ?? -->.
 
 
-## Cleaning the corpus
+## Cleansing the corpus
 
-Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant cleaning by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list.
+Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleansing is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list: deduplication.
 
 The files inside the downloaded folder are organized as follows:
 
@@ -115,7 +115,7 @@ Zipped folder in GZ format
 
 This organization is straight-forward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [Open Subtitles]() project (hence the name of the corpus).<!-- reference --> Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
 
-Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [Appendix 3.3](link?). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
+Part of cleansing the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [Appendix 3.3](link?). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 

@@ -1,3 +1,7 @@
+---
+lang: en
+...
+
 \thispagestyle{empty}
 \strut \vfill
 \begin{center}

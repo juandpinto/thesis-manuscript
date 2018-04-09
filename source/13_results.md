@@ -6,7 +6,7 @@ The Conversational Hebrew Vocabulary List in its entirety can be found as an ele
 
 For discussion purposes, a small sample of the first 20 words is here presented.
 
-|\# |LEMMA   | FREQUENCY| RANGE|UDP                |
+|<!-- . -->|LEMMA   | FREQUENCY| RANGE|U~DP~              |
 |--:|-------:|---------:|-----:|:------------------|
 1   |הוא     |23446109  |43455|0.9480170255915042|
 2   |ל       |5638813   |43448|0.9420130372643667|
@@ -29,15 +29,26 @@ For discussion purposes, a small sample of the first 20 words is here presented.
 19  |ידע     |1202416   |43323|0.8586088803742931|
 20  |אבל     |921757    |42963|0.8519038846130076|
 
+Besides lemmas and their number in the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is the raw frequency, or the total number of times the lemma appears in the OpenSubtitles2018 corpus.<!--I should probably change this to show freq/million tokens--> The range is the number of sub-corpora—or in this case movies—the lemma appears in.
 
-
-
-## Organization
-
-
+The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the methods section above. U~DP~ is also used as the sorting measure for the CHVL.
 
 
 ## Use
+
+The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew. A quick scan of the list reveals some notable items worth discussing.
+
+The most common lemma, "הוא," refers to more than the word הוא itself. All pronouns, such as היא ,אתה, and אנחנו are counted together as part of the lemma "הוא." In fact, even pronominal suffixes such as ך- and כם- are considered a separate lemma than whatever they are attached to, but are listed together under the lemma "הוא". This fact easily accounts for why "הוא" is listed as the most common lemma in the corpus.
+
+Prepositions, including inseparable prepositions such as -ה and -ב are considered independent lemmas, listed respectively as the lemmas "ה" and "ב".
+
+Verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "דיבר" (item 60).
+
+The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
+
+מ and מן are listed separately.
+
+
 
 
 ## Expansion
