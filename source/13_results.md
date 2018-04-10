@@ -2,66 +2,101 @@
 
 # The CHVL: A vocabulary list of conversational Modern Hebrew
 
-The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: <https://github.com/juandpinto/opus-lemmas>. A sample of the first 1,000 words is included in Appendix 1.
+## Overview
 
-For discussion purposes, a small sample of the first 20 words is here presented.
+The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in Appendix 1.
 
-|<!-- . -->|LEMMA   | FREQUENCY| RANGE|U~DP~              |
-|--:|-------:|---------:|-----:|:------------------|
-1   |הוא     |23446109  |43455|0.9480170255915042|
-2   |ל       |5638813   |43448|0.9420130372643667|
-3   |ה       |9850733   |43458|0.929266134661147  |
-4   |ב       |4812778   |43450|0.9292364864789281|
-5   |את      |6846782   |43426|0.9285176069174289|
-6   |לא      |5272808   |43433|0.9145688112131216|
-7   |ש       |3880654   |43439|0.9088900047303463|
-8   |של      |3892328   |43445|0.9067041511201389|
-9   |על      |1766990   |43430|0.9042865019832009|
-10  |זה      |5118759   |43441|0.9015544612816044|
-11  |מה      |2362419   |43403|0.8922532708182579|
-12  |היה     |2579370   |43420|0.8909904417204713|
-13  |מ       |1061614   |43411|0.88900672760779   |
-14  |כול     |1325676   |43414|0.8860074112131449|
-15  |ו       |1906717   |43429|0.8852706380348441|
-16  |יש      |1069358   |43376|0.8770543442171884|
-17  |עם      |839575    |43331|0.8668140051895192|
-18  |אם      |861163    |43321|0.8654587702150129|
-19  |ידע     |1202416   |43323|0.8586088803742931|
-20  |אבל     |921757    |42963|0.8519038846130076|
+For discussion purposes, a small sample of the first 20 items is here presented.
 
-Besides lemmas and their number in the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is the raw frequency, or the total number of times the lemma appears in the OpenSubtitles2018 corpus.<!--I should probably change this to show freq/million tokens--> The range is the number of sub-corpora—or in this case movies—the lemma appears in.
+| <!----> | LEMMA | FREQUENCY | RANGE | U~DP~              |
+|--------:|------:|----------:|------:|:-------------------|
+|       1 |   הוא |  23446109 | 43455 | 0.9480170255915042 |
+|       2 |     ל |   5638813 | 43448 | 0.9420130372643667 |
+|       3 |     ה |   9850733 | 43458 | 0.929266134661147  |
+|       4 |     ב |   4812778 | 43450 | 0.9292364864789281 |
+|       5 |    את |   6846782 | 43426 | 0.9285176069174289 |
+|       6 |    לא |   5272808 | 43433 | 0.9145688112131216 |
+|       7 |     ש |   3880654 | 43439 | 0.9088900047303463 |
+|       8 |    של |   3892328 | 43445 | 0.9067041511201389 |
+|       9 |    על |   1766990 | 43430 | 0.9042865019832009 |
+|      10 |    זה |   5118759 | 43441 | 0.9015544612816044 |
+|      11 |    מה |   2362419 | 43403 | 0.8922532708182579 |
+|      12 |   היה |   2579370 | 43420 | 0.8909904417204713 |
+|      13 |     מ |   1061614 | 43411 | 0.88900672760779   |
+|      14 |   כול |   1325676 | 43414 | 0.8860074112131449 |
+|      15 |     ו |   1906717 | 43429 | 0.8852706380348441 |
+|      16 |    יש |   1069358 | 43376 | 0.8770543442171884 |
+|      17 |    עם |    839575 | 43331 | 0.8668140051895192 |
+|      18 |    אם |    861163 | 43321 | 0.8654587702150129 |
+|      19 |   ידע |   1202416 | 43323 | 0.8586088803742931 |
+|      20 |   אבל |    921757 | 42963 | 0.8519038846130076 |
+
+Besides lemmas and their number in the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is the raw frequency, or the total number of times the lemma appears in the OpenSubtitles2018 corpus.<!--I should probably change this to show freq/million tokens--> The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
 The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the methods section above. U~DP~ is also used as the sorting measure for the CHVL.
+
+The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
+
+For example, the sum of the frequencies of the first 20 lemmas in the sample above (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the CHVL one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's law (see [*Introduction*](10_introduction.md)).
+
+Here is a listing of some important coverages provided by different amounts of lemmas on the CHVL:
+
+*n* Lemmas | Frequency Sum | ÷ Corpus Size | = Coverage
+----------:|:-------------:|:-------------:|:---------:
+       374 |  135,767,644  |  193,755,220  |    70%
+       939 |  155,016,588  |  193,755,220  |    80%
+     4,246 |  174,380,519  |  193,755,220  |    90%
+    13,758 |  184,067,666  |  193,755,220  |    95%
+
+The entire CHVL consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the CHVL covers 90.8% of the corpus from which it is created.
 
 
 ## Use
 
-The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew. A quick scan of the list reveals some notable items worth discussing.
-
-The most common lemma, "הוא," refers to more than the word הוא itself. All pronouns, such as היא ,אתה, and אנחנו are counted together as part of the lemma "הוא." In fact, even pronominal suffixes such as ך- and כם- are considered a separate lemma than whatever they are attached to, but are listed together under the lemma "הוא". This fact easily accounts for why "הוא" is listed as the most common lemma in the corpus.
-
-Prepositions, including inseparable prepositions such as -ה and -ב are considered independent lemmas, listed respectively as the lemmas "ה" and "ב".
-
-Verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "דיבר" (item 60).
-
-The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
-
-מ and מן are listed separately.
+The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
 
 
 
-
-## Expansion
 
 
 ## Challenges and future direction
 
+Throughout the course of this project, I have encountered several issues that are worth discussing. Some of these are questions that require further study in order to address adequately. Others are technical issues related to the complex task of pre-processing and parsing the corpus—something not directly dealt with in this thesis. Others yet are simple suggestions that I simply did not have time to implement given this project's time constraints. And finally, there are limitations that are the inevitable result of the tools at hand.
 
-### Using original-language movies exclusively
+I have divided all of these issues into two categories: methodological challenges of a bigger nature, and functional challenges of a more limited scope.
 
-One of the potential downsides of using the OpenSubtitles2018 corpus is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as well as an original script?
 
-This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the length and mouth shapes that a dubbed script does, its quality still largely depends on the skills of a translator. Most importantly, it's possible that a translation will not accurately reflect the register of the original. Again, these are important points to consider.
+### Methodological challenges
+
+One of the more obvious issues of this project is the use of a corpus of movie subtitles as substitute for a corpus of true conversational language. This issue in a way forms the backbone of the CHVL, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
+
+
+#### Ideal vs. practical corpora
+
+The use of a subtitle corpus has both positive and negative aspects. As mentioned earlier, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language.<!-- sources --> This includes a high level of correlation between the two <!-- sources -->, as well as a strong ability to predict the outcomes of a lexical decision task <!-- sources -->.
+
+One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as *<http://opensubtitles.com>* and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And they already come pre-processed, as an additional incentive for the time-constrained researcher.
+
+This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making this type of data-collection more accessible, the costs remain too high for many less-commonly taught languages as of now. This is largely due to the arduous process of transcribing audio recordings.[@IzreelTranscribingSpokenIsraeli2004]
+
+An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed, spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
+
+The most prominent of these is the [Corpus of Spoken Israeli Hebrew (CoSIH)](http://cosih.com/), created at Tel Aviv University between 2000 and 2002.[@IzreelDesigningCoSIHCorpus2001] Designed and initiated by a team of distinguished scholars, it unfortunately ran out of funding long before its goals were met. The CoSIH website (*<http://cosih.com/>*) makes available to the public a total of 13.5 hours of recorded Hebrew, with just over five hours of it having been transcribed.
+
+Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself.[@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007] At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens. [-@Dekelmattertimetense2010, p.7]
+
+Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, which are addressed below under *Functional challenges*.
+
+Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.[-@Sorellstudyissuestechniques2013]
+
+Are movie and television subtitles an suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as one practical option.
+
+
+#### Using original-language movies exclusively
+
+One of the potential downsides of using the OpenSubtitles2018 corpus not yet discussed is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as faithfully as an original script?
+
+This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, its quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
 One solution is to simply use movies that were originally filmed in the target language of the corpus. In theory, each XML file in a monolingual OpenSubtitles2018 file should contain a tag that identifies the original language of the movie.<!-- cite article --> In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
@@ -121,3 +156,30 @@ print('# ' + year + '\n' +
                 doc['year'] + '\t' +
                 doc['language'])
 ```
+
+
+
+### Functional challenges
+
+
+
+
+A quick scan of the list reveals some notable items.
+
+The most common lemma, "הוא," refers to more than the word הוא itself. All pronouns, such as היא ,אתה, and אנחנו are counted together as part of the lemma "הוא." In fact, even pronominal suffixes such as ך- and כם- are considered a separate lemma than whatever they are attached to, but are listed together under the lemma "הוא". This fact easily accounts for why "הוא" is listed as the most common lemma in the corpus.
+
+Prepositions, including inseparable prepositions such as -ה and -ב are considered independent lemmas, listed respectively as the lemmas "ה" and "ב".
+
+Verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "דיבר" (item 60).
+
+The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
+
+מ and מן are listed separately.
+
+
+
+
+Many of these
+
+
+### Automatic word parsing
