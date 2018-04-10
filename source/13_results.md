@@ -158,19 +158,36 @@ print('# ' + year + '\n' +
 ```
 
 
-
 ### Functional challenges
 
+A quick scan of the CHVL reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
+
+For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of spoken dialogue, its place at the top of the list ceases to be a surprise.<!-- source (Nation) -->
+
+Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (item 19) and "דיבר" (item 60).
+
+Many of the most common lemmas on the CHVL are prepositions. Note that even inseparable prepositions, such as -ה and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה" and "ב".
+
+But what about the flexible spelling conventions of Hebrew, under which one may write דִּבֵּר *he spoke* as either דיבר or דבר? Does the lemma "דבר" (item 27) include the defective spelling of the verb as well, or does it always refer to דָּבָר?
 
 
+#### Textual ambiguity of Hebrew orthography
 
-A quick scan of the list reveals some notable items.
+To answer the above question, yes, the lemma "דבר" does indeed include instances of both.
 
-The most common lemma, "הוא," refers to more than the word הוא itself. All pronouns, such as היא ,אתה, and אנחנו are counted together as part of the lemma "הוא." In fact, even pronominal suffixes such as ך- and כם- are considered a separate lemma than whatever they are attached to, but are listed together under the lemma "הוא". This fact easily accounts for why "הוא" is listed as the most common lemma in the corpus.
 
-Prepositions, including inseparable prepositions such as -ה and -ב are considered independent lemmas, listed respectively as the lemmas "ה" and "ב".
+<!--
 
-Verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "דיבר" (item 60).
+<w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דבר" id="1270.2" deprel="root">דברנו</w>
+
+<w xpos="VERB" head="0" feats="Gender=Fem|HebSource=ConvUncertainHead|Number=Sing|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="2346.4" deprel="root">דברה</w>
+
+
+<w xpos="NOUN" head="463.5" feats="Gender=Masc|Number=Sing" upos="NOUN" lemma="דבר" id="463.9" deprel="nsubj">דבר</w>
+
+
+-->
+
 
 The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
 
