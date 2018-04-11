@@ -1,6 +1,6 @@
 \newpage
 
-# Appendix 1: Conversational Hebrew Vocabulary List (CHVL) {.unnumbered}
+# Appendix 1: Conversational Hebrew Vocabulary List (CHVL) {#appendix-1 .unnumbered}
 
 |LEMMA   | FREQUENCY| RANGE|UDP                |
 |-------:|---------:|-----:|:------------------|

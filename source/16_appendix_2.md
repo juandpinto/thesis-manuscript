@@ -1,8 +1,8 @@
 \newpage
 
-# Appendix 2: Scripts {.unnumbered}
+# Appendix 2: Scripts {#appendix-2 .unnumbered}
 
-## Appendix 2.1: HebrewLemmaCount.py {.unnumbered}
+## Appendix 2.1: HebrewLemmaCount.py {#appendix-2.1 .unnumbered}
 
 ``` {#HebrewLemmaCount .python .numberLines}
 #! /usr/bin/env python3
@@ -226,7 +226,7 @@ result.close()
 
 
 \newpage
-## Appendix 2.2: OMDb-fetch.py {.unnumbered}
+## Appendix 2.2: OMDb-fetch.py {#appendix-2.2 .unnumbered}
 
 ``` {#OMDb-fetch .python .numberLines}
 #! /usr/bin/env python3
@@ -295,7 +295,7 @@ for i in dirs:
 
 
 \newpage
-## Appendix 2.3: single_file_extract.py {.unnumbered}
+## Appendix 2.3: single_file_extract.py {#appendix-2.3 .unnumbered}
 
 ``` {#single_file_extract .python .numberLines}
 #! /usr/bin/env python3

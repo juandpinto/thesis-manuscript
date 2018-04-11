@@ -12,7 +12,7 @@ The two most widely-used languages for the type of data analysis involved in a w
 
 The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
 
-Though all of the code is included in this thesis (appendix 2), it can also be found in an online repository at <https://github.com/juandpinto/opus-lemmas>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
+Though all of the code is included in this thesis ([*Appendix 2*](#appendix-2)), it can also be found in an online repository at <https://github.com/juandpinto/opus-lemmas>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
 
 Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Conversational Hebrew Vocabulary List, in its entirety, can also be found in the repository.
 
@@ -113,7 +113,7 @@ Zipped folder in GZ format
 
 This organization is straight-forward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [Open Subtitles]() project (hence the name of the corpus).<!-- reference --> Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
 
-Part of cleansing the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [Appendix 3.3](link?). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
+Part of cleansing the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [*Appendix 2.3*](#appendix-2.3). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 
@@ -149,7 +149,7 @@ for dirName, subdirList, fileList in os.walk(source):
         shutil.copy2(src, dst)
 ```
 
-With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of that entire process can be found in section [4.4.1 - using original-language movies exclusively]().
+With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of the entire process can be discussed later under [*Using original-language movies exclusively*](#using-original-language-movies-exclusively).
 
 
 ## Reading data
@@ -166,7 +166,7 @@ A different approach is to use *regular expressions* to search for a specific st
 
 Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmaticized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
 
-I will now explain the code in the script used to create the CHVL. As with the other code, the entire script in its entirety can be found in the appendix ([2.1]()).
+I will now explain the code in the script used to create the CHVL. As with the other code, the entire script in its entirety can be found in [*Appendix 2.1*](#appendix-2.1).
 
 After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
 
