@@ -6,7 +6,7 @@
 
 The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix 1*](#appendix-1).
 
-For discussion purposes, a small sample of the first 20 items is here presented.
+For discussion purposes, a small sample of the first 20 items is here presented.<!-- expand to 30 items? and fix formatting -->
 
 | <!----> | LEMMA | FREQUENCY | RANGE | U~DP~              |
 |--------:|------:|----------:|------:|:-------------------|
@@ -162,41 +162,62 @@ print('# ' + year + '\n' +
 
 A quick scan of the CHVL reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
 
-For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of spoken dialogue, its place at the top of the list ceases to be a surprise.<!-- source (Nation) -->
+For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of spoken dialogue (in many languages), its place at the top of the list ceases to be a surprise.<!-- source (Nation) -->
 
 Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (item 19) and "דיבר" (item 60).
 
 Many of the most common lemmas on the CHVL are prepositions. Note that even inseparable prepositions, such as -ה and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה" and "ב".
 
-But what about the flexible spelling conventions of Hebrew, under which one may write דִּבֵּר *he spoke* as either דיבר or דבר? Does the lemma "דבר" (item 27) include the defective spelling of the verb as well, or does it always refer to דָּבָר?
+Other issues, however, are more difficult to explain.
 
 
 #### Textual ambiguity of Hebrew orthography
 
-To answer the above question, yes, the lemma "דבר" does indeed include instances of both.
+The flexible spelling conventions of Hebrew are at the root of many of the problems with the CHVL. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
 
+The lemma "דבר" (item 27) includes instances of both the verb and the noun, which are completely unrelated. A simple search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
 
-<!--
+```{.xml}
+<w xpos="NOUN" head="579.3" feats="Gender=Masc|Number=Sing" upos="NOUN" lemma="דבר" id="579.2" deprel="nsubj">דבר</w>
+
+<w xpos="NOUN" head="200.11" feats="Gender=Masc|Number=Plur" upos="NOUN" lemma="דבר" id="200.12" deprel="obj">דברים</w>
+```
+
+We also find plenty of examples of the verb with the same lemma tag:
+
+```{.xml}
+<w xpos="VERB" head="0" feats="Gender=Fem|HebSource=ConvUncertainHead|Number=Sing|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="2346.4" deprel="root">דברה</w>
 
 <w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דבר" id="1270.2" deprel="root">דברנו</w>
 
-<w xpos="VERB" head="0" feats="Gender=Fem|HebSource=ConvUncertainHead|Number=Sing|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="2346.4" deprel="root">דברה</w>
+<w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="368.4" deprel="root">דברו</w>
+```
+
+A different lemma, "דיבר" (item 61), is the expected lemma for the verb since it follows the standard third masculine plural conjugation. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, at least this issue is consistent.
+
+```{.xml}
+<w xpos="VERB" head="840.4" feats="Gender=Fem,Masc|HebBinyan=HITPAEL|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דיבר" id="840.16" deprel="conj">דיברנו</w>
+
+<w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
+```
+
+To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106).
 
 
-<w xpos="NOUN" head="463.5" feats="Gender=Masc|Number=Sing" upos="NOUN" lemma="דבר" id="463.9" deprel="nsubj">דבר</w>
 
 
--->
+Which, based on context (<!--sentence example(s)-->), should clearly be parsed as two separate lemmas, "ש" and "דיבר."
 
+These are just a few among many examples of the difficulties encountered by the automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, it is valuable to at least have an idea of how it works its magic. I will here explain the basics of the process and some of the implications entailed.
+
+
+<!--
+Many more examples of specific issues can be included in this section. Examples:
 
 The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
 
 מ and מן are listed separately.
+-->
 
 
-
-
-Many of these
-
-
-### Automatic word parsing
+#### Automatic word parsing
