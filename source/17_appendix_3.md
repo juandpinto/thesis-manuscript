@@ -1,3 +1,3 @@
 \newpage
 
-# Appendix 3: List of movies used {.unnumbered}
+# Appendix 3: Movies used {.unnumbered}

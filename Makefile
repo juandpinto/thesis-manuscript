@@ -32,7 +32,7 @@ pdf:
 	--bibliography="$(BIBFILE)" 2>pandoc.log \
 	--csl="$(STYLEDIR)/ref_format.csl" \
 	--metadata link-citations \
-	--highlight-style pygments \
+	--highlight-style tango \
 	-V fontsize=12pt \
 	-V papersize=letterpaper \
 	-V documentclass=article \

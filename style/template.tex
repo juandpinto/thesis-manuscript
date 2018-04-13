@@ -171,6 +171,10 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+% break verbatim (code) lines
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, commandchars=\\\{\}, breakafter=\space}
+
 \begin{document}
 $if(title)$
 \maketitle
