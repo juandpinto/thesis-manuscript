@@ -249,7 +249,7 @@ This returns Using the short example given above, this would result in the follo
 ```
 
 
-### U~DP~ (dispersion)
+### U~DP~ (dispersion) {#dispersion}
 
 Dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. There is no agreed-upon, single way to calculate dispersion, and different researchers will use the words in slightly different contexts.<!-- source --> The model of dispersion I have chosen to follow for this project is Gries' dispersion coefficient, or U~DP~, (<!-- source -->) calculated from Gries' DP. (<!-- source -->)
 

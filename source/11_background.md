@@ -2,26 +2,37 @@
 
 # Background: Review of the literature {#background}
 
+The theoretical foundation for the creation and use of word frequency lists rests on the observation, made popular by the linguist George Kingsley Zipf in the 1930s and 40s, that if one were to create a frequency list of words in a large enough text, the first word would occur roughly twice as often as the second word, three times as often as the third word, and so on [-@Zipfpsychobiologylanguage1935; -@ZipfHumanbehaviorprinciple1949].
+
+This exponential distribution is significant because it means that a small number of words make up the bulk of a text, whereas the majority of the words occur very few times[@SorellZipflawvocabulary2012]. Paul Nation, one of the most influential scholars in the field of vocabulary acquisition, has pointed out that Zipf’s Law—as it is has come to be known—can serve as motivation to language learners and teachers, since learning the most common vocabulary in a language covers so much of the communication that naturally occurs [-@NationLearningvocabularyanother2013, p. 34].
+
+This observation guides the entire endeavor of word list creation and use. Though the CHVL is not sorted using raw frequency alone^[The sorting method is explained in the sections [*Objective Criteria*](#objective-criteria), [*Dispersion*](#dispersion), and [*Sort and Export*](#sort-and-export).], the effect of Zipf's law can be easily seen in the listed frequencies that accompany each item on the list.
+
+One level above this theoretical basis lie the theoretical considerations of the process that serve as the structure upon which the CHVL is built. These include corpus size and text type, general vs. specialized lists, word family levels, and objective criteria. Each of these issues will be treated separately throughout this literature review.
+
 
 ## Corpus Design
 
-For a word list to accurately reflect the use of a language in its broadest context, the corpus from which it is extracted needs to be representative of that context. Since it is impossible to analyze all of the communications that take place in a particular language (not even taking into account the fact that language itself is an ever-expanding, ever-changing, *open* corpus), researchers must make do with an approximation of the whole: a bounded corpus of language.
+Before designing a word list, a careful, clear plan must be made for the design of the corpus from which the list is extracted. The corpus must be representative of the language context that the word list wishes to analyze. Of course, it is impossible to capture all of the communications that take place in a particular language. For this simple reason, researchers must make do with an approximation of the whole: a bounded corpus of language.
 
-Though the focus of this literature review is the creation of word frequency lists, the truth is that relatively few corpora have been created for this specific purpose. Most corpora have aimed at being general collections that cover the language (usually English) as a whole in an attempt to serve different theoretical and applied uses. Yet despite this broad range of purposes, the creation of corpora has historically revolved around two big questions: (1) how large should the corpus be, and (2) what kinds of texts should it include? I will here address these two points separately, with the recurring emphasis remaining on corpus use for word list creation.
-
+Though the focus of this literature review is the creation of word frequency lists, the truth is that relatively few corpora have been created for this specific purpose. Most corpora have aimed at being general collections that cover the language (usually English) as a whole in an attempt to serve different theoretical and applied uses. Yet despite this broad objective, the creation of corpora has historically revolved around two big questions: (1) how large should the corpus be, and (2) what kinds of texts should it include. These questions are important not only for corpus creation, but also for corpus selection. Both of these points will be addressed here, with the recurring emphasis being corpus use for word list creation.
 
 
 ### Corpus Size
 
-Conventional wisdom in corpus creation states that more is better. If a word list is to accurately reflect the frequencies of words in the language as a whole, then a corpus must contain enough text to approximate the overall use of discourse. This line of thinking is equivalent to the maxim in quantitative research that a sample should be as representative of the target population as possible. And in order to maximize the statistical probability of this representativeness, the sample must be of an appropriate size for the study. True, larger sample sizes often increase this probability, but they also tend to be more resource-intensive for the researcher. The same is true of corpus size. When creating a vocabulary list, then, what is an “appropriate” corpus size?
+Conventional wisdom in corpus creation states that more is better. If a word list is to accurately reflect the frequencies of words in the language as a whole, then a corpus must contain enough text to approximate the overall use of discourse. This line of thinking is equivalent to the maxim in quantitative research that a sample should be as representative of the target population as possible. And in order to maximize the statistical probability of this representation, the sample must be of an appropriate size for the study.
 
-Corpora composed of millions of tokens are easy to access today. This is especially true of corpora of written material—corpora of spoken language are still comparatively small. Advances in computing power have made it possible to analyze these mega-corpora, something that would have been far too labor-intensive in the not-so-distant past. It is finally becoming plausible for more researchers without access to extensive resources to use these mega-corpora for the purpose of word list creation.
+True, larger sample sizes often increase this probability, but they also tend to be more resource-intensive for the researcher. The same is true of corpus size. When creating a vocabulary list, then, what is an "ideal" corpus size?
 
-The first project to create a one-million-token corpus was Kučera and Francis’ effort at Brown University to compile a corpus of American English texts printed in 1961. They strived to create a corpus with equal amounts of texts from different sources by randomly selecting 500 passages of 2,000 words each from different published materials found at the Brown University Library and the Providence Athenaeum. This mixed design would be used as a model by many of the corpora created during the next few decades: <!--examples-->. These began to be compiled at increasingly faster rates. Many of these corpora were created—in part—to serve as parallel corpora of different varieties of English.
+Corpora composed of millions of tokens are easy to access today. This is especially true of corpora of written material—corpora of spoken language are still comparatively small. And thanks to advances in computing power, it is finally becoming plausible for more researchers without access to extensive resources to use these mega-corpora for the purpose of word list creation.
+
+The first project to create a one-million-token corpus was a joint effort by Henry Kučera and W. Nelson Francis of Brown University to compile a corpus of American English texts printed in 1961 [@KuceraComputationalanalysispresentday1967], known today simply as the *Brown Corpus*. They strived to create a corpus with equal amounts of texts from different sources by randomly selecting 500 passages of 2,000 words each from different published materials found at the Brown University Library and the Providence Athenaeum. This mixed design would be used as a model by many of the corpora created during the next few decades: <!--examples-->. These began to be compiled at increasingly faster rates. Many of these corpora were created—in part—to serve as parallel corpora of different varieties of English.
 
 <!-- Still missing lots of history here. BNC?! -->
 
-What began in 1980 as a collaboration between Collins Publishing and a group of researchers—the *Collins Birmingham University International Language Database* (COBUILD)—became a 7-million-token corpus by 1982. It continued expanding until it was joined to *The Bank of English* corpus in the 1990s, which reached 320 million words in 1997. In 2004, as part of the Collins World Web, it reached 2.5 billion words (HarperCollins Publishers, 2004a, 2004b). Now, with the use of web-crawling applications that scour the internet and collect text at unprecedented speed, there exist English corpora 11 billion tokens (*enTenTen12*) and even 19 billion tokens (*enTenTen13*).
+As an example of how quickly corpora have grown in recent decades, consider the history of COBUILD. What began in 1980 as a collaboration between Collins Publishing and a group of researchers led by John Sinclair—the Collins Birmingham University International Language Database (COBUILD)—led to the creation of the *Collins Corpus* of 7-million-tokens by 1982. It continued expanding until transforming into the *Bank of English* in the 1990s, which reached 320 million words in 1997. In 2005, as part of the Collins World Web, which also comprises French, German, and Spanish corpora, it reached 2.5 billion words [@CollinsCollinsCobuildEnglish2005]. The Collins Corpus now contains over 4.5 billion words [@historyCollinsCOBUILD].
+
+Today, with the use of web-crawling applications that scour the internet and collect text at unprecedented speed, we can now use the *enTenTen12* corpus of 12 billion English tokens, which was collected in 12 days [@JakubicekTenTenCorpusFamily2013]!
 
 Clearly, then, the sky’s the limit when it comes to ever-growing corpora of language. But when it comes to word list creation, is there a corpus size that can be considered sufficient?
 
@@ -170,7 +181,7 @@ Brezina and Gablasova (2015), p. 3:
 
 
 
-### Objective Criteria (Frequency, Range, Dispersion)
+### Objective Criteria (Frequency, Range, Dispersion) {#objective-criteria}
 
 
 
