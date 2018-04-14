@@ -4,7 +4,7 @@
         \huge
         Creating a Conversational Hebrew Vocabulary List
 
-        \vspace{.7in}
+        \vspace{.6in}
 
         \normalsize
         by

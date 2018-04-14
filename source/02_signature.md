@@ -1,7 +1,7 @@
 \newpage
 \begin{center}
 
-\vspace*{.5in}
+\vspace*{.4in}
 \textbf{The Thesis committee for Juan Daniel Pinto \\ Certifies that this is the approved version of the following thesis:}
 
 \vspace*{.5in}
@@ -12,18 +12,22 @@
 \normalsize
 
 \vspace*{1in}
-
-\textbf{APPROVED BY}
-
-\textbf{SUPERVISING COMMITTEE:}
-
-\vspace*{.6in}
-
-Esther Raizen, Supervisor
-
-\vspace*{.6in}
-
-Elaine Horwitz, Co-Supervisor
-
 \end{center}
+
+\textbf{
+\noindent\hspace*{2.9in}APPROVED BY\\
+\noindent\hspace*{2.9in}SUPERVISING COMMITTEE:
+}
+
+\vspace*{.4in}
+
+\hspace*{2.9in}\rule{0.5\textwidth}{.4pt}
+\noindent\hspace*{2.9in}Esther Raizen, Supervisor
+
+\vspace*{.4in}
+
+\hspace*{2.9in}\rule{0.5\textwidth}{.4pt}
+\noindent\hspace*{2.9in}Elaine Horwitz, Co-Supervisor
+
+
 \pagenumbering{gobble}

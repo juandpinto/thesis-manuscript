@@ -6,38 +6,41 @@ The Conversational Hebrew Vocabulary List in its entirety can be found as an ele
 
 For discussion purposes, a small sample of the first 20 items is here presented.<!-- expand to 30 items? and fix formatting -->
 
-| <!----> | LEMMA | FREQUENCY | RANGE | U~DP~              |
-|--------:|------:|----------:|------:|:-------------------|
-|       1 |   הוא |  23446109 | 43455 | 0.9480170255915042 |
-|       2 |     ל |   5638813 | 43448 | 0.9420130372643667 |
-|       3 |     ה |   9850733 | 43458 | 0.929266134661147  |
-|       4 |     ב |   4812778 | 43450 | 0.9292364864789281 |
-|       5 |    את |   6846782 | 43426 | 0.9285176069174289 |
-|       6 |    לא |   5272808 | 43433 | 0.9145688112131216 |
-|       7 |     ש |   3880654 | 43439 | 0.9088900047303463 |
-|       8 |    של |   3892328 | 43445 | 0.9067041511201389 |
-|       9 |    על |   1766990 | 43430 | 0.9042865019832009 |
-|      10 |    זה |   5118759 | 43441 | 0.9015544612816044 |
-|      11 |    מה |   2362419 | 43403 | 0.8922532708182579 |
-|      12 |   היה |   2579370 | 43420 | 0.8909904417204713 |
-|      13 |     מ |   1061614 | 43411 | 0.88900672760779   |
-|      14 |   כול |   1325676 | 43414 | 0.8860074112131449 |
-|      15 |     ו |   1906717 | 43429 | 0.8852706380348441 |
-|      16 |    יש |   1069358 | 43376 | 0.8770543442171884 |
-|      17 |    עם |    839575 | 43331 | 0.8668140051895192 |
-|      18 |    אם |    861163 | 43321 | 0.8654587702150129 |
-|      19 |   ידע |   1202416 | 43323 | 0.8586088803742931 |
-|      20 |   אבל |    921757 | 42963 | 0.8519038846130076 |
+| RANK | LEMMA | FREQUENCY | RANGE | U~DP~              |
+|-----:|------:|----------:|------:|:-------------------|
+|    1 |   הוא |  23446109 | 43455 | 0.9480170255915042 |
+|    2 |     ל |   5638813 | 43448 | 0.9420130372643667 |
+|    3 |     ה |   9850733 | 43458 | 0.929266134661147  |
+|    4 |     ב |   4812778 | 43450 | 0.9292364864789281 |
+|    5 |    את |   6846782 | 43426 | 0.9285176069174289 |
+|    6 |    לא |   5272808 | 43433 | 0.9145688112131216 |
+|    7 |     ש |   3880654 | 43439 | 0.9088900047303463 |
+|    8 |    של |   3892328 | 43445 | 0.9067041511201389 |
+|    9 |    על |   1766990 | 43430 | 0.9042865019832009 |
+|   10 |    זה |   5118759 | 43441 | 0.9015544612816044 |
+|   11 |    מה |   2362419 | 43403 | 0.8922532708182579 |
+|   12 |   היה |   2579370 | 43420 | 0.8909904417204713 |
+|   13 |     מ |   1061614 | 43411 | 0.88900672760779   |
+|   14 |   כול |   1325676 | 43414 | 0.8860074112131449 |
+|   15 |     ו |   1906717 | 43429 | 0.8852706380348441 |
+|   16 |    יש |   1069358 | 43376 | 0.8770543442171884 |
+|   17 |    עם |    839575 | 43331 | 0.8668140051895192 |
+|   18 |    אם |    861163 | 43321 | 0.8654587702150129 |
+|   19 |   ידע |   1202416 | 43323 | 0.8586088803742931 |
+|   20 |   אבל |    921757 | 42963 | 0.8519038846130076 |
 
-Besides lemmas and their number in the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is the raw frequency, or the total number of times the lemma appears in the OpenSubtitles2018 corpus.<!--I should probably change this to show freq/million tokens--> The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
+Table: Sample of the first 20 items on the CHVL.\label{CHVL_sample}
+
+
+Besides each lemma and its respective rank on the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using frequency per million makes the number more meaningful since—in theory—it reflects the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
 The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the methods section above. U~DP~ is also used as the sorting measure for the CHVL.
 
 The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
 
-For example, the sum of the frequencies of the first 20 lemmas in the sample above (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the CHVL one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see [*Introduction*](#introduction) for more on Zipf's Law).
+For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{CHVL_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the CHVL one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see [*Introduction*](#introduction) for more on Zipf's Law).
 
-Here is a listing of some important coverages provided by different amounts of lemmas on the CHVL:
+Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the CHVL.
 
 *n* Lemmas | Frequency Sum | ÷ Corpus Size | = Coverage
 ----------:|:-------------:|:-------------:|:---------:
@@ -45,6 +48,9 @@ Here is a listing of some important coverages provided by different amounts of l
        939 |  155,016,588  |  193,755,220  |    80%
      4,246 |  174,380,519  |  193,755,220  |    90%
     13,758 |  184,067,666  |  193,755,220  |    95%
+
+Table: Breakdown of coverage percentages.\label{coverages}
+
 
 The entire CHVL consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the CHVL covers 90.8% of the corpus from which it is created.
 

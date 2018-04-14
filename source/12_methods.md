@@ -149,7 +149,7 @@ for dirName, subdirList, fileList in os.walk(source):
         shutil.copy2(src, dst)
 ```
 
-With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of the entire process can be discussed later under [*Using original-language movies exclusively*](#using-original-language-movies-exclusively).
+With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of the entire process will be discussed later under [*Using original-language movies exclusively*](#using-original-language-movies-exclusively).
 
 
 ## Reading data
