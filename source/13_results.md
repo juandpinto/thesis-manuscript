@@ -4,37 +4,47 @@
 
 The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix 1*](#appendix-1).
 
-For discussion purposes, a small sample of the first 20 items is here presented.<!-- expand to 30 items? and fix formatting -->
+For discussion purposes, a small sample of the first 30 items is here presented.
 
-| RANK | LEMMA | FREQUENCY | RANGE | U~DP~              |
-|-----:|------:|----------:|------:|:-------------------|
-|    1 |   הוא |  23446109 | 43455 | 0.9480170255915042 |
-|    2 |     ל |   5638813 | 43448 | 0.9420130372643667 |
-|    3 |     ה |   9850733 | 43458 | 0.929266134661147  |
-|    4 |     ב |   4812778 | 43450 | 0.9292364864789281 |
-|    5 |    את |   6846782 | 43426 | 0.9285176069174289 |
-|    6 |    לא |   5272808 | 43433 | 0.9145688112131216 |
-|    7 |     ש |   3880654 | 43439 | 0.9088900047303463 |
-|    8 |    של |   3892328 | 43445 | 0.9067041511201389 |
-|    9 |    על |   1766990 | 43430 | 0.9042865019832009 |
-|   10 |    זה |   5118759 | 43441 | 0.9015544612816044 |
-|   11 |    מה |   2362419 | 43403 | 0.8922532708182579 |
-|   12 |   היה |   2579370 | 43420 | 0.8909904417204713 |
-|   13 |     מ |   1061614 | 43411 | 0.88900672760779   |
-|   14 |   כול |   1325676 | 43414 | 0.8860074112131449 |
-|   15 |     ו |   1906717 | 43429 | 0.8852706380348441 |
-|   16 |    יש |   1069358 | 43376 | 0.8770543442171884 |
-|   17 |    עם |    839575 | 43331 | 0.8668140051895192 |
-|   18 |    אם |    861163 | 43321 | 0.8654587702150129 |
-|   19 |   ידע |   1202416 | 43323 | 0.8586088803742931 |
-|   20 |   אבל |    921757 | 42963 | 0.8519038846130076 |
+| RANK |    LEMMA |  FREQUENCY | RANGE | UDP           |
+|-----:|---------:|-----------:|------:|--------------:|
+|    1 |      הוא | 121,008.92 | 43455 | 22,227,310.52 |
+|    2 |        ה |  50,841.12 | 43458 | 9,153,952.58  |
+|    3 |       את |  35,337.28 | 43426 | 6,357,357.64  |
+|    4 |        ל |  29,102.77 | 43448 | 5,311,835.36  |
+|    5 |       לא |  27,213.76 | 43433 | 4,822,345.74  |
+|    6 |       זה |  26,418.69 | 43441 | 4,614,840.01  |
+|    7 |        ב |  24,839.48 | 43450 | 4,472,208.92  |
+|    8 |       של |  20,088.89 | 43445 | 3,529,189.96  |
+|    9 |        ש |  20,028.64 | 43439 | 3,527,087.63  |
+|   10 |      היה |  13,312.52 | 43420 | 2,298,194.02  |
+|   11 |       מה |  12,192.80 | 43403 | 2,107,876.08  |
+|   12 |        ו |   9,840.85 | 43429 | 1,687,960.58  |
+|   13 |       על |   9,119.70 | 43430 | 1,597,865.21  |
+|   14 |      כול |   6,842.01 | 43414 | 1,174,558.76  |
+|   15 |      ידע |   6,205.85 | 43323 | 1,032,405.06  |
+|   16 |       כן |   6,232.26 | 43226 | 971,073.85    |
+|   17 |        מ |   5,479.15 | 43411 | 943,781.99    |
+|   18 |       יש |   5,519.12 | 43376 | 937,885.08    |
+|   19 |      עשה |   4,941.68 | 43311 | 810,088.75    |
+|   20 |      אבל |   4,757.33 | 42963 | 785,248.37    |
+|   21 |      טוב |   4,891.35 | 43291 | 766,201.25    |
+|   22 |      רצה |   4,671.67 | 43202 | 765,197.00    |
+|   23 |       אם |   4,444.59 | 43321 | 745,301.07    |
+|   24 |       עם |   4,333.17 | 43331 | 727,755.37    |
+|   25 |      אמר |   4,128.07 | 43196 | 681,096.31    |
+|   26 |       אז |   4,052.24 | 43202 | 653,014.96    |
+|   27 |      סדר |   4,305.52 | 42733 | 619,555.39    |
+|   28 |     צריך |   3,501.64 | 43101 | 554,553.56    |
+|   29 |       רק |   2,996.30 | 43306 | 492,899.21    |
+|   30 |      חשב |   3,021.85 | 43062 | 486,623.93    |
 
-Table: Sample of the first 20 items on the CHVL.\label{CHVL_sample}
+Table: Sample of the first 30 items on the CHVL.\label{CHVL_sample}
 
 
 Besides each lemma and its respective rank on the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using frequency per million makes the number more meaningful since—in theory—it reflects the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
-The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the methods section above. U~DP~ is also used as the sorting measure for the CHVL.
+The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the [*methods*](#methods) section above. U~DP~ is also used as the sorting measure for the CHVL.
 
 The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
 
@@ -89,7 +99,7 @@ The most prominent of these is the [Corpus of Spoken Israeli Hebrew (CoSIH)](htt
 
 Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself.[@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007] At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens. [-@Dekelmattertimetense2010, p.7]
 
-Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, which are addressed below under *Functional challenges*.
+Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, which are addressed below under [*functional challenges*](#functional-challenges).
 
 Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.[-@Sorellstudyissuestechniques2013]
 
