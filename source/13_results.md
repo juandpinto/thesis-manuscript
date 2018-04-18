@@ -2,11 +2,11 @@
 
 # The CHVL: A vocabulary list of conversational Modern Hebrew
 
-The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix 1*](#appendix-1).
+The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 items is here presented.
 
-| RANK |    LEMMA |  FREQUENCY | RANGE | UDP           |
+| RANK |    LEMMA |  FREQUENCY | RANGE | U~DP~           |
 |-----:|---------:|-----------:|------:|--------------:|
 |    1 |      הוא | 121,008.92 | 43455 | 22,227,310.52 |
 |    2 |        ה |  50,841.12 | 43458 | 9,153,952.58  |
@@ -42,7 +42,7 @@ For discussion purposes, a small sample of the first 30 items is here presented.
 Table: Sample of the first 30 items on the CHVL.\label{CHVL_sample}
 
 
-Besides each lemma and its respective rank on the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using frequency per million makes the number more meaningful since—in theory—it reflects the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
+Besides each lemma and its respective rank on the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
 The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the [*methods*](#methods) section above. U~DP~ is also used as the sorting measure for the CHVL.
 
@@ -68,6 +68,8 @@ The entire CHVL consists of 5,000 lemmas. This number was chosen in order for it
 ## Use
 
 The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
+
+See section 2.7 in Sorell, 2013.
  -->
 
 
@@ -120,7 +122,7 @@ Though IMDb does provide their own API, I decided instead to use an API created 
 
 Once an API key is obtained, a script can be written to obtain the information desired for every movie all at once. In this case, we want to know the original language(s) for each movie.
 
-This script in its entirety is found in [Appendix 2.2](14_appendix_2.md). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.<!-- I need to have a small section or at least a footnote that explains the level of knowledge of Python required to use my scripts -->
+This script in its entirety is found in [Appendix B.2](#appendix-b.2). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.<!-- I need to have a small section or at least a footnote that explains the level of knowledge of Python required to use my scripts -->
 
 For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
 

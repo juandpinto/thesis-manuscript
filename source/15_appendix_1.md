@@ -1,8 +1,8 @@
 \newpage
 
-# Appendix 1: Conversational Hebrew Vocabulary List (CHVL) {#appendix-1 .unnumbered}
+# Appendix A: Conversational Hebrew Vocabulary List (CHVL) {#appendix-a .unnumbered}
 
-| RANK |    LEMMA |  FREQUENCY | RANGE | UDP           |
+| RANK |    LEMMA |  FREQUENCY | RANGE | U~DP~           |
 |-----:|---------:|-----------:|------:|--------------:|
 |    1 |      הוא | 121,008.92 | 43455 | 22,227,310.52 |
 |    2 |        ה |  50,841.12 | 43458 | 9,153,952.58  |

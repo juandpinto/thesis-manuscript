@@ -1,4 +1,4 @@
-\vspace*{1in}
+\vspace*{.8in}
 
 # Dedication {.unnumbered}
 

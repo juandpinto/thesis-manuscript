@@ -175,19 +175,33 @@ Seeking to quantify the effect of choosing to measure word families as opposed t
 
 
 
-### Objective vs. subjective design
+### Objective design
+
+Many word lists—including some of the most widely-known lists—take what could be termed a semi-objective approach. They begin by creating a list that bases word rankings on statistical measures such as frequency, range, and dispersion. Then, because certain words don't fit the researcher's intuitions, or because some rankings simply seem out of order, the list is tweaked here and there [@NationMakingusingword2016, p. 133].
+
+For example, one common tweak is to group lexical sets together on a list, such as days of the week or numbers. This is true of West's GSL, resulting in a list that "brought a large element of subjectivity into the final product." [@Brezinatherecoregeneral2015, p. 3] West himself laid out his argument as to why such an approach is preferable [-@Westgeneralservicelist1953, pp. ix–x].
+
+Despite a few supposed pedagogical advantages, however, a semi-objective approach (which is therefore also a semi-subjective approach) has important implications for reproducibility. This alone makes it unfit for the present project, since one of the primary goals of this thesis is to present an easily reproducible process than can be use to create vocabulary lists in many different languages. Additionally, the simple fact is that by inserting subjective criteria into the list-creation process, it ceases to be based on the data directly. Rather than letting a particular corpus speak for itself, the whims and opinions of the researcher come into play. This can affect secondary tests that may be performed using the list, such as a lexical decision test.
+
+Some lists that use strictly objective criteria include *Word Frequencies in Written and Spoken English* [@LeechWordFrequenciesWritten2001], Brezine and Gablasova's *New General Service List* [-@Brezinatherecoregeneral2015], and Dang and Webb's *Essential Word List* [@NationMakingusingword2016, pp. 153–67]. This thesis also uses exclusively objective criteria to create the *Conversational Hebrew Vocabulary List*: frequency, range, and dispersion. Let us now discuss each of these in turn.
+
+
+#### Frequency
+
+Frequency can refer to either raw frequency (sometimes called absolute frequency) or normalized frequency. Raw frequency is simply the total number of times that a specific word or word family is attested in the corpus. Normalized frequency is a measure of how many times the item appears *per every x tokens* in the corpus. This is usually calculated to be per-million-tokens, though it can vary. Using normalized frequency is more meaningful since it is easier to compare with frequencies found in other corpora.
+
+
+#### Range
 
 
 
-(Nation 2016:133)
->There are two major approaches to making corpus-based word lists. One is to stick strictly to criteria based on range, frequency and dispersion (Brezina & Gablasova, 2015; Dang & Webb, Chapter 15 this volume; Leech, Rayson & Wilson, 2001). The other is to use a similar statistical approach but to adjust the results using other criteria such as ensuring that lexical sets such as numbers, days of the week, months.
 
-Brezina and Gablasova (2015), p. 3:
-> Seen from the perspective of current corpus linguistic research (cf. McEnery and Hardie 2011), one of the main problems of West’s GSL lies in the fact that its compilation involved a number of competing principles that brought a large element of subjectivity into the final product. When reviewing the compilation principles of the GSL, we can see that in addition to the quantitative measure of word frequency, West also used a number of ‘qualitative’ criteria for the selection of individual lexical items. These include (i) the ease of learning, (ii) necessity, (iii) cover, and (iv) stylistic and emotional neutrality (West 1953: ix–x). Let us now briefly discuss these principles.
+Sorell (2013), 18:
+> A word’s range refers to the number of individual texts or samples in which a word occurs in a particular study. This term was apparently coined by Thorndike in his pioneering word frequency study (Fries & Traver, 1960: 21).
 
 
 
-### Objective criteria (frequency, range, dispersion) {#objective-criteria}
+#### Dispersion
 
 
 
@@ -202,7 +216,6 @@ Brezina and Gablasova (105), p. 8:
 > ARF is a measure that takes into account both the absolute frequency of a lexical item and its distribution in the corpus (Savicky´and Hlava´c ˇ ova´2002; Hlava´c ˇ ova´2006). Thus if a word occurs with a relatively high absolute frequency only in a small number of texts, the ARF will be small (cf. Cerma´k and Kr ˇ en 2005; Kilgarriff 2009). All four wordlists were then sorted according to the ARF that ensured that only words that are frequent in a large variety of texts appeared in the top positions in the wordlists.
 
 Sorell (2013), p. 89: Dispersion.
-
 
 
 ## Modern non-English word lists
