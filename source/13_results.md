@@ -64,6 +64,14 @@ Table: Breakdown of coverage percentages.\label{coverages}
 
 The entire CHVL consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the CHVL covers 90.8% of the corpus from which it is created.
 
+<!-- Other observations:
+- Count words with changed rank due to dispersion (as opposed to freq alone). Use table?
+
+Nation (2016), p. 103:
+> Carroll, Davies and Richman (1971) found in their study that frequency and their measure of dispersion correlated at .8538 (page xxix), showing that the more widely used a word is, the more likely it is to be frequent. Some words however are frequent in just one or two texts or sub-corpora and may not even occur in others. The use of a range or dispersion figure or both can indicate such words.
+
+-->
+
 <!--
 ## Use
 

@@ -188,17 +188,18 @@ Some lists that use strictly objective criteria include *Word Frequencies in Wri
 
 #### Frequency
 
-Frequency can refer to either raw frequency (sometimes called absolute frequency) or normalized frequency. Raw frequency is simply the total number of times that a specific word or word family is attested in the corpus. Normalized frequency is a measure of how many times the item appears *per every x tokens* in the corpus. This is usually calculated to be per-million-tokens, though it can vary. Using normalized frequency is more meaningful since it is easier to compare with frequencies found in other corpora.
+Frequency can refer to either raw frequency (sometimes called absolute frequency) or normalized frequency. Raw frequency is simply the total number of times that a specific word is attested in the corpus. Normalized frequency is a measure of how many times the item appears *for every x tokens* in the corpus. This is usually calculated to be per-million-tokens, though the exact count can vary. Using normalized frequency is more meaningful since it is easier to compare with frequencies found in other corpora.
+
+Frequency forms the core of frequency word lists, and it is also their most simple measure. A word list can be created using frequency alone. However, other measures, such as range, help take into account important factors that frequency ignores.
 
 
 #### Range
 
+Range is a measure of the number of sub-corpora—or sections of a corpus—in which the word can be found [@FriesEnglishWordLists1960]. Range is also sometimes referred to as *contextual diversity* [@BrysbaertMovingKuceraFrancis2009]. To measure this, a corpus must first be divided into a series of sub-corpora. As of now, there is no real consensus on a specific way to do this, so different word lists may contain very different range measures based on the method chosen by the researcher. Like frequency, range can also be normalized to make the number more meaningful for inter-study comparison.
 
+Nation has gone as far as to suggest that "range figures are more important than frequency figures, because a range figure shows how widely used a word is." [-@NationMakingusingword2016, p. 103] This conclusion is corroborated by studies such as that of Adelman, Brown, and Quesada, which found that range better explained the findings of lexical decision tasks by 1%–3% [@AdelmanContextualdiversitynot2006]. The value of calculating range is that it provides a simple way to evaluate skewed frequency results. For example, a word may be rare overall in a language, but if it happens to be very common in only a few texts, it can still attain an inappropriately high place on the frequency list. This often occurs with specialized words that are only used by a very specific subset of the population but with high frequency. By calculating range, it becomes easy to identify these words.
 
-
-Sorell (2013), 18:
-> A word’s range refers to the number of individual texts or samples in which a word occurs in a particular study. This term was apparently coined by Thorndike in his pioneering word frequency study (Fries & Traver, 1960: 21).
-
+The question then becomes, what to do once these words are found. How can range and frequency be used in tandem? One possibility, suggested by Nation and used by <!-- examples -->, is to decide on a minimum range, discard any words that fall below this bar, and order only the remaining words by frequency. This approach, however, relies on a subjective decision that becomes diffcult to replicate with other corpora. The fate of words with range close to the cutoff point is to be either completely thrown out or kept in their original position. Shifting the word's position on the list—its rank—is more sensical, but this can quickly become messy and subjective as well. Dispersion tries to solve this problem.
 
 
 #### Dispersion
@@ -206,11 +207,6 @@ Sorell (2013), 18:
 
 
 
-Nation (2016), p. 103:
-> Dividing a corpus into sub-corpora allows the creation of range and dispersion figures. In some ways range figures are more important than frequency figures, because a range figure shows how widely used a word is, and this indicates its “general service”. Brysbaert and New (2009) found that a range measure was a good predictor of lexical decision times. Carroll, Davies and Richman (1971) found in their study that frequency and their measure of dispersion correlated at .8538 (page xxix), showing that the more widely used a word is, the more likely it is to be frequent. Some words however are frequent in just one or two texts or sub-corpora and may not even occur in others. The use of a range or dispersion figure or both can indicate such words.
-
-Brysbert and New (2009), pp. 984–5:
-> Another variable that has been proposed as an alternative to WF frequency is the contextual diversity (CD) of a word (Adelman, Brown, & Quesada, 2006). This variable refers to the number of passages (documents) in a corpus containing the word. So, rather than calculating how often a word appeared in the BNC, Adelman et al. measured how many of the 3,144 text samples in the corpus contained the word. They found that the CD measure explained 1%–3% more of the variance in the Elexicon data.
 
 Brezina and Gablasova (105), p. 8:
 > ARF is a measure that takes into account both the absolute frequency of a lexical item and its distribution in the corpus (Savicky´and Hlava´c ˇ ova´2002; Hlava´c ˇ ova´2006). Thus if a word occurs with a relatively high absolute frequency only in a small number of texts, the ARF will be small (cf. Cerma´k and Kr ˇ en 2005; Kilgarriff 2009). All four wordlists were then sorted according to the ARF that ensured that only words that are frequent in a large variety of texts appeared in the top positions in the wordlists.
@@ -218,9 +214,12 @@ Brezina and Gablasova (105), p. 8:
 Sorell (2013), p. 89: Dispersion.
 
 
-## Modern non-English word lists
 
+<!--
+## Modern non-English word lists
 
 
 Gardner, D. (2007), p. 242:
 > Hazenberg and Hulstijn 1996—Dutch language;
+
+-->
