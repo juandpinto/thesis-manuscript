@@ -22,12 +22,12 @@
 \vspace*{.4in}
 
 \hspace*{2.9in}\rule{0.5\textwidth}{.4pt}
-\noindent\hspace*{2.9in}Esther Raizen, Supervisor
+\noindent\hspace*{2.9in}Esther L. Raizen, Supervisor
 
 \vspace*{.4in}
 
 \hspace*{2.9in}\rule{0.5\textwidth}{.4pt}
-\noindent\hspace*{2.9in}Elaine Horwitz, Co-Supervisor
+\noindent\hspace*{2.9in}Elaine K. Horwitz, Co-Supervisor
 
 
 \pagenumbering{gobble}

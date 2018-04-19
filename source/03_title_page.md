@@ -10,7 +10,7 @@
         by
 
         \Large
-        Juan D. Pinto
+        Juan Daniel Pinto
 
         \vspace{1.3in}
 
@@ -28,7 +28,7 @@
 
         \vspace{.3in}
         \textbf{
-            Master of Arts in Hebrew linguistics
+            Master of Arts
         }
 
         \vspace{1.3in}
