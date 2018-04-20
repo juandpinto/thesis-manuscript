@@ -193,16 +193,28 @@ Frequency can refer to either raw frequency (sometimes called absolute frequency
 Frequency forms the core of frequency word lists, and it is also their most simple measure. A word list can be created using frequency alone. However, other measures, such as range, help take into account important factors that frequency ignores.
 
 
+Gries (2010):
+> for example, observed frequencies (or their logs) are good proxies toward the familiarity of words—see Howes and Solomon (1951) for recognition times, Oldfield and Wingfield (1965) as well as Forster and Chambers (1973) for naming times, and Ellis (2002a, b) as well as Jurafsky (2003) and Gilquin and Gries (2009) for overviews.
+
+
 #### Range
 
 Range is a measure of the number of sub-corpora—or sections of a corpus—in which the word can be found [@FriesEnglishWordLists1960]. Range is also sometimes referred to as *contextual diversity* [@BrysbaertMovingKuceraFrancis2009]. To measure this, a corpus must first be divided into a series of sub-corpora. As of now, there is no real consensus on a specific way to do this, so different word lists may contain very different range measures based on the method chosen by the researcher. Like frequency, range can also be normalized to make the number more meaningful for inter-study comparison.
 
-Nation has gone as far as to suggest that "range figures are more important than frequency figures, because a range figure shows how widely used a word is." [-@NationMakingusingword2016, p. 103] This conclusion is corroborated by studies such as that of Adelman, Brown, and Quesada, which found that range better explained the findings of lexical decision tasks by 1%–3% [@AdelmanContextualdiversitynot2006]. The value of calculating range is that it provides a simple way to evaluate skewed frequency results. For example, a word may be rare overall in a language, but if it happens to be very common in only a few texts, it can still attain an inappropriately high place on the frequency list. This often occurs with specialized words that are only used by a very specific subset of the population but with high frequency. By calculating range, it becomes easy to identify these words.
+Nation has gone as far as to suggest that "range figures are more important than frequency figures, because a range figure shows how widely used a word is." [-@NationMakingusingword2016, p. 103] This conclusion is corroborated by studies such as that of Adelman, Brown, and Quesada, which found that range better explained the findings of lexical decision tasks by 1%–3% [@AdelmanContextualdiversitynot2006]. Similar results were found by Ellis, who attributed better predictive power to range than to word frequency [-@EllisFrequencyeffectslanguage2002; -@EllisReflectionsfrequencyeffects2002].
+
+The value of calculating range is that it provides a simple way to evaluate skewed frequency results. For example, a word may be rare overall in a language, but if it happens to be very common in only a few texts, it can still attain an inappropriately high place on the frequency list. This often occurs with specialized words that are only used by a very specific subset of the population but with high frequency. By calculating range, it becomes easy to identify these words.
 
 The question then becomes, what to do once these words are found. How can range and frequency be used in tandem? One possibility, suggested by Nation and used by <!-- examples -->, is to decide on a minimum range, discard any words that fall below this bar, and order only the remaining words by frequency. This approach, however, relies on a subjective decision that becomes diffcult to replicate with other corpora. The fate of words with range close to the cutoff point is to be either completely thrown out or kept in their original position. Shifting the word's position on the list—its rank—is more sensical, but this can quickly become messy and subjective as well. Dispersion tries to solve this problem.
 
 
 #### Dispersion
+
+In a (simplistic) nutshell, dispersion is a combination of both frequency and range. It serves as a single number—a distributional statistic—that incorporates the benefits of both of these measures, while also allowing a list to be ranked in a methodical, objective manner.
+
+Unfortunately, there is still little agreement on how best to measure dispersion. Many ideas have been proposed, such as Juilland's *D* [@JuillandFrequencydictionaryFrench1970], Carroll's *D~2~* [-@CarrollalternativeJuillandusage1970], Rosengren's *S* [-@Rosengrenquantitativeconceptlanguage1971], Lyne's *D~3~* [-@LyneDispersion1985], and Zhang's *Distributional Consistency* (*DC*) [@ZhangDistributionalconsistencygeneral2004]. A thorough overview of these and other dispersion measures was published by Gries, who then provided his own suggested method, *deviation of proportions*, or *DP* [-@GriesDispersionsadjustedfrequencies2008; -@GriesDispersionsadjustedfrequencies2010; @LijffijtCorrectionStefanTh2012].
+
+Unlike earlier proposals, however, Gries' *DP* stands out as a comparatively simple calculation that takes into account some of the biggest problems he identified in the others. Gries himself lists the benefits of *DP* as: flexibility to use differently sized subcorpora, simplicity, extendability to different scenarios, and appropriate sensitivity.
 
 
 

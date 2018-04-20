@@ -78,6 +78,11 @@ Nation (2016), p. 103:
 The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
 
 See section 2.7 in Sorell, 2013.
+
+
+Gries (2010), "Dispersions and adjusted frequencies in corpora: further explorations":
+> in some theoretical approaches, such as cognitive linguistics or usage-based grammar, frequency data are now regularly used in the domains of first- and second/foreign-language acquisition, the study of language and culture, grammaticalization, phonological reduction, morphological processing, syntactic alternations, etc.
+
  -->
 
 
