@@ -5,7 +5,10 @@
 
     \vspace{.5in}
     \Large
-    \textbf{Creating a Conversational Hebrew \\ Vocabulary List}
+    \textbf{Creating a Frequency Dictionary \\ of Spoken Hebrew}
+
+    \large
+    A Reproducible Use of Technology to Overcome Scarcity of Data
 
     \vspace{.5in}
     \normalsize

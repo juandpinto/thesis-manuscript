@@ -1,6 +1,6 @@
 \newpage
 
-# Appendix A: Conversational Hebrew Vocabulary List (CHVL) {#appendix-a .unnumbered}
+# Appendix A: Frequency Dictionary of Spoken Hebrew (FDOSH) {#appendix-a .unnumbered}
 
 | RANK |    LEMMA |  FREQUENCY | RANGE | U~DP~           |
 |-----:|---------:|-----------:|------:|--------------:|

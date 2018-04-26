@@ -1,8 +1,8 @@
 \newpage
 
-# The CHVL: A vocabulary list of conversational Modern Hebrew
+# The FDOSH: A vocabulary list of conversational Modern Hebrew
 
-The Conversational Hebrew Vocabulary List in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
+The Frequency Dictionary of Spoken Hebrew in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 items is here presented.
 
@@ -39,18 +39,18 @@ For discussion purposes, a small sample of the first 30 items is here presented.
 |   29 |       רק |   2,996.30 | 43306 | 492,899.21    |
 |   30 |      חשב |   3,021.85 | 43062 | 486,623.93    |
 
-Table: Sample of the first 30 items on the CHVL.\label{CHVL_sample}
+Table: Sample of the first 30 items on the FDOSH.\label{FDOSH_sample}
 
 
-Besides each lemma and its respective rank on the list, the CHVL includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
+Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
-The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the [*methods*](#methods) section above. U~DP~ is also used as the sorting measure for the CHVL.
+The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the [*methods*](#methods) section above. U~DP~ is also used as the sorting measure for the FDOSH.
 
 The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
 
-For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{CHVL_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the CHVL one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see [*Introduction*](#introduction) for more on Zipf's Law).
+For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FDOSH_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the FDOSH one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see [*Introduction*](#introduction) for more on Zipf's Law).
 
-Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the CHVL.
+Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
 
 *n* Lemmas | Frequency Sum | ÷ Corpus Size | = Coverage
 ----------:|:-------------:|:-------------:|:---------:
@@ -62,7 +62,7 @@ Table \ref{coverages} presents a listing of some important coverages provided by
 Table: Breakdown of coverage percentages.\label{coverages}
 
 
-The entire CHVL consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the CHVL covers 90.8% of the corpus from which it is created.
+The entire FDOSH consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the FDOSH covers 90.8% of the corpus from which it is created.
 
 <!-- Other observations:
 - Count words with changed rank due to dispersion (as opposed to freq alone). Use table?
@@ -75,7 +75,7 @@ Nation (2016), p. 103:
 <!--
 ## Use
 
-The purpose of the CHVL is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
+The purpose of the FDOSH is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
 
 See section 2.7 in Sorell, 2013.
 
@@ -97,7 +97,7 @@ I have divided all of these issues into two categories: methodological challenge
 
 ### Methodological challenges
 
-One of the more obvious issues of this project is the use of a corpus of movie subtitles as substitute for a corpus of true conversational language. This issue in a way forms the backbone of the CHVL, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
+One of the more obvious issues of this project is the use of a corpus of movie subtitles as substitute for a corpus of true conversational language. This issue in a way forms the backbone of the FDOSH, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
 
 
 #### Ideal vs. practical corpora
@@ -129,7 +129,7 @@ This is a question that requires more research in order to answer satisfactorily
 
 One solution is to simply use movies that were originally filmed in the target language of the corpus. In theory, each XML file in a monolingual OpenSubtitles2018 file should contain a tag that identifies the original language of the movie.<!-- cite article --> In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
-This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movies IMDb ID, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
+This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movie's IMDb identifier, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
 
 Though IMDb does provide their own API, I decided instead to use an API created for the [Open Movie Database (OMDb)](http://www.omdbapi.com/). This API can be used free-of-charge, but it has a 1,000 movie limit per day. Since the OpenSubtitles2018 Hebrew corpus contains nearly 50,000 movies, I decided instead to pay for a daily limit of 100,000 movies. This only requires a $1.00 donation for each month that one is registered to use the OMDb API.
 
@@ -189,20 +189,20 @@ print('# ' + year + '\n' +
 
 ### Functional challenges
 
-A quick scan of the CHVL reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
+A quick scan of the FDOSH reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
 
 For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of spoken dialogue (in many languages), its place at the top of the list ceases to be a surprise.<!-- source (Nation) -->
 
 Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (item 19) and "דיבר" (item 60).
 
-Many of the most common lemmas on the CHVL are prepositions. Note that even inseparable prepositions, such as -ה and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה" and "ב".
+Many of the most common lemmas on the FDOSH are prepositions. Note that even inseparable prepositions, such as -ה and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה" and "ב".
 
 Other issues, however, are more difficult to explain.
 
 
 #### Textual ambiguity of Hebrew orthography
 
-The flexible spelling conventions of Hebrew are at the root of many of the problems with the CHVL. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
+The flexible spelling conventions of Hebrew are at the root of many of the problems with the FDOSH. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
 
 The lemma "דבר" (item 27) includes instances of both the verb and the noun, which are completely unrelated. A simple search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
 
@@ -230,12 +230,7 @@ A different lemma, "דיבר" (item 61), is the expected lemma for the verb sinc
 <w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
 ```
 
-To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106).
-
-
-
-
-Which, based on context (<!--sentence example(s)-->), should clearly be parsed as two separate lemmas, "ש" and "דיבר."
+To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106). Based on their context (<!--sentence example(s)-->), these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
 
 These are just a few among many examples of the difficulties encountered by the automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, it is valuable to at least have an idea of how it works its magic. I will here explain the basics of the process and some of the implications entailed.
 
@@ -251,7 +246,7 @@ The lack of vowels makes it so that the clearly different words עִם and עַ�
 
 #### Automatic parsing
 
-Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligences such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the CHVL.<!-- source from Nation --> This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
+Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligences such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH.<!-- source from Nation --> This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
 
 Two distinct types of syntactic parsers exist, contituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
@@ -265,6 +260,6 @@ Some parsers, however, are instead simply given entirely unparsed corpora and no
 
 Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed as 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew OpenSubtitles2018 corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
 
-Undoubtedly, this can have a negative impact on the accuracy of lemma frequency counts. Many of the issues found in the CHVL are not due to orthographic ambiguity, but simply to inaccurate parsing. Some, as shown in the previous section, are even caused by erroneous automatic tokenization (consider the lemma "שדיבר").
+Undoubtedly, this can have a negative impact on the accuracy of lemma frequency counts. Many of the issues found in the FDOSH are not due to orthographic ambiguity, but simply to inaccurate parsing. Some, as shown in the previous section, are even caused by erroneous automatic tokenization (consider the lemma "שדיבר").
 
 The good news is that automatic parsers are continually improving in accuracy. This is a problem that exists across the board, regardless of the corpus being used—unless it is manually parsed and lemmaticized, which is nearly impossible for such large corpora. The tools and techniques outlined in this thesis do not directly deal with the process of parsing.

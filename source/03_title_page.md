@@ -2,17 +2,20 @@
     \begin{center}
 
         \huge
-        Creating a Conversational Hebrew Vocabulary List
+        Creating a Frequency Dictionary of Spoken Hebrew
 
-        \vspace{.6in}
+        \Large
+        A Reproducible Use of Technology to Overcome \\ Scarcity of Data
+
+        \vspace{.5in}
 
         \normalsize
         by
 
-        \Large
+        \large
         Juan Daniel Pinto
 
-        \vspace{1.3in}
+        \vspace{1in}
 
         \normalsize
         \textbf{
@@ -31,7 +34,7 @@
             Master of Arts
         }
 
-        \vspace{1.3in}
+        \vspace{1in}
         The University of Texas at Austin\\
         May 2018
 

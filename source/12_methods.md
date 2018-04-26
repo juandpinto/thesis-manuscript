@@ -1,12 +1,12 @@
 \newpage
 
-# Methods: Creating the Conversational Hebrew Vocabulary List (CHVL) {#methods}
+# Methods: Creating the Frequency Dictionary of Spoken Hebrew (FDOSH) {#methods}
 
 As we have seen, the brunt of the work in high-quality vocabulary frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it's difficult to find well-researched word lists, if they exist at all. Why have not more educators—those who may benefit from these lists the most—decided to undertake such a task?
 
 This need not be a project that one starts from scratch every time. Many tools already exist to make the process smoother. Still, with the rapid pace at which technology changes, these tools tend to quickly become obsolete. They are also usually restrictive to the specific preferences of their creators.
 
-Rather than using these tools, I chose to create a series of simple scripts to create the Conversational Hebrew Vocabulary List.
+Rather than using these tools, I chose to create a series of simple scripts to create the Frequency Dictionary of Spoken Hebrew.
 
 The two most widely-used languages for the type of data analysis involved in a word list creation are Python and R. I chose to use Python for this project. Python was designed specifically to be a very readable programming language. That is, it is easy to read and understand the purpose and flow of the code. This was one of my primary reasons for choosing to use it, since it increases the ease with which this project can be reproduced by other researchers and educators to create their own word lists. R, on the other hand, requires a deeper familiarity with the syntax and conventions of the language in order to understand.
 
@@ -14,16 +14,16 @@ The second characteristic that makes Python ideal for an open-source project of 
 
 Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-lemmas>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
 
-Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Conversational Hebrew Vocabulary List, in its entirety, can also be found in the repository.
+Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Frequency Dictionary of Spoken Hebrew, in its entirety, can also be found in the repository.
 
-This thesis, then, beyond explaining the theory behind the creation of the CHVL, aims to make the process as reproducible as possible. This section contributes to that aim by carefully documenting each step of the process.
+This thesis, then, beyond explaining the theory behind the creation of the FDOSH, aims to make the process as reproducible as possible. This section contributes to that aim by carefully documenting each step of the process.
 
 
 ## The corpus
 
 Before coding or analyzing anything, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of movie and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
 
-The CHVL was created using one of OPUS's corpora, the [OpenSubtitles2018](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and can be downloaded either as *parallel* corpora, or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
+The FDOSH was created using one of OPUS's corpora, the [OpenSubtitles2018](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and can be downloaded either as *parallel* corpora, or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
 
 For the purpose of creating a word list, a monolingual corpus is best. Note that parallel corpora will often be composed of less tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
 
@@ -77,7 +77,7 @@ A parsed corpus contains much more information for each token. The data included
 ```
 
 
-All of the data used to create the CHVL came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically using <!-- ?? -->.
+All of the data used to create the FDOSH came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically using <!-- ?? -->.
 
 
 ## Cleansing the corpus
@@ -150,10 +150,10 @@ for dirName, subdirList, fileList in os.walk(source):
         shutil.copy2(src, dst)
 ```
 
-With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the CHVL, I will skip that step here. However, a description of the entire process will be discussed later under [*Using original-language movies exclusively*](#using-original-language-movies-exclusively).
+With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the FDOSH, I will skip that step here. However, a description of the entire process will be discussed later under [*Using original-language movies exclusively*](#using-original-language-movies-exclusively).
 
 
-## Reading data
+## Extracting data
 
 Before calculating any measures such as frequency, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case we would be creating a list of all *values* in the `'lemma'` *key* within each `<w>` *tag*. The value that corresponds to the `'lemma'` tag below for the word אומר is אמר.
 
@@ -167,7 +167,7 @@ A different approach is to use *regular expressions* to search for a specific st
 
 Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmaticized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
 
-I will now explain the code in the script used to create the CHVL. As with the other code, the entire script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
+I will now explain the code in the script used to create the FDOSH. As with the other code, the entire script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
 
 After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
 
@@ -229,7 +229,7 @@ Throughout the rest of the script, this nested dictionary serves as the basis fo
 
 ## Calculations
 
-For each lemma, the CHVL includes three measures: frequency, range, and U~DP~ (dispersion). It uses dispersion as its sorting value. Let's look at how each of these is calculated. Range will be addressed in the export section, since the script calculates it on the spot as the list is created.
+For each lemma, the FDOSH includes three measures: frequency, range, and U~DP~ (dispersion). It uses dispersion as its sorting value. Let's look at how each of these is calculated. Range will be addressed in the export section, since the script calculates it on the spot as the list is created.
 
 
 ### Frequency {#methods-frequency}
@@ -314,7 +314,7 @@ In order to ensure that the words on the list do not have an abnormally high fre
 
 Though this is a more systematic approach than that used to create many early frequency lists, it still depends on a subjective decision and the whim of the researcher.<!-- sources -->
 
-Rather than setting an arbitrary bar, the CHVL is sorted entirely by Gries' usage coefficient of dispersion (U~DP~). This *modus operandi* ensures that the order of words itself—not just which words make it onto the list and which don't—is decided by a combination of both relevant measures: frequency and dispersion. This approach also has the added benefit of being entirely objective.
+Rather than setting an arbitrary bar, the FDOSH is sorted entirely by Gries' usage coefficient of dispersion (U~DP~). This *modus operandi* ensures that the order of words itself—not just which words make it onto the list and which don't—is decided by a combination of both relevant measures: frequency and dispersion. This approach also has the added benefit of being entirely objective.
 
 Since we've already calculated the U~DP~ for each lemma, sorting the list is simple.
 

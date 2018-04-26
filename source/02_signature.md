@@ -1,13 +1,16 @@
 \newpage
 \begin{center}
 
-\vspace*{.4in}
+\vspace*{.2in}
 \textbf{The Thesis committee for Juan Daniel Pinto \\ Certifies that this is the approved version of the following thesis:}
 
 \vspace*{.5in}
 
 \Large
-\textbf{Creating a Conversational \\ Hebrew Vocabulary List}
+\textbf{Creating a Frequency Dictionary \\ of Spoken Hebrew}
+
+\large
+A Reproducible Use of Technology to Overcome Scarcity of Data
 
 \normalsize
 
