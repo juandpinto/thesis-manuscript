@@ -12,7 +12,7 @@ The two most widely-used languages for the type of data analysis involved in a w
 
 The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
 
-Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-lemmas>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
+Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-frequencies>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
 
 Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Frequency Dictionary of Spoken Hebrew, in its entirety, can also be found in the repository.
 
@@ -23,7 +23,7 @@ This thesis, then, beyond explaining the theory behind the creation of the FDOSH
 
 Before coding or analyzing anything, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of movie and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
 
-The FDOSH was created using one of OPUS's corpora, the [OpenSubtitles2018](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and can be downloaded either as *parallel* corpora, or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
+The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and can be downloaded either as *parallel* corpora, or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
 
 For the purpose of creating a word list, a monolingual corpus is best. Note that parallel corpora will often be composed of less tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
 
@@ -77,7 +77,7 @@ A parsed corpus contains much more information for each token. The data included
 ```
 
 
-All of the data used to create the FDOSH came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically using <!-- ?? -->.
+All of the data used to create the FDOSH came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically—a process that will be discussed in the [*automatic parsing*](#automatic-parsing) section of the next chapter.
 
 
 ## Cleansing the corpus
@@ -229,7 +229,7 @@ Throughout the rest of the script, this nested dictionary serves as the basis fo
 
 ## Calculations
 
-For each lemma, the FDOSH includes three measures: frequency, range, and U~DP~ (dispersion). It uses dispersion as its sorting value. Let's look at how each of these is calculated. Range will be addressed in the export section, since the script calculates it on the spot as the list is created.
+For each lemma, the FDOSH includes three measures: frequency, range, and dispersion. It uses dispersion as its sorting value. Though the theoretical underpinnings of each has already been discussed in the [*objective design*](#objective-design) section of the previous chapter, I will here give a brief reminder of what each measure is and explain how it is calculated. Range will be addressed afterwards in the (*export*)[#export] section, since the script calculates it on the spot as the list is created.
 
 
 ### Frequency {#methods-frequency}
@@ -250,11 +250,11 @@ This returns Using the short example given above, this would result in the follo
 ```
 
 
-### U~DP~ (dispersion) {#methods-dispersion}
+### Dispersion (*U~DP~*) {#methods-dispersion}
 
-Dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. There is no agreed-upon, single way to calculate dispersion, and different researchers will use the words in slightly different contexts.<!-- source --> The model of dispersion I have chosen to follow for this project is Gries' dispersion coefficient, or U~DP~, (<!-- source -->) calculated from Gries' DP. (<!-- source -->)
+Dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. The model of dispersion I have chosen to follow for this project is a usage coefficient of Gries' deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010].
 
-In order to calculate Gries' DP for lemma~x~, we must first make two calculations for each file in the corpus (file~i~): the lemma's *expected frequency* if it were perfectly distributed, and its *observed frequency*—or its actual frequency.
+In order to calculate *U~DP~* for lemma~x~, we must first make two calculations for each file in the corpus (file~i~): the lemma's *expected frequency* if it were perfectly distributed, and its *observed frequency*—or its actual frequency.
 
 $$\textbf{expected frequency}\ =\ \frac{tokens\ in\ file_i}{tokens\ in\ corpus}$$
 
@@ -262,13 +262,13 @@ $$\textbf{observed frequency}\ =\ \frac{frequency\ of\ lemma_x\ in\ file_i}{freq
 
 We must then subtract the lemma's observed frequency from its expected frequency, which will return a value between -1 and 1. We can normalize this result by finding the absolute value. Now the closer the result is to 0, the closer that lemma's frequency is in that particular file to what we would expect if it were perfectly distributed throughout the corpus. A higher number (closer to 1), would indicate a heavier load in that file that we would expect.
 
-By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values originally in both directions), we now have Gries' DP. Where `n` is the number of files:
+By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values originally in both directions), we now have Gries' *DP*. Where `n` is the number of files:
 
 $$\textbf{DP}\ =\ 0.5 \sum_{i=1}^{n} |\ \text{expected frequency}\ -\ \text{observed frequency}\ |$$
 
-A DP of 0 represents a perfectly even dispersion, and a DP close to 1 means a more uneven distribution, where fewer files contain a larger load of the lemma's overall frequency. A DP of 1 is not actually possible.
+A *DP* of 0 represents a perfectly even dispersion, and a *DP* close to 1 means a more uneven distribution, where fewer files contain a larger load of the lemma's overall frequency. A *DP* of 1 is not actually possible.
 
-Gries' usage coefficient, or U~DP~, is an attempt to make this number more useful. DP is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for U~DP~ is as follows:
+Gries' usage coefficient, or *U~DP~*, is an attempt to make this number more useful. *DP* is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for *U~DP~* is as follows:
 
 $$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
 
@@ -288,7 +288,7 @@ for file in token_count_dict:
     total_tokens_int = total_tokens_int + token_count_dict.get(file, 0)
 ```
 
-Finally, the script uses all these measures to calculate DP and then U~DP~ for each lemma, and places them into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
+Finally, the script uses all these measures to calculate *DP* and then *U~DP~* for each lemma, and places them into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
 
 ``` {#HebrewLemmaCount .python .numberLines startFrom="129"}
 # Calculate DPs
@@ -310,13 +310,11 @@ With these values all calculated for each lemma, the only thing left is to sort 
 
 ## Sort and export
 
-In order to ensure that the words on the list do not have an abnormally high frequency in some subcorpora (movies) and are nearly absent in others, some have suggested setting a minimum range or dispersion.<!-- sources --> All words that fall below this threshold are discarded, and the remaining words can then be sorted by frequency.
+In order to ensure that the words on the list do not have an abnormally high frequency in some subcorpora (movies) and are nearly absent in others, some have suggested setting a minimum range or dispersion and discarding words below this threshold (see the [*objective design*](#objective-design) section in the previous chapter).
 
-Though this is a more systematic approach than that used to create many early frequency lists, it still depends on a subjective decision and the whim of the researcher.<!-- sources -->
+Rather than setting an arbitrary bar, the FDOSH is sorted entirely by *U~DP~*. This *modus operandi* ensures that the order of words itself—not just which words make it onto the list and which don't—is decided by a combination of both relevant measures: frequency and dispersion. This approach also has the added benefit of being entirely objective.
 
-Rather than setting an arbitrary bar, the FDOSH is sorted entirely by Gries' usage coefficient of dispersion (U~DP~). This *modus operandi* ensures that the order of words itself—not just which words make it onto the list and which don't—is decided by a combination of both relevant measures: frequency and dispersion. This approach also has the added benefit of being entirely objective.
-
-Since we've already calculated the U~DP~ for each lemma, sorting the list is simple.
+Since we've already calculated the *U~DP~* for each lemma, sorting the list is simple.
 
 ``` {#HebrewLemmaCount .python .numberLines startFrom="148"}
 UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
@@ -324,7 +322,7 @@ UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
     reverse=True)]
 ```
 
-A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its overall frequency, its range, and its U~DP~. This table is already sorted by U~DP~ as it's being created.
+A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its overall frequency, its range, and its *U~DP~*. This table is already sorted by *U~DP~* as it's being created.
 
 Because the script has not calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly counts the number of files included in the `lemma_by_file_dict`. Here is the resulting code:
 

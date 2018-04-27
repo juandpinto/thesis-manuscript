@@ -2,49 +2,49 @@
 
 # The FDOSH: A vocabulary list of conversational Modern Hebrew
 
-The Frequency Dictionary of Spoken Hebrew in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-lemmas>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the OpenSubtitles2018 corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
+The Frequency Dictionary of Spoken Hebrew in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-frequencies>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 items is here presented.
 
-| RANK |    LEMMA |  FREQUENCY | RANGE | U~DP~           |
-|-----:|---------:|-----------:|------:|--------------:|
-|    1 |      הוא | 121,008.92 | 43455 | 22,227,310.52 |
-|    2 |        ה |  50,841.12 | 43458 | 9,153,952.58  |
-|    3 |       את |  35,337.28 | 43426 | 6,357,357.64  |
-|    4 |        ל |  29,102.77 | 43448 | 5,311,835.36  |
-|    5 |       לא |  27,213.76 | 43433 | 4,822,345.74  |
-|    6 |       זה |  26,418.69 | 43441 | 4,614,840.01  |
-|    7 |        ב |  24,839.48 | 43450 | 4,472,208.92  |
-|    8 |       של |  20,088.89 | 43445 | 3,529,189.96  |
-|    9 |        ש |  20,028.64 | 43439 | 3,527,087.63  |
-|   10 |      היה |  13,312.52 | 43420 | 2,298,194.02  |
-|   11 |       מה |  12,192.80 | 43403 | 2,107,876.08  |
-|   12 |        ו |   9,840.85 | 43429 | 1,687,960.58  |
-|   13 |       על |   9,119.70 | 43430 | 1,597,865.21  |
-|   14 |      כול |   6,842.01 | 43414 | 1,174,558.76  |
-|   15 |      ידע |   6,205.85 | 43323 | 1,032,405.06  |
-|   16 |       כן |   6,232.26 | 43226 | 971,073.85    |
-|   17 |        מ |   5,479.15 | 43411 | 943,781.99    |
-|   18 |       יש |   5,519.12 | 43376 | 937,885.08    |
-|   19 |      עשה |   4,941.68 | 43311 | 810,088.75    |
-|   20 |      אבל |   4,757.33 | 42963 | 785,248.37    |
-|   21 |      טוב |   4,891.35 | 43291 | 766,201.25    |
-|   22 |      רצה |   4,671.67 | 43202 | 765,197.00    |
-|   23 |       אם |   4,444.59 | 43321 | 745,301.07    |
-|   24 |       עם |   4,333.17 | 43331 | 727,755.37    |
-|   25 |      אמר |   4,128.07 | 43196 | 681,096.31    |
-|   26 |       אז |   4,052.24 | 43202 | 653,014.96    |
-|   27 |      סדר |   4,305.52 | 42733 | 619,555.39    |
-|   28 |     צריך |   3,501.64 | 43101 | 554,553.56    |
-|   29 |       רק |   2,996.30 | 43306 | 492,899.21    |
-|   30 |      חשב |   3,021.85 | 43062 | 486,623.93    |
+|    LEMMA | RANK | DISPERSION |  FREQUENCY |  RANGE |
+|---------:|-----:|-----------:|-----------:|-------:|
+|      הוא |    1 | 114,718.51 | 121,008.92 |  99.99 |
+|        ה |    2 |  47,244.93 |  50,841.12 | 100.00 |
+|       את |    3 |  32,811.28 |  35,337.28 |  99.92 |
+|        ל |    4 |  27,415.19 |  29,102.77 |  99.97 |
+|       לא |    5 |  24,888.86 |  27,213.76 |  99.94 |
+|       זה |    6 |  23,817.89 |  26,418.69 |  99.96 |
+|        ב |    7 |  23,081.75 |  24,839.48 |  99.98 |
+|       של |    8 |  18,214.68 |  20,088.89 |  99.97 |
+|        ש |    9 |  18,203.83 |  20,028.64 |  99.95 |
+|      היה |   10 |  11,861.33 |  13,312.52 |  99.91 |
+|       מה |   11 |  10,879.07 |  12,192.80 |  99.87 |
+|        ו |   12 |   8,711.82 |   9,840.85 |  99.93 |
+|       על |   13 |   8,246.82 |   9,119.70 |  99.93 |
+|      כול |   14 |   6,062.08 |   6,842.01 |  99.90 |
+|      ידע |   15 |   5,328.40 |   6,205.85 |  99.69 |
+|       כן |   16 |   5,011.86 |   6,232.26 |  99.46 |
+|        מ |   17 |   4,871.00 |   5,479.15 |  99.89 |
+|       יש |   18 |   4,840.57 |   5,519.12 |  99.81 |
+|      עשה |   19 |   4,180.99 |   4,941.68 |  99.66 |
+|      אבל |   20 |   4,052.79 |   4,757.33 |  98.86 |
+|      טוב |   21 |   3,954.48 |   4,891.35 |  99.61 |
+|      רצה |   22 |   3,949.30 |   4,671.67 |  99.41 |
+|       אם |   23 |   3,846.61 |   4,444.59 |  99.68 |
+|       עם |   24 |   3,756.06 |   4,333.17 |  99.71 |
+|      אמר |   25 |   3,515.24 |   4,128.07 |  99.39 |
+|       אז |   26 |   3,370.31 |   4,052.24 |  99.41 |
+|      סדר |   27 |   3,197.62 |   4,305.52 |  98.33 |
+|     צריך |   28 |   2,862.13 |   3,501.64 |  99.18 |
+|       רק |   29 |   2,543.93 |   2,996.30 |  99.65 |
+|      חשב |   30 |   2,511.54 |   3,021.85 |  99.09 |
 
 Table: Sample of the first 30 items on the FDOSH.\label{FDOSH_sample}
 
 
-Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and U~DP~. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
+Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and *U~DP~*. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
 
-The most important piece of information the list provides, however, is the U~DP~, which refers to Griers' usage coefficient for dispersion.<!--source--> This is discussed more in-depth in the [*methods*](#methods) section above. U~DP~ is also used as the sorting measure for the FDOSH.
+The most important piece of information the list provides, however, is dispersion, which acts as the ranking measure for the FDOSH and is discussed more in-depth in the [*dispersion*](##methods-dispersion) section of the previous chapter.
 
 The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
 
@@ -102,7 +102,7 @@ One of the more obvious issues of this project is the use of a corpus of movie s
 
 #### Ideal vs. practical corpora
 
-The use of a subtitle corpus has both positive and negative aspects. As mentioned earlier, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language.<!-- sources --> This includes a high level of correlation between the two <!-- sources -->, as well as a strong ability to predict the outcomes of a lexical decision task <!-- sources -->.
+The use of a subtitle corpus has both positive and negative aspects. As mentioned earlier, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language [@Newusefilmsubtitles2007; @BrysbaertMovingKuceraFrancis2009]. This includes a high level of correlation between the two, as well as a strong ability to predict the outcomes of a lexical decision task.
 
 One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as *<http://opensubtitles.com>* and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And they already come pre-processed, as an additional incentive for the time-constrained researcher.
 
@@ -127,7 +127,7 @@ One of the potential downsides of using the OpenSubtitles2018 corpus not yet dis
 
 This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, its quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
-One solution is to simply use movies that were originally filmed in the target language of the corpus. In theory, each XML file in a monolingual OpenSubtitles2018 file should contain a tag that identifies the original language of the movie.<!-- cite article --> In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
+One solution is to simply use movies that were originally filmed in the target language of the corpus. In theory, each XML file in a monolingual OpenSubtitles2018 file should contain a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
 This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movie's IMDb identifier, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
 
@@ -243,7 +243,7 @@ A different lemma, "דיבר" (item 61), is the expected lemma for the verb sinc
 <w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
 ```
 
-To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106). Based on their context (<!--sentence example(s)-->), these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
+To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106). Based on their context<!--sentence example(s)-->, these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
 
 These are just a few among many examples of the difficulties encountered by the automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, it is valuable to at least have an idea of how it works its magic. I will here explain the basics of the process and some of the implications entailed.
 
@@ -259,7 +259,7 @@ The lack of vowels makes it so that the clearly different words עִם and עַ�
 
 #### Automatic parsing
 
-Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligences such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH.<!-- source from Nation --> This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
+Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligences such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
 
 Two distinct types of syntactic parsers exist, contituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
@@ -267,11 +267,11 @@ Constituent grammar is the classic syntax tree structure taught in introductory-
 
 Some parsers proceed in a two-step process of morphological tagging (part of speech) and then dependency parsing (syntactic role and conjugations). In all cases, tokenization must first take place, which refers to splitting the text into individual lemmas.
 
-Most automatic parsers are "trained" using a small corpus that has been manually parsed by a human previously, or at least one that was automatically parsed and then checked and corrected by the researcher.<!-- source:*Parsing Hebrew CHILDES transcripts* --> These "gold-standard" pre-parsed corpora are called treebanks, and repositories of them they have been created for many languages. Building on existing databases of knowledge, these many of these parsers use statistical models to determine the most likely syntactic structure and conjugation for each word in each sentence.
+Most automatic parsers are "trained" using a small corpus that has been manually parsed by a human previously, or at least one that was automatically parsed and then checked and corrected by the researcher [@GretzParsingHebrewCHILDES2015]. These "gold-standard" pre-parsed corpora are called treebanks, and repositories of them they have been created for many languages. Building on existing databases of knowledge, these many of these parsers use statistical models to determine the most likely syntactic structure and conjugation for each word in each sentence.
 
 Some parsers, however, are instead simply given entirely unparsed corpora and no knowledge of the language's syntactic structure. Working with nothing but the text itself, the program seeks out patterns and begins to create links and relationships that it deems significant.
 
-Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed as 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew OpenSubtitles2018 corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
+Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed as 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew *OpenSubtitles2018* corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
 
 Undoubtedly, this can have a negative impact on the accuracy of lemma frequency counts. Many of the issues found in the FDOSH are not due to orthographic ambiguity, but simply to inaccurate parsing. Some, as shown in the previous section, are even caused by erroneous automatic tokenization (consider the lemma "שדיבר").
 
