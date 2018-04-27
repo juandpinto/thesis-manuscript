@@ -52,6 +52,8 @@ For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FD
 
 Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
 
+<!-- need to double-check these coverage figures now that I've changed the list using UDP ranking -->
+
 *n* Lemmas | Frequency Sum | ÷ Corpus Size | = Coverage
 ----------:|:-------------:|:-------------:|:---------:
        374 |  135,767,644  |  193,755,220  |    70%
@@ -102,7 +104,7 @@ One of the more obvious issues of this project is the use of a corpus of movie s
 
 #### Ideal vs. practical corpora
 
-The use of a subtitle corpus has both positive and negative aspects. As mentioned earlier, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language [@Newusefilmsubtitles2007; @BrysbaertMovingKuceraFrancis2009]. This includes a high level of correlation between the two, as well as a strong ability to predict the outcomes of a lexical decision task.
+The use of a subtitle corpus has both positive and negative aspects. As described in the literature review, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language [@Newusefilmsubtitles2007; @BrysbaertMovingKuceraFrancis2009]. This includes a high level of correlation between the two, as well as a strong ability to predict the outcomes of a lexical decision task.
 
 One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as *<http://opensubtitles.com>* and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And they already come pre-processed, as an additional incentive for the time-constrained researcher.
 
@@ -110,15 +112,15 @@ This free and open nature makes subtitle corpora excellent tools for research in
 
 An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed, spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
 
-The most prominent of these is the [Corpus of Spoken Israeli Hebrew (CoSIH)](http://cosih.com/), created at Tel Aviv University between 2000 and 2002.[@IzreelDesigningCoSIHCorpus2001] Designed and initiated by a team of distinguished scholars, it unfortunately ran out of funding long before its goals were met. The CoSIH website (*<http://cosih.com/>*) makes available to the public a total of 13.5 hours of recorded Hebrew, with just over five hours of it having been transcribed.
+The most prominent of these is the [*Corpus of Spoken Israeli Hebrew* (CoSIH)](http://cosih.com/), created at Tel Aviv University between 2000 and 2002 [@IzreelDesigningCoSIHCorpus2001]. Designed and initiated by a team of distinguished scholars, it unfortunately ran out of funding long before its goals were met. The CoSIH website (*<http://cosih.com/>*) makes available to the public a total of 13.5 hours of recorded Hebrew, with just over five hours of it having been transcribed.
 
-Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself.[@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007] At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens. [-@Dekelmattertimetense2010, p.7]
+Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself [@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007]. At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens [-@Dekelmattertimetense2010, p.7].
 
 Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, which are addressed below under [*functional challenges*](#functional-challenges).
 
-Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.[-@Sorellstudyissuestechniques2013]
+Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell [-@Sorellstudyissuestechniques2013] provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.
 
-Are movie and television subtitles an suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as one practical option.
+Are movie and television subtitles an suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as a practical and appealing option.
 
 
 #### Using original-language movies exclusively
@@ -127,7 +129,7 @@ One of the potential downsides of using the OpenSubtitles2018 corpus not yet dis
 
 This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, their quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
-One solution is to simply use movies that were originally filmed in the target language of the corpus. Another possibility is to calculate frequency measures for original and translated subtitles separately, then average them. This latter approach was used by @Newusefilmsubtitles2007. In either case, the first step is to extract the subtitle files that represent the original language of the movie, in this case Hebrew. In theory, each XML file in a monolingual *OpenSubtitles2018* file should contain a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
+One solution is to simply use movies that were originally filmed in the target language of the corpus. Another possibility is to calculate frequency measures for original and translated subtitles separately, then average them. This latter approach was used by New et al. [-@Newusefilmsubtitles2007]. In either case, the first step is to extract the subtitle files that represent the original language of the movie, in this case Hebrew. In theory, each XML file in a monolingual *OpenSubtitles2018* file should contain a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
 This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movie's IMDb identifier, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
 
@@ -135,7 +137,7 @@ Though IMDb does provide their own API, I decided instead to use an API created 
 
 Once an API key is obtained, a script can be written to obtain the information desired for every movie all at once. In this case, we want to know the original language(s) for each movie.
 
-This script in its entirety is found in [Appendix B.2](#appendix-b.2). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.<!-- I need to have a small section or at least a footnote that explains the level of knowledge of Python required to use my scripts -->
+This script in its entirety is found in [Appendix B.2](#appendix-b.2). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.
 
 For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
 

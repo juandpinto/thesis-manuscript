@@ -2,7 +2,7 @@
 
 # Appendix B: Scripts {#appendix-b .unnumbered}
 
-## Appendix B.1: HebrewLemmaCount.py {#appendix-b.1 .unnumbered}
+## Appendix B.1: create-freq-list.py {#appendix-b.1 .unnumbered}
 
 ``` {#HebrewLemmaCount .python .numberLines}
 #! /usr/bin/env python3
@@ -20,16 +20,18 @@ from collections import defaultdict
 
 # Define path for topmost directory to search. Make sure this points to
 # the correct location of your corpus.
-corpus_path = './OpenSubtitles2018_parsed_single'
+corpus_path = './OpenSubtitles2018_parsed_single/parsed/he'
 
 # Initialize dictionaries
-lemma_by_corpus_dict = {}
+lemma_by_file_dict = {}
 lemma_totals_dict = {}
+lemma_norm_dict = {}
 token_count_dict = {}
 lemma_DPs_dict = defaultdict(float)
 lemma_UDPs_dict = defaultdict(float)
 
 total_tokens_int = 0
+total_files_int = 0
 table_list = []
 
 # Set size of final list
@@ -48,17 +50,17 @@ def open_and_read(file_loc):
     return read_data
 
 
-# Search for lemma and add counts to "frequency{}".
+# Search for lemmas and add counts to "lemma_by_file_dict{}".
 def find_and_count(doc):
-    corpus = str(f)[38:-4]
+    file = str(f)[40:-3]
     match_pattern = re.findall(r'lemma="[א-ת]+"', doc)
     for word in match_pattern:
-        if word[7:-1] in lemma_by_corpus_dict:
-            count = lemma_by_corpus_dict[word[7:-1]].get(corpus, 0)
-            lemma_by_corpus_dict[word[7:-1]][corpus] = count + 1
+        if word[7:-1] in lemma_by_file_dict:
+            count = lemma_by_file_dict[word[7:-1]].get(file, 0)
+            lemma_by_file_dict[word[7:-1]][file] = count + 1
         else:
-            lemma_by_corpus_dict[word[7:-1]] = {}
-            lemma_by_corpus_dict[word[7:-1]][corpus] = 1
+            lemma_by_file_dict[word[7:-1]] = {}
+            lemma_by_file_dict[word[7:-1]][file] = 1
 
 
 ############################################################
@@ -70,6 +72,7 @@ def find_and_count(doc):
 #
 for dirName, subdirList, fileList in os.walk(corpus_path):
     if len(fileList) > 0:
+        total_files_int = total_files_int + 1
         f = dirName + '/' + fileList[0]
         find_and_count(open_and_read(f))
 
@@ -119,32 +122,41 @@ for dirName, subdirList, fileList in os.walk(corpus_path):
 # --------------------- CALCULATIONS --------------------- #
 ############################################################
 
-# Calculate token count per corpus
-for lemma in lemma_by_corpus_dict:
-    for corpus in lemma_by_corpus_dict[lemma]:
-        token_count_dict[corpus] = token_count_dict.get(
-            corpus, 0) + lemma_by_corpus_dict[lemma][corpus]
+# Calculate total raw frequencies per lemma
+for lemma in lemma_by_file_dict:
+    lemma_totals_dict[lemma] = sum(lemma_by_file_dict[lemma].values())
 
-# Calculate total frequencies per lemma
-for lemma in lemma_by_corpus_dict:
-    lemma_totals_dict[lemma] = sum(lemma_by_corpus_dict[lemma].values())
+# Calculate token count per file
+for lemma in lemma_by_file_dict:
+    for file in lemma_by_file_dict[lemma]:
+        token_count_dict[file] = token_count_dict.get(
+            file, 0) + lemma_by_file_dict[lemma][file]
 
 # Calculate total token count
-for corpus in token_count_dict:
-    total_tokens_int = total_tokens_int + token_count_dict.get(corpus, 0)
+for file in token_count_dict:
+    total_tokens_int = total_tokens_int + token_count_dict.get(file, 0)
+
+# Set value by which to measure normalized frequency (freq per x words)
+freq_per_int = 1000000
+
+# Calculate normalized frequencies per lemma
+for lemma in lemma_totals_dict:
+    lemma_norm_dict[lemma] = lemma_totals_dict[lemma] / total_tokens_int * \
+        freq_per_int
 
 # Calculate DPs
-for lemma in lemma_by_corpus_dict.keys():
-    for corpus in lemma_by_corpus_dict[lemma].keys():
+for lemma in lemma_by_file_dict.keys():
+    for file in lemma_by_file_dict[lemma].keys():
         lemma_DPs_dict[lemma] = lemma_DPs_dict[lemma] + abs(
-            (token_count_dict[corpus] /
+            (token_count_dict[file] /
              total_tokens_int) -
-            (lemma_by_corpus_dict[lemma][corpus] /
+            (lemma_by_file_dict[lemma][file] /
              lemma_totals_dict[lemma]))
 lemma_DPs_dict = {lemma: DP/2 for (lemma, DP) in lemma_DPs_dict.items()}
 
 # Calculate UDPs
-lemma_UDPs_dict = {lemma: 1-DP for (lemma, DP) in lemma_DPs_dict.items()}
+lemma_UDPs_dict = {lemma: (1-DP)*lemma_norm_dict[lemma] for (lemma, DP) in
+                   lemma_DPs_dict.items()}
 
 
 ############################################################
@@ -156,11 +168,18 @@ UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
     lemma_UDPs_dict, key=lemma_UDPs_dict.__getitem__,
     reverse=True)]
 
-# Create list of tuples with all values (Lemma, Frequency, Range, UDP)
+# Create list of tuples with all values (Lemma, Rank, UDP, Frequency, Range)
+i = 0
 for k, v in UDP_sorted_list[:list_size_int]:
-    table_list.append((k, lemma_totals_dict[k], sum(
-        1 for count in lemma_by_corpus_dict[k].values() if count > 0),
-        v))
+    i = i + 1
+    table_list.append((k,
+                       i,
+                       '{0:,.2f}'.format(v),
+                       '{0:,.2f}'.format(lemma_norm_dict[k]),
+                       '{0:,.2f}'.format(sum(1 for count in
+                                             lemma_by_file_dict[k].values() if
+                                             count > 0) /
+                                         total_files_int * 100)))
 
 ############################################################
 # ---------------- SORT-BY-FREQUENCY BLOCK -----------------
@@ -182,7 +201,7 @@ for k, v in UDP_sorted_list[:list_size_int]:
 #
 # for k, v in frequency_sorted_list[:list_size_int]:
 #     table_list.append((k, v, sum(
-#         1 for count in lemma_by_corpus_dict[k].values() if count > 0),
+#         1 for count in lemma_by_file_dict[k].values() if count > 0),
 #         lemma_UDPs_dict[k]))
 #
 # ------------- END OF SORT-BY-FREQUENCY BLOCK -------------
@@ -202,14 +221,15 @@ for k, v in UDP_sorted_list[:list_size_int]:
 #         break
 # list_size_int = count
 
-# Write final tallies to CSV file
-result = open('./export/HebrewWordList2.csv', 'w')
-result.write('LEMMA, FREQUENCY, RANGE, UDP\n')
+# Write final tallies to TSV file
+result = open('./export/frequency-dictionary.tsv', 'w')
+result.write('LEMMA\tRANK\tDISPERSION\tFREQUENCY\tRANGE\n')
 for i in range(list_size_int):
-    result.write(str(table_list[i][0]) + ', ' +
-                 str(table_list[i][1]) + ', ' +
-                 str(table_list[i][2]) + ', ' +
-                 str(table_list[i][3]) + '\n')
+    result.write(str(table_list[i][0]) + '\t' +
+                 str(table_list[i][1]) + '\t' +
+                 str(table_list[i][2]) + '\t' +
+                 str(table_list[i][3]) + '\t' +
+                 str(table_list[i][4]) + '\n')
 result.close()
 
 # Print final tallies. Uncomment this code to see the results
@@ -232,63 +252,47 @@ result.close()
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# import re
 from sys import argv
 import os
 import glob
 import omdb
 
-# year = '1996'
-script, year, id_start = argv
+script, year = argv
 
-dirs = []
-p = []
+# Initialize IDs list
+IDs = []
 
-
+# Create list of all movie directory paths for desired year
 for name in glob.glob(
-        '../OpenSubtitles2018_parsed/parsed/he/' + year + '/*/'):
-    p.append(name)
-# p = Path('../OpenSubtitles2018_parsed/parsed/he')
-# p = list(p.glob('[198-199]*/*/*.xml'))
+        './OpenSubtitles2018_parsed_single/parsed/he/' + year + '/*/'):
+    IDs.append(name)
 
-p = [os.path.basename(os.path.dirname(str(i))) for i in p]
+# Trim list of directories to only the movie IDs
+IDs = [os.path.basename(os.path.dirname(str(i))) for i in IDs]
 
-for i in p:
-    if i not in dirs:
-        dirs.append(i)
-
-for i in dirs:
+# Add additional zeros to beginning of IDs to match with database
+for i in IDs:
     while len(i) < 7:
-        dirs[dirs.index(i)] = '0' + i
+        IDs[IDs.index(i)] = '0' + i
         i = '0' + i
 
-dirs.sort()
+# Sort IDs numerically (easier to use results)
+IDs.sort()
 
-# for i in dirs:
-#     print('tt' + i)
+# Replace the API key here (906517b3) with your own (omdbapi.com)
+omdb.set_default('apikey', '906517b3')
 
+# Print table header
 print('# ' + year + '\n' +
       'IMDb ID\tTitle\tYear\tLanguage(s)')
 
-
-omdb.set_default('apikey', '906517b3')
-
-for i in dirs:
-    if id_start != '':
-        if i > id_start:
-            print('tt' + i + '\t', end="", flush=True)
-            doc = omdb.imdbid('tt' + i)
-            # if doc['language'] == 'Hebrew':
-            print(doc['title'] + '\t' +
-                  doc['year'] + '\t' +
-                  doc['language'])
-    else:
-        print('tt' + i + '\t', end="", flush=True)
-        doc = omdb.imdbid('tt' + i)
-        # if doc['language'] == 'Hebrew':
-        print(doc['title'] + '\t' +
-              doc['year'] + '\t' +
-              doc['language'])
+# Fetch and print movie ID, title, year, and language(s)
+for i in IDs:
+    doc = omdb.imdbid('tt' + i)
+    print('tt' + i + '\t' +
+          doc['title'] + '\t' +
+          doc['year'] + '\t' +
+          doc['language'])
 ```
 
 

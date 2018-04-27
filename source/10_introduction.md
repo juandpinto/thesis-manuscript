@@ -3,15 +3,6 @@
 
 # Introduction
 
-<!--
-- Goals, where is the project going?
-- Research questions
-- The role of word lists
-- Subtitles? From where? Be explicit.
-- Zipf’s law
-- Word families defined?
- -->
-
 This thesis provides an in-depth look at the creation of the *Frequency Dictionary of Spoken Hebrew* (FDOSH)—a list of the most common words in spoken Modern Hebrew. Its two-fold aim is (1) to explore the theory behind the creation of the FDOSH, along with implications for similar projects, and (2) to describe the methods and provide the tools to make the process as reproducible as possible.
 
 The complete dictionary itself, consisting of 5,000 items, is included as an electronic supplement and can be downloaded free of charge.^[Supplements can be downloaded directly from the thesis archive of the University of Texas at Austin. A separate repository at GitHub also contains the complete FDOSH at *<https://github.com/juandpinto/opus-frequencies>*.] A partial list of the first 1,000 items can be found in [*Appendix A*](#appendix-a).
@@ -20,7 +11,9 @@ A review of the literature will first highlight the gap that exists for less com
 
 The present paper is, therefore, an effort to partially fill that gap in order to help educators interested in creating and/or using frequency dictionaries for their own classrooms, for wider dissemination, or simply for general research purposes. In doing so, it will provide an overview of some of the key decisions that must be taken into account for such a project.
 
-The various uses of word frequency lists can be loosely classified into research applications and practical applications. Examples of research applications include traditional linguistic studies that look for common morphological patterns<!--cite some examples here and throughout this paragraph-->, corpus-linguistic studies seeking to understand language through “real world” texts, and psycholinguistic studies that explore connections between a speaker’s mental lexicon and word frequency. Practical applications of frequency lists include curriculum and textbook planning for language teachers, vocabulary selection for graded readers and dictionaries, and even independent language study. Of course, some of the most influential studies straddle both sides of this divide and attempt to answer questions such as: How can vocabulary knowledge be appropriately tested and measured? What is the role of extensive reading (as opposed to intensive reading) in incidental vocabulary acquisition? What level of vocabulary do learners need in order to read extensively for pleasure? What level of vocabulary do learners need in order to succeed in an academic setting? What role does specialized vocabulary play in reaching understanding? These questions and their answers rely heavily on the creation and use of trustworthy frequency dictionaries. Yet due to the resources and effort required to create these lists, they are rarely found for less commonly taught languages.
+The various uses of word frequency lists can be loosely classified into research applications and practical applications. Examples of research applications include traditional linguistic studies that look for common morphological patterns, corpus-linguistic studies seeking to understand language through “real world” texts, and psycholinguistic studies that explore connections between a speaker’s mental lexicon and word frequency. Practical applications of frequency lists include curriculum and textbook planning for language teachers, vocabulary selection for graded readers and dictionaries, and even independent language study.
+
+Of course, some of the most influential studies straddle both sides of this divide and attempt to answer questions such as: How can vocabulary knowledge be appropriately tested and measured [@McLeancreationnewvocabulary2015; @NationResearchinganalyzingvocabulary2010; @NationMakingusingword2016]? What is the role of extensive reading (as opposed to intensive reading) in incidental vocabulary acquisition [@RestrepoRamosIncidentalvocabularylearning2015]? What level of vocabulary do learners need in order to read extensively for pleasure [@HirshWhatvocabularysize1992; @Schmittpercentagewordsknown2011; @NationHowlargevocabulary2006]? What level of vocabulary do learners need in order to succeed in an academic setting [@Xueuniversitywordlist1984; @Coxheadnewacademicword2000; @CoxheadReflectingCoxhead20002016]? What role does specialized vocabulary play in reaching understanding [@NationWherewouldgeneral1995]? These questions and their answers rely heavily on the creation and use of trustworthy frequency dictionaries. Yet due to the resources and effort required to create these lists, they are rarely found for less commonly taught languages.
 
 
 The primary research question guiding this project is this:
@@ -52,7 +45,7 @@ Word family levels
 :   The word family level that is best suited for the FDOSH’s intended audience is the lemma, consisting of a word and all of its inflected forms, but counting derived forms as separate words.\
 
 Criteria
-:   The FDOSH was created using exclusively objective criteria, meaning that it is the product of calculations, and it was not manually tweaked in any way. The words are sorted by dispersion (specifically, Gries' U~DP~), and also include the measures of frequency and range.
+:   The FDOSH was created using exclusively objective criteria, meaning that it is the product of calculations, and it was not manually tweaked in any way. The words are sorted by dispersion (specifically, Gries' *U~DP~*), and also include the measures of frequency and range.
 
 
 Following the review of the literature and explanation of theory, the process of the FDOSH's creation will be explained in detail, along with some findings from the project. As already mentioned, the goal of this is to make the process easy to follow and reproduce for other languages. Finally, the FDOSH and all scripts used will be provided in the appendices.
