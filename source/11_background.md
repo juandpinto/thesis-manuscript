@@ -63,36 +63,43 @@ One issue that has yet to be studied (to my knowledge) is the difference in unit
 Regardless of differences between approaches, the studies in this section have demonstrated the importance of having a sufficiently large corpus in order to create a trustworthy frequency dictionary. The next section deals with the second aspect of corpus design: the types of texts that are included.
 
 
+### Text types
+
+Deciding on the texts that make up a corpus, and their corresponding text types, is a critical aspect of corpus design. Designing a corpus for the goal of creating a frequency dictionary needs to take the dictionary's intended purpose into account. Many corpora take a conglomerate approach, meaning that they simply amass as many texts as possible, regardless of their type. This has the unfortunate effect of leading to frequency lists that serve no clear purpose.<!-- sources? -->
+
+Some published corpora—especially those designed for a specific purpose rather than "core vocabulary" or the language as a whole—do take a more strategic approach. For example, Coxhead’s [-@Coxheadnewacademicword2000] *Academic Word List* was created from a carefully designed corpus that used equally sized subcorpora of texts from different disciplines. This suited the purpose of the frequency list well, since it was intended to serve students from a variety of disciplines.<!--Other corpora / published word lists?-->
+
+In order to better understand text types, some studies have sought a taxonomy that would make the selection process more objective. In other words, are there distinguishable linguistic differences between an informal correspondence and a narrative work of fiction? Or between a romance and a fantasy novel?
+
+One influential attempt at this categorization was conducted by @BiberVariationspeechwriting1988, who analyzed a variety of texts using large corpora to tag syntactic markers and other linguistic attributes that could potentially be used to define different types of texts. He found a series of five categories (each consisting of two opposite ends of a spectrum) in which texts varied:
+
+1. Involved vs. informational
+2. Narrative
+3. Situated vs. elaborated
+4. Persuasive
+5. Abstract
+<!-- are these the original labels, or Sorell’s? -->
+
+Biber then conducted an in-depth follow-up study that found eight distinct, recurring patterns of different combinations of these categories [-@BiberDimensionsRegisterVariation1995]. These groupings serve as a linguistically-based taxonomy that divides texts along objective lines, rather than subjective, culturally-defined genres.
+
+Similar but independent studies have been conducted for Somali, Korean, Nukulaelae Tuvuluan, Taiwanese, and Spanish [@BiberDimensionsRegisterVariation1995; @JangDimensionsspokenwritten1998]. For each language, a unique set of text types have been identified. Yet, significantly, the texts were found to align along similar distinguishing linguistic dimensions as the English texts [@BiberDimensionsRegisterVariation1995, p. 270].
+
+@Sorellstudyissuestechniques2013 sought to simplify Biber’s eight text types into categories suitable for corpus design. He did this by identifying the similar ways that some of the text types lined up along Biber’s five linguistic categories, while incorporating some extra-linguistic features, such as shared contexts (e.g. predominantly spoken types). He excluded Biber’s [-@BiberDimensionsRegisterVariation1995] two smallest text types—"situated on-line reportage" and "involved persuasion"—deeming them impractical for corpus study and difficult to isolate [@Sorellstudyissuestechniques2013, p. 68]. In doing this, he came up with four simplified text types:
+
+1. Interactive (conversation)
+2. General reported exposition (general writing)
+3. Imaginative narrative (narrative writing)
+4. Academic
+
+Using his comparison method of Dice distance (described above under [*corpus size*](#corpus-size)), Sorell found each simplified text type to be equidistant from the next in this order: conversation, narrative, general writing, and academic writing [-@Sorellstudyissuestechniques2013, pp. 153–154]. He therefore claims that his own study of vocabulary frequency using simplified text types as a base has “validated Biber’s studies by adding a vocabulary dimension to the description of each of the key text types” (p. 201).
+
+Similar efforts to simplify Biber's text types have also been carried out in the *Longman Grammar of Spoken and Written English* [@BiberLongmangrammarspoken1999, p. 16] and the *Longman Student Grammar of Spoken and Written English* [@BiberLongmanstudentgrammar2002, p. 23]
+
+
+
 <!-- ************************** -->
 <!-- CONTINUE PROOFREADING HERE -->
 <!-- ************************** -->
-
-
-### Text types
-
-There has been much debate about the “best” way to balance a corpus’ text types. This is a major aspect of corpus design, and one worth delving into. At the end of the day, much of it comes down to the purpose of the corpus. When used for the creation of word lists, one must also consider the intended purpose of the word list itself. Is it for general use or for one of many possible specialized uses? More on this in the next section.
-
-In order to design a corpus with different amounts of text types (i.e. narrative, conversational, academic), clear definitions for these text types are necessary. But is there a better way than the use of subjective genres to classify texts?
-
-Or is there a better methodology than simply mixing a bunch of different texts together, with the hope that the resulting word list covers the language as a whole? This is the most common way of creating frequency lists, but it tends to result in a mix of words that have little relevance to any one purpose. Esoteric, academic words in a beginners’ vocabulary list? Science fiction terms in a vocabulary list for business managers? It’s obvious that a list is only as good as the corpus from which it’s made, which is why a clear delineation of different text types and their qualities is critical.
-
-When speaking of corpus balance, I refer to the proportion of different text types that make up a corpus. Published corpora have taken different approaches in this regard, and published word lists have made use of a variety of strategies for balancing the corpora from which they are made. Coxhead’s *Academic Word List* [-@Coxheadnewacademicword2000] was created from a carefully-designed corpus that used equally-sized sub-corpora of texts from different disciplines. This suited the purpose of her word list well, since it was intended to serve students from a variety of disciplines.<!--Other corpora / published word lists?-->
-
-
-
-
-
-The importance of identifying a taxonomy of text types based on objective criteria: are there distinguishable linguistic differences between an informal correspondence and a narrative work of fiction? What about between a romance and a fantasy novel?
-
-
-Biber’s early work [-@BiberVariationspeechwriting1988] conducted an analysis of a wide variety of texts using large corpora to tag syntactic markers and other linguistic attributes that could potentially be used to define different types of texts. In this study, he found a series of five categories (each consisting of two opposite ends of a spectrum) in which texts varied: involved vs. informational, narrative, situated vs. elaborated, persuasive, and abstract.<!--NOTE: are these the original labels, or Sorell’s?--> He then conducted a very large study, which he published as a book, (1995) that found eight distinct, recurring patterns of different combinations of these categories. These groupings serve as a linguistically-based taxonomy that divides texts along objective lines, rather than subjective, culturally-defined genres.
-
-Similar but independent studies were conducted for Somali, Korean, Nukulaelae Tuvuluan, Taiwanese, and Spanish [@BiberDimensionsRegisterVariation1995; @JangDimensionsspokenwritten1998]. For each language, a unique set of text types were identified. However, the texts were found to align along similar distinguishing linguistic dimensions as the English texts.
-
-Sorell [-@Sorellstudyissuestechniques2013] sought to simplify Biber’s eight text types into categories suitable for corpora study. He did this by noticing the closely similar ways that some of the text types lined up along Biber’s five linguistic categories, also incorporating some extra-linguistic features, such as shared contexts (e.g. predominantly spoken types). He also dropped Biber’s two smallest text types, deeming them impractical for corpus study and difficult to isolate. In doing this, he came up with four simplified text types: interactive (conversation), general reported exposition (general writing), imaginative narrative (narrative writing), and academic. Regarding this last type, Biber’s study found a nosignificant difference between academic writing in the natural sciences (“scientific exposition”) and the humanities (“learned exposition”)—he found that natural science uses more concrete language, whereas the humanities tend to use more abstract language. However, Sorell sought to unify these for the sake of simplicity, simply leaving their distinction to “a future study” [-@Sorellstudyissuestechniques2013, p. 68]. Sorell acknowledged that his wasn’t the first attempt at simplification of Biber’s text types, a surprisingly similar effort having been made in the *Longman Grammar of Spoken and Written English* [@BiberLongmangrammarspoken1999, p. 16] and the *Longman Student Grammar of Spoken and Written English* [@BiberLongmanstudentgrammar2002, p. 23].
-
-Sorell found that each of his four simplified text types yielded a vocabulary frequency list that was as unique as the linguistic criteria that Biber had used. He also measured how different they were from each other, and found all four to be equidistant from the next in this order: conversation, narrative, general writing, and academic writing (See section on corpus size for an explanation of this measurement). Sorell, therefore, claims that his own study of vocabulary frequency using his simplified text types as a base has “validated Biber’s studies by adding a vocabulary dimension to the description of each of the key text types” [-@Sorellstudyissuestechniques2013, p. 201].
-
 
 
 
