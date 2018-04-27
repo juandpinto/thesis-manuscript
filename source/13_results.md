@@ -125,9 +125,9 @@ Are movie and television subtitles an suitable substitute for spontaneous, spoke
 
 One of the potential downsides of using the OpenSubtitles2018 corpus not yet discussed is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as faithfully as an original script?
 
-This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, its quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
+This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, their quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
-One solution is to simply use movies that were originally filmed in the target language of the corpus. In theory, each XML file in a monolingual OpenSubtitles2018 file should contain a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
+One solution is to simply use movies that were originally filmed in the target language of the corpus. Another possibility is to calculate frequency measures for original and translated subtitles separately, then average them. This latter approach was used by @Newusefilmsubtitles2007. In either case, the first step is to extract the subtitle files that represent the original language of the movie, in this case Hebrew. In theory, each XML file in a monolingual *OpenSubtitles2018* file should contain a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
 This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movie's IMDb identifier, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
 
@@ -138,6 +138,8 @@ Once an API key is obtained, a script can be written to obtain the information d
 This script in its entirety is found in [Appendix B.2](#appendix-b.2). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.<!-- I need to have a small section or at least a footnote that explains the level of knowledge of Python required to use my scripts -->
 
 For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
+
+I also found that, unfortunately, OMDb does not contain every movie in its database. However, these mystery movies were few.
 
 The script begins by creating a list of all movie directory paths for the desired year.
 
@@ -186,18 +188,11 @@ print('# ' + year + '\n' +
                 doc['language'])
 ```
 
+Using a simple search program that allows for extraction of specific lines, such as those labeled with the language `Hebrew`, one can make a list of all the subtitle files that represent the original primary language of the movie. I used the open-source coding program [*Atom*](https://atom.io) to do this, though many options exist.
 
-<!--
+I modified the main script to use only movies from this list. The instructions for how to do this are included in the comments within the main script itself, which can be found in [*appendix b.1](#appendix-b.1).
 
-FINISH THIS SECTION
-
-
-Also see (from #conversation-text-type):
-
-> @Newusefilmsubtitles2007 created a 50-million-token corpus of French subtitles. They divided this into four subcorpora, one for each of the type of media from which the subtitles were extracted: French films, English movies, English television series, and non-English-language European films. The reason for using French subtitles from English media is the sheer dominance of English in the film industry. In order to counter-balance the much larger sizes of the two subcorpora extracted from English media, the researchers measured word frequencies for each subcorpora separately, then averaged them to arrive at the final frequency used for their ranked word list.
-
--->
-
+In the end, however, I found that the total token count for this entire mini-corpus of original Hebrew subtitles was only 615 thousand. This was well below my minimum goal of a 20-million-token corpus. In comparison, the entire Hebrew *OpenSubtitles2018* corpus that I used (with translated and original language subtitles) contains over 194 million tokens. I have explained how to use the scripts for this purpose so that they can be used for language that have sufficient original subtitles. The *Frequency Dictionary of Spoken Hebrew*, however, is created using the entire corpus.
 
 
 ### Functional challenges
