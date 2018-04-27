@@ -187,6 +187,19 @@ print('# ' + year + '\n' +
 ```
 
 
+<!--
+
+FINISH THIS SECTION
+
+
+Also see (from #conversation-text-type):
+
+> @Newusefilmsubtitles2007 created a 50-million-token corpus of French subtitles. They divided this into four subcorpora, one for each of the type of media from which the subtitles were extracted: French films, English movies, English television series, and non-English-language European films. The reason for using French subtitles from English media is the sheer dominance of English in the film industry. In order to counter-balance the much larger sizes of the two subcorpora extracted from English media, the researchers measured word frequencies for each subcorpora separately, then averaged them to arrive at the final frequency used for their ranked word list.
+
+-->
+
+
+
 ### Functional challenges
 
 A quick scan of the FDOSH reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
