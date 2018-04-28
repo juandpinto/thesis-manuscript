@@ -42,7 +42,7 @@ For discussion purposes, a small sample of the first 30 items is here presented.
 Table: Sample of the first 30 items on the FDOSH.\label{FDOSH_sample}
 
 
-Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and *U~DP~*. Frequency in this case is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or in this case, movies—the lemma appears in.
+Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and *U~DP~*. Frequency, in this case, is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or, in this case, movies—the lemma appears in.
 
 The most important piece of information the list provides, however, is dispersion, which acts as the ranking measure for the FDOSH and is discussed more in-depth in the [*dispersion*](##methods-dispersion) section of the previous chapter.
 
@@ -99,7 +99,7 @@ I have divided all of these issues into two categories: methodological challenge
 
 ### Methodological challenges
 
-One of the more obvious issues of this project is the use of a corpus of movie subtitles as substitute for a corpus of true conversational language. This issue in a way forms the backbone of the FDOSH, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
+One of the more obvious issues of this project is the use of a corpus of movie subtitles as a substitute for a corpus of true conversational language. This issue in a way forms the backbone of the FDOSH, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
 
 
 #### Ideal vs. practical corpora
@@ -110,7 +110,7 @@ One especially positive aspect of subtitle corpora is their accessibility. Thank
 
 This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making this type of data-collection more accessible, the costs remain too high for many less-commonly taught languages as of now. This is largely due to the arduous process of transcribing audio recordings.[@IzreelTranscribingSpokenIsraeli2004]
 
-An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed, spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
+An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
 
 The most prominent of these is the [*Corpus of Spoken Israeli Hebrew* (CoSIH)](http://cosih.com/), created at Tel Aviv University between 2000 and 2002 [@IzreelDesigningCoSIHCorpus2001]. Designed and initiated by a team of distinguished scholars, it unfortunately ran out of funding long before its goals were met. The CoSIH website (*<http://cosih.com/>*) makes available to the public a total of 13.5 hours of recorded Hebrew, with just over five hours of it having been transcribed.
 
@@ -120,7 +120,7 @@ Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelH
 
 Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell [-@Sorellstudyissuestechniques2013] provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.
 
-Are movie and television subtitles an suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as a practical and appealing option.
+Are movie and television subtitles a suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as a practical and appealing option.
 
 
 #### Using original-language movies exclusively
@@ -139,7 +139,7 @@ Once an API key is obtained, a script can be written to obtain the information d
 
 This script in its entirety is found in [Appendix B.2](#appendix-b.2). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.
 
-For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
+For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as a wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
 
 I also found that, unfortunately, OMDb does not contain every movie in its database. However, these mystery movies were few.
 
@@ -194,7 +194,7 @@ Using a simple search program that allows for extraction of specific lines, such
 
 I modified the main script to use only movies from this list. The instructions for how to do this are included in the comments within the main script itself, which can be found in [*appendix b.1](#appendix-b.1).
 
-In the end, however, I found that the total token count for this entire mini-corpus of original Hebrew subtitles was only 615 thousand. This was well below my minimum goal of a 20-million-token corpus. In comparison, the entire Hebrew *OpenSubtitles2018* corpus that I used (with translated and original language subtitles) contains over 194 million tokens. I have explained how to use the scripts for this purpose so that they can be used for language that have sufficient original subtitles. The *Frequency Dictionary of Spoken Hebrew*, however, is created using the entire corpus.
+In the end, however, I found that the total token count for this entire mini-corpus of original Hebrew subtitles was only 615 thousand. This was well below my minimum goal of a 20-million-token corpus. In comparison, the entire Hebrew *OpenSubtitles2018* corpus that I used (with translated and original language subtitles) contains over 194 million tokens. I have explained how to use the scripts for this purpose so that they can be used for languages that have sufficient original subtitles. The *Frequency Dictionary of Spoken Hebrew*, however, is created using the entire corpus.
 
 
 ### Functional challenges
@@ -256,11 +256,11 @@ The lack of vowels makes it so that the clearly different words עִם and עַ�
 
 #### Automatic parsing
 
-Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligences such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
+Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligence assistants such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
 
-Two distinct types of syntactic parsers exist, contituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
+Two distinct types of syntactic parsers exist, constituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
-Constituent grammar is the classic syntax tree structure taught in introductory-level linguistics classes. It is essentially a theory of the logic structure of language as a whole. Dependency grammar is a competing theory that treats words as more directly interconnected to each other. A thorough description of these ideas is outside the scope of this thesis, and is not pertinent to the project. What is important to know is that dependency grammar, and thus dependency parsers, have played an important role in the advancement of NLP and computational linguistics as a whole. The term "automatic parser", therefore, most often refers to an automatic *dependency* parser.<!-- source(s)? -->
+Constituent grammar is the classic syntax tree structure taught in introductory-level linguistics classes. It is essentially a theory of the logic structure of language as a whole. Dependency grammar is a competing theory that treats words as more directly interconnected to each other. A thorough description of these ideas is outside the scope of this thesis and is not pertinent to the project. What is important to know is that dependency grammar, and thus dependency parsers, have played an important role in the advancement of NLP and computational linguistics as a whole. The term "automatic parser", therefore, most often refers to an automatic *dependency* parser.<!-- source(s)? -->
 
 Some parsers proceed in a two-step process of morphological tagging (part of speech) and then dependency parsing (syntactic role and conjugations). In all cases, tokenization must first take place, which refers to splitting the text into individual lemmas.
 
@@ -268,8 +268,8 @@ Most automatic parsers are "trained" using a small corpus that has been manually
 
 Some parsers, however, are instead simply given entirely unparsed corpora and no knowledge of the language's syntactic structure. Working with nothing but the text itself, the program seeks out patterns and begins to create links and relationships that it deems significant.
 
-Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed as 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew *OpenSubtitles2018* corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
+Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew *OpenSubtitles2018* corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
 
 Undoubtedly, this can have a negative impact on the accuracy of lemma frequency counts. Many of the issues found in the FDOSH are not due to orthographic ambiguity, but simply to inaccurate parsing. Some, as shown in the previous section, are even caused by erroneous automatic tokenization (consider the lemma "שדיבר").
 
-The good news is that automatic parsers are continually improving in accuracy. This is a problem that exists across the board, regardless of the corpus being used—unless it is manually parsed and lemmaticized, which is nearly impossible for such large corpora. The tools and techniques outlined in this thesis do not directly deal with the process of parsing.
+The good news is that automatic parsers are continually improving in accuracy. This is a problem that exists across the board, regardless of the corpus being used—unless it is manually parsed and lemmatized, which is nearly impossible for such large corpora. The tools and techniques outlined in this thesis do not directly deal with the process of parsing.

@@ -23,9 +23,9 @@ This thesis, then, beyond explaining the theory behind the creation of the FDOSH
 
 Before coding or analyzing anything, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of movie and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
 
-The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and can be downloaded either as *parallel* corpora, or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
+The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and it can be downloaded either as *parallel* corpora or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
 
-For the purpose of creating a word list, a monolingual corpus is best. Note that parallel corpora will often be composed of less tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
+For the purpose of creating a word list, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
 
 Though it's possible to download plain text files, the most useful format available for download is XML. Indeed, the most common file format used for large corpora is XML.<!-- source? --> The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON, which we will use later to extract specific movie metadata directly from a database.
 
@@ -80,9 +80,9 @@ A parsed corpus contains much more information for each token. The data included
 All of the data used to create the FDOSH came from a monolingual parsed corpus of Hebrew. The parsing was all done automatically—a process that will be discussed in the [*automatic parsing*](#automatic-parsing) section of the next chapter.
 
 
-## Cleansing the corpus
+## Cleaning the corpus
 
-Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleansing is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list: deduplication.
+Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list: deduplication.
 
 The files inside the downloaded folder are organized as follows:
 
@@ -112,9 +112,9 @@ Zipped folder in GZ format
            └── Zipped XML in GZ format
 ```
 
-This organization is straight-forward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
+This organization is straightforward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
 
-Part of cleansing the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [*Appendix B.3*](#appendix-b.3). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
+Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [*Appendix B.3*](#appendix-b.3). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 
@@ -155,7 +155,7 @@ With a newly organized version of the corpus, it's now possible to begin the pro
 
 ## Extracting data
 
-Before calculating any measures such as frequency, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case we would be creating a list of all *values* in the `'lemma'` *key* within each `<w>` *tag*. The value that corresponds to the `'lemma'` tag below for the word אומר is אמר.
+Before calculating any measures such as frequency, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case, we would be creating a list of all *values* in the `'lemma'` *key* within each `<w>` *tag*. The value that corresponds to the `'lemma'` tag below for the word אומר is אמר.
 
 ``` {.xml}
 <w xpos="VERB" head="0" feats="Gender=Masc|HebBinyan=PAAL|Number=Sing|
@@ -165,7 +165,7 @@ Before calculating any measures such as frequency, individual lemmas must be ext
 
 A different approach is to use *regular expressions* to search for a specific string of characters and extract every instance of that string. This is a more brute-force approach, since it ignores the structure of the XML file and treats it all simply as raw text. To find a lemma, a very simple regular expression is sufficient: `lemma="[א-ת]+"`. This will search for any instance of the characters `lemma="`, followed by a combination of any number of Hebrew letters (at least one), followed by the character `"`.
 
-Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmaticized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
+Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmatized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
 
 I will now explain the code in the script used to create the FDOSH. As with the other code, the entire script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
 
@@ -209,7 +209,7 @@ The `find_and_count()`{.python} function finds each instance of the string descr
 'lemma': {'path of file': 'frequency of lemma in file'}
 ```
 
-A dictionary is at its core a list of key:value pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
+A dictionary is at its core a list of *key*:*value* pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
 
 After the script reads each file, it returns a complete dictionary. Here is a sample:
 
@@ -230,12 +230,12 @@ Throughout the rest of the script, this nested dictionary serves as the basis fo
 
 ## Calculations
 
-For each lemma, the FDOSH includes three measures: frequency, range, and dispersion. It uses dispersion as its sorting value. Though the theoretical underpinnings of each has already been discussed in the [*objective design*](#objective-design) section of the previous chapter, I will here give a brief reminder of what each measure is and explain how it is calculated. Range will be addressed afterwards in the (*sort and export*)[#sort-and-export] section, since the script calculates it on the spot as the list is created.
+For each lemma, the FDOSH includes three measures: frequency, range, and dispersion. It uses dispersion as its sorting value. Though the theoretical underpinnings of each have already been discussed in the [*objective design*](#objective-design) section of the previous chapter, I will here give a brief reminder of what each measure is and explain how it is calculated. Range will be addressed afterward in the (*sort and export*)[#sort-and-export] section, since the script calculates it on the spot as the list is created.
 
 
 ### Frequency {#methods-frequency}
 
-Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straight forward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, {'lemma1':'frequency1', 'lemma2':'frequency2', . . . }
+Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, {'lemma1':'frequency1', 'lemma2':'frequency2', . . . }
 
 ``` {#create-freq-list .python .numberLines startFrom="119"}
 for lemma in lemma_by_file_dict:
@@ -273,7 +273,7 @@ Gries' usage coefficient, or *U~DP~*, is an attempt to make this number more use
 
 $$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
 
-In order to calculate this, the script must first find the number of tokens in each file. Like before, this is done by creating a dictionary, `token_count_dict`, which contains the key:value pairs of file:tokens. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
+In order to calculate this, the script must first find the number of tokens in each file. Like before, this is done by creating a dictionary, `token_count_dict`, which contains the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
 
 ``` {#create-freq-list .python .numberLines startFrom="123"}
 for lemma in lemma_by_file_dict:
