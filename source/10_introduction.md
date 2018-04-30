@@ -5,9 +5,9 @@
 
 This thesis provides an in-depth look at the creation of the *Frequency Dictionary of Spoken Hebrew* (FDOSH)—a list of the most common words in spoken Modern Hebrew. Its two-fold aim is (1) to explore the theory behind the creation of the FDOSH, along with implications for similar projects, and (2) to describe the methods and provide the tools to make the process as reproducible as possible.
 
-The complete dictionary itself, consisting of 5,000 items, is included as an electronic supplement and can be downloaded free of charge.^[Supplements can be downloaded directly from the thesis archive of the University of Texas at Austin. A separate repository at GitHub also contains the complete FDOSH at *<https://github.com/juandpinto/opus-frequencies>*.] A partial list of the first 1,000 items can be found in [*Appendix A*](#appendix-a).
+The complete dictionary itself, consisting of 5,000 items, is included as an electronic supplement and can be downloaded free of charge.^[Supplements can be downloaded directly from the thesis archive of the University of Texas at Austin. A separate repository at GitHub also contains the complete FDOSH at *<https://github.com/juandpinto/opus-frequencies>*.] A partial list that includes the first 1,000 items can be found in [*Appendix A*](#appendix-a).
 
-A review of the literature will first highlight the gap that exists for less commonly taught languages (LCTLs). Because the overwhelming majority of previous research on vocabulary frequency lists has focused on English (and a handful of other European languages), some important nuances are yet to be addressed. More often than not, the few non-English frequency dictionaries that do exist, along with much of the research in vocabulary acquisition, have taken at face value some of the findings of this limited-scope research—often without questioning whether the same methodologies and conclusions should be applied to different languages.
+A review of the literature will first highlight the difficulties that exist for less commonly taught languages (LCTLs). Because the overwhelming majority of previous research on vocabulary frequency lists has focused on English (and a handful of other European languages), some important nuances are yet to be addressed. More often than not, the few non-English frequency dictionaries that do exist, along with much of the research in vocabulary acquisition, have taken at face value some of the findings of this limited-scope research—often without questioning whether the same methodologies and conclusions should be applied to different languages.
 
 The present paper is, therefore, an effort to partially fill that gap in order to help educators interested in creating and/or using frequency dictionaries for their own classrooms, for wider dissemination, or simply for general research purposes. In doing so, it will provide an overview of some of the key decisions that must be taken into account for such a project.
 
@@ -36,7 +36,7 @@ Corpus size
 :   The corpus from which the FDOSH was created needed to contain a minimum of 20 million tokens, though 50 million was preferred. In the end, it used a corpus of nearly 200 million tokens.\
 
 Corpus text types
-:   In order to best fit with the FDOSH's intended audience (Hebrew learners), the corpus consists of a single text type: conversation. But because of a lack of large-enough corpora of spoken Hebrew, a corpus of film subtitles was used instead.\
+:   In order to best fit with the FDOSH's intended audience (Hebrew learners), the corpus consists of a single text type: conversation. But because of a lack of large corpora of spoken Hebrew, a corpus of film subtitles was used instead. The reasoning for and validity of such an approach will be elaborated on.\
 
 Use
 :   The primary intended audience for the FDOSH is composed of beginning-to-low-intermediate learners of Hebrew as a foreign language. It is designed for both receptive and productive language use.\
