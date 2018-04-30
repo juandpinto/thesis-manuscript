@@ -1,20 +1,20 @@
 \newpage
 
-# Methods: Creating the Frequency Dictionary of Spoken Hebrew (FDOSH) {#methods}
+# Methods: Creating the *Frequency Dictionary of Spoken Hebrew* (FDOSH) {#methods}
 
-As we have seen, the brunt of the work in high-quality vocabulary frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it's difficult to find well-researched word lists, if they exist at all. Why have not more educators—those who may benefit from these lists the most—decided to undertake such a task?
+As we have seen, the majority of research into high quality vocabulary frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it's difficult to find well-researched frequency dictionaries, if they exist at all. Why have not more educators—those who may benefit from these dictionaries the most—decided to undertake such a task?
 
-This need not be a project that one starts from scratch every time. Many tools already exist to make the process smoother. Still, with the rapid pace at which technology changes, these tools tend to quickly become obsolete. They are also usually restrictive to the specific preferences of their creators.
+Some tools already exist that aid in the process of creating a frequency dictionary. One affordable example is the web tool [*SketchEngine*](https://www.sketchengine.eu), a European-based database of hundreds of corpora in many different languages. As is common for similar products, however, SketchEngine does not provide access to the raw corpora themselves. Instead, it acts as a search portal through which one may peek into a corpus's data. This and other restrictions severely limit what researchers can do and the insight they can gain.
 
-Rather than using these tools, I chose to create a series of simple scripts to create the Frequency Dictionary of Spoken Hebrew.
+Rather than using SketchEngine or similar tools, I chose to create a series of simple scripts to create the *Frequency Dictionary of Spoken Hebrew*. They are designed to be easily customizable to suit researchers' needs.
 
-The two most widely-used languages for the type of data analysis involved in a word list creation are Python and R. I chose to use Python for this project. Python was designed specifically to be a very readable programming language. That is, it is easy to read and understand the purpose and flow of the code. This was one of my primary reasons for choosing to use it, since it increases the ease with which this project can be reproduced by other researchers and educators to create their own word lists. R, on the other hand, requires a deeper familiarity with the syntax and conventions of the language in order to understand.
+The two most widely-used languages for the type of data analysis involved in creating a frequency dictionary are Python and R. I chose to use Python for this project. Python was designed specifically to be a very readable programming language. That is, it is easy to read and understand the purpose and flow of the code. This was one of my primary reasons for choosing to use it, since it increases the ease with which this project can be reproduced by other researchers and educators to create their own frequency lists. R, on the other hand, requires a deeper familiarity with the syntax and conventions of the language in order to understand and modify its scripts.
 
 The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
 
-Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-frequencies>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system *Git*. This means that anyone can easily look through the history of each file to see specific changes that have been made over time.
+Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-frequencies>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system [*Git*](https://git-scm.com). Git keeps track of all changes that have been made to all files at any time and makes it easy to search through these file histories to observe the project's creation process.^[For a thorough introduction to Git and GitHub, see Chacon and Straub [-@ChaconProGit2014].]
 
-Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported Frequency Dictionary of Spoken Hebrew, in its entirety, can also be found in the repository.
+Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported *Frequency Dictionary of Spoken Hebrew*, in its entirety, can also be found in the repository.
 
 This thesis, then, beyond explaining the theory behind the creation of the FDOSH, aims to make the process as reproducible as possible. This section contributes to that aim by carefully documenting each step of the process.
 
@@ -23,9 +23,9 @@ This thesis, then, beyond explaining the theory behind the creation of the FDOSH
 
 Before coding or analyzing anything, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of movie and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
 
-The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and it can be downloaded either as *parallel* corpora or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguistics, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
+The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and it can be downloaded either as *parallel* corpora or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguists, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
 
-For the purpose of creating a word list, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
+For the purpose of creating a frequency dictionary, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
 
 Though it's possible to download plain text files, the most useful format available for download is XML. Indeed, the most common file format used for large corpora is XML.<!-- source? --> The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON, which we will use later to extract specific movie metadata directly from a database.
 
@@ -82,7 +82,7 @@ All of the data used to create the FDOSH came from a monolingual parsed corpus o
 
 ## Cleaning the corpus
 
-Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one issue that must be addressed before the corpus can be used to create a word list: deduplication.
+Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one task that must be addressed before the corpus can be used to create a frequency list: deduplication.
 
 The files inside the downloaded folder are organized as follows:
 
@@ -112,7 +112,7 @@ Zipped folder in GZ format
            └── Zipped XML in GZ format
 ```
 
-This organization is straightforward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. Some few variations seem to be different and independent translations.
+This organization is straightforward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. A few of the variant files do seem to be different translations.
 
 Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [*Appendix B.3*](#appendix-b.3). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
@@ -167,7 +167,7 @@ A different approach is to use *regular expressions* to search for a specific st
 
 Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmatized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
 
-I will now explain the code in the script used to create the FDOSH. As with the other code, the entire script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
+I will now explain the code in the script used to create the FDOSH. As with the other code, the script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
 
 After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
 
@@ -362,4 +362,4 @@ for i in range(list_size_int):
 result.close()
 ```
 
-The list is now complete. The next section will explore the list itself more in-depth.
+The frequency dictionary is now complete. The next section will explore the FDOSH itself more in-depth.

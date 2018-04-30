@@ -25,7 +25,7 @@ The secondary research questions have been answered thus:
 
 A corpus of film and television subtitles offers an effective alternative. Though more study is needed in this area, the preliminary studies are in agreement on this point [@BrysbaertMovingKuceraFrancis2009; @Newusefilmsubtitles2007]. Importantly, this thesis has shown how obtaining and using such a corpus can be done easily despite the lack of resources that often plagues research for less commonly taught languages.
 
-> How can the process of creating a frequency dictionary be simplified so that it is easy for others to reproduce while maintaining a high level of customizability?
+> How can the process of creating a frequency dictionary be simplified so that it is easy to reproduce while maintaining a high level of customizability?
 
 This project aimed at making the entire dictionary-creation process as reproducible as possible while allowing for flexibility and transparency in the tools used. By using well-documented open-source scripts written in an easily readable programming language (Python) the result succeeds in this regard. The scripts themselves are a product of this project as much as the frequency dictionary is.
 

@@ -24,7 +24,7 @@ The resulting study also addresses the following secondary research questions:
 
 > What is an effective alternative for a corpus of spoken language when one is lacking in the desired language, as is often the case for less commonly taught languages?
 
-> How can the process of creating a frequency dictionary be simplified so that it is easy for others to reproduce while maintaining a high level of customizability?
+> How can the process of creating a frequency dictionary be simplified so that it is easy to reproduce while maintaining a high level of customizability?
 
 > What implications might these findings have for frequency list creation and use as it pertains to other less commonly taught languages?
 

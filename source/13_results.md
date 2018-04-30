@@ -92,7 +92,7 @@ Gries (2010), "Dispersions and adjusted frequencies in corpora: further explorat
 
 ## Challenges and future direction
 
-Throughout the course of this project, I have encountered several issues that are worth discussing. Some of these are questions that require further study in order to address adequately. Others are technical issues related to the complex task of pre-processing and parsing the corpus—something not directly dealt with in this thesis. Others yet are simple suggestions that I simply did not have time to implement given this project's time constraints. And finally, there are limitations that are the inevitable result of the tools at hand.
+Throughout the course of this project, I have encountered several issues that are worth discussing. Some of these are questions that require further study in order to address adequately. Others are technical issues related to the complex task of pre-processing and parsing the corpus—something not directly dealt with in this thesis. Others yet are suggestions that I simply did not have time to implement given this project's time constraints. And finally, there are limitations that are the inevitable result of the tools at hand.
 
 I have divided all of these issues into two categories: methodological challenges of a bigger nature, and functional challenges of a more limited scope.
 
@@ -205,7 +205,7 @@ For example, the very first lemma on the list is a bit unexpected. "הוא" is c
 
 Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (item 19) and "דיבר" (item 60).
 
-Many of the most common lemmas on the FDOSH are prepositions. Note that even inseparable prepositions, such as -ה and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה" and "ב".
+Many of the most common lemmas on the FDOSH are prepositions. Note that even the definite article (-ה) and inseparable prepositions, such as -ל and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ל" ,"ה" and "ב".
 
 Other issues, however, are more difficult to explain.
 
