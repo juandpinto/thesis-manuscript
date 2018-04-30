@@ -48,7 +48,7 @@ The most important piece of information the list provides, however, is dispersio
 
 The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
 
-For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FDOSH_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the FDOSH one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see [*Introduction*](#introduction) for more on Zipf's Law).
+For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FDOSH_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the FDOSH one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see the [*introduction*](#introduction) for more on Zipf's Law).
 
 Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
 
@@ -125,7 +125,7 @@ Are movie and television subtitles a suitable substitute for spontaneous, spoken
 
 #### Using original-language movies exclusively
 
-One of the potential downsides of using the OpenSubtitles2018 corpus not yet discussed is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as faithfully as an original script?
+One of the potential downsides of using the OpenSubtitles2018 corpus is that it includes all subtitles of a specific language, even *translated* subtitles from movies filmed in other languages. The question is, does a translated script represent true conversational language as faithfully as an original script?
 
 This is a question that requires more research in order to answer satisfactorily. Though translated subtitles don't need to try to approximate the utterance length and visual cues that a dubbed script does, their quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
@@ -192,9 +192,9 @@ print('# ' + year + '\n' +
 
 Using a simple search program that allows for extraction of specific lines, such as those labeled with the language `Hebrew`, one can make a list of all the subtitle files that represent the original primary language of the movie. I used the open-source coding program [*Atom*](https://atom.io) to do this, though many options exist.
 
-I modified the main script to use only movies from this list. The instructions for how to do this are included in the comments within the main script itself, which can be found in [*appendix b.1](#appendix-b.1).
+I modified the main script to use only movies from this list. The instructions for how to do this are included in the comments within the main script itself, which can be found in [*Appendix B.1](#appendix-b.1).
 
-In the end, however, I found that the total token count for this entire mini-corpus of original Hebrew subtitles was only 615 thousand. This was well below my minimum goal of a 20-million-token corpus. In comparison, the entire Hebrew *OpenSubtitles2018* corpus that I used (with translated and original language subtitles) contains over 194 million tokens. I have explained how to use the scripts for this purpose so that they can be used for languages that have sufficient original subtitles. The *Frequency Dictionary of Spoken Hebrew*, however, is created using the entire corpus.
+In the end, however, I found that the total token count for this entire mini-corpus of original Hebrew subtitles was only 615 thousand. This was well below my minimum goal of a 20-million-token corpus. In comparison, the entire Hebrew *OpenSubtitles2018* corpus that I used (with translated and original language subtitles) contains over 194 million tokens. I have explained how to use the scripts for this purpose so that they can be used for languages that have sufficient original subtitles. The *Frequency Dictionary of Spoken Hebrew*, however, is created using the entire corpus. As I mention in the [*conversation text type*](#conversation-text-type) section of the literature review, the findings of a study by New et al. [-@Newusefilmsubtitles2007] suggest that translated subtitles may be a valid alternative, but more research is needed in this area.
 
 
 ### Functional challenges
@@ -256,7 +256,7 @@ The lack of vowels makes it so that the clearly different words עִם and עַ�
 
 #### Automatic parsing
 
-Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligence assistants such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*Identifying Words*](#identifying-words-word-family-levels) in this thesis.
+Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligence assistants such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*identifying words (word family levels)*](#identifying-words) in this thesis.
 
 Two distinct types of syntactic parsers exist, constituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
