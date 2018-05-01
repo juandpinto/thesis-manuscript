@@ -151,19 +151,20 @@ The script begins by creating a list of all movie directory paths for the desire
 
 ``` {#OMDb-fetch .python .numberLines startFrom="15"}
 for name in glob.glob(
-        './OpenSubtitles2018_parsed_single/parsed/he/' + year + '/*/'):
+        './OpenSubtitles2018_parsed_single/parsed/he/' +
+        year + '/*/'):
     IDs.append(name)
 ```
 
 Each item in the list is then trimmed to include only the name of the movie folder, which is *almost* equivalent to the IMDb ID.
 
-``` {#OMDb-fetch .python .numberLines startFrom="20"}
+``` {#OMDb-fetch .python .numberLines startFrom="21"}
 IDs = [os.path.basename(os.path.dirname(str(i))) for i in IDs]
 ```
 
 In order to make the IDs match those in the database, additional zeros must be added to the beginning until they are seven digits long.
 
-``` {#OMDb-fetch .python .numberLines startFrom="23"}
+``` {#OMDb-fetch .python .numberLines startFrom="24"}
 for i in IDs:
     while len(i) < 7:
         IDs[IDs.index(i)] = '0' + i
@@ -174,24 +175,24 @@ The list is then sorted numerically in order to more easily interpret the result
 
 The API key is set in line 32, but be sure to replace `906517b3` with your own key, which can be obtained at <http://www.omdbapi.com/>.
 
-``` {#OMDb-fetch .python .numberLines startFrom="32"}
+``` {#OMDb-fetch .python .numberLines startFrom="33"}
 omdb.set_default('apikey', '906517b3')
 ```
 
 The script then prints a table header, fetches the title, year, and language(s) for each movie, and prints the results directly into the computer terminal.
 
-``` {#OMDb-fetch .python .numberLines startFrom="35"}
+``` {#OMDb-fetch .python .numberLines startFrom="36"}
 print('# ' + year + '\n' +
       'IMDb ID\tTitle\tYear\tLanguage(s)')
 ```
 
-``` {#OMDb-fetch .python .numberLines startFrom="39"}
-      for i in IDs:
-          doc = omdb.imdbid('tt' + i)
-          print('tt' + i + '\t' +
-                doc['title'] + '\t' +
-                doc['year'] + '\t' +
-                doc['language'])
+``` {#OMDb-fetch .python .numberLines startFrom="40"}
+for i in IDs:
+    doc = omdb.imdbid('tt' + i)
+    print('tt' + i + '\t' +
+          doc['title'] + '\t' +
+          doc['year'] + '\t' +
+          doc['language'])
 ```
 
 Using a simple search program that allows for extraction of specific lines, such as those labeled with the language `Hebrew`, one can make a list of all the subtitle files that represent the original primary language of the movie. I used the open-source coding program [*Atom*](https://atom.io) to do this, though many options exist.
@@ -229,7 +230,7 @@ The lemma "דבר" (entry 27) includes instances of both the verb and the noun, 
 We also find plenty of examples of the verb with the same lemma tag:
 
 ```{.xml}
-<w xpos="VERB" head="0" feats="Gender=Fem|HebSource=ConvUncertainHead|Number=Sing|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="2346.4" deprel="root">דברה</w>
+<w xpos="VERB" head="0" feats="Gender=Fem|HebSource=ConvUncertainHead|Number=Sing| Person=3|Tense=Past" upos="VERB" lemma="דבר" id="2346.4" deprel="root">דברה</w>
 
 <w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דבר" id="1270.2" deprel="root">דברנו</w>
 
@@ -239,9 +240,9 @@ We also find plenty of examples of the verb with the same lemma tag:
 A different lemma, "דיבר" (entry 61), is the expected lemma for the verb since it follows the standard third masculine plural conjugation. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, at least this issue is consistent.
 
 ```{.xml}
-<w xpos="VERB" head="840.4" feats="Gender=Fem,Masc|HebBinyan=HITPAEL|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דיבר" id="840.16" deprel="conj">דיברנו</w>
+<w xpos="VERB" head="840.4" feats="Gender=Fem,Masc|HebBinyan=HITPAEL|Number=Plur|Person=1| Tense=Past" upos="VERB" lemma="דיבר" id="840.16" deprel="conj">דיברנו</w>
 
-<w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
+<w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3| VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
 ```
 
 To complicate matters more, we also find the unexpected lemmas "דיברה" (entry 1184), "שדיבר" (entry 2588), and "שדיברה" (entry 4106). Based on their context<!--sentence example(s)-->, these should clearly be parsed as two separate lemmas, "ש" and "דיבר."

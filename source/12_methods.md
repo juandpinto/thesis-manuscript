@@ -133,12 +133,13 @@ destination = './OpenSubtitles2018_parsed_single'
 Next, a single line of code copies all directories and subdirectories into their new location.
 
 ``` {#single_file_extract .python .numberLines startFrom="11"}
-shutil.copytree(source, destination, ignore=shutil.ignore_patterns('*.*'))
+shutil.copytree(source, destination,
+                ignore=shutil.ignore_patterns('*.*'))
 ```
 
 Lastly, we create a variable that holds all the XML files located in each movie folder, trim the list to just one, and copy that one into its new location. This process is carried out for one movie folder at a time. The originals are left untouched.
 
-``` {#single_file_extract .python .numberLines startFrom="14"}
+``` {#single_file_extract .python .numberLines startFrom="15"}
 for dirName, subdirList, fileList in os.walk(source):
     for fname in fileList:
         if fname == '.DS_Store':
@@ -171,7 +172,7 @@ I will now explain the code in the script used to create the FDOSH. As with the 
 
 After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
 
-``` {#create-freq-list .python .numberLines startFrom="39"}
+``` {#create-freq-list .python .numberLines startFrom="40"}
 # Open XML file and read it.
 def open_and_read(file_loc):
     with gzip.open(file_loc, 'rt', encoding='utf-8') as f:
@@ -179,7 +180,7 @@ def open_and_read(file_loc):
     return read_data
 ```
 
-``` {#create-freq-list .python .numberLines startFrom="46"}
+``` {#create-freq-list .python .numberLines startFrom="47"}
 # Search for lemmas and add counts to "lemma_by_file_dict{}".
 def find_and_count(doc):
     file = str(f)[40:-3]
@@ -195,7 +196,7 @@ def find_and_count(doc):
 
 We then run both of these functions for each XML file in the corpus directory (defined earlier in `corpus_path`).
 
-``` {#create-freq-list .python .numberLines startFrom="66"}
+``` {#create-freq-list .python .numberLines startFrom="67"}
 for dirName, subdirList, fileList in os.walk(corpus_path):
     if len(fileList) > 0:
         total_files_int = total_files_int + 1
@@ -237,9 +238,10 @@ For each lemma, the FDOSH includes three measures: frequency, range, and dispers
 
 Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, {'lemma1':'frequency1', 'lemma2':'frequency2', . . . }
 
-``` {#create-freq-list .python .numberLines startFrom="119"}
+``` {#create-freq-list .python .numberLines startFrom="120"}
 for lemma in lemma_by_file_dict:
-    lemma_totals_dict[lemma] = sum(lemma_by_file_dict[lemma].values())
+    lemma_totals_dict[lemma] = \
+        sum(lemma_by_file_dict[lemma].values())
 ```
 
 Using the short example given above, this would result in the following dictionary:
@@ -275,7 +277,7 @@ $$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ 
 
 In order to calculate this, the script must first find the number of tokens in each file. Like before, this is done by creating a dictionary, `token_count_dict`, which contains the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
 
-``` {#create-freq-list .python .numberLines startFrom="123"}
+``` {#create-freq-list .python .numberLines startFrom="125"}
 for lemma in lemma_by_file_dict:
     for file in lemma_by_file_dict[lemma]:
         token_count_dict[file] = token_count_dict.get(
@@ -284,9 +286,10 @@ for lemma in lemma_by_file_dict:
 
 We also need to know the total number of tokens in the entire corpus. This is a simple matter of adding all the values in the `token_count_dict` dictionary. The final count is saved into an integer variable, `total_tokens_int`.
 
-``` {#create-freq-list .python .numberLines startFrom="129"}
+``` {#create-freq-list .python .numberLines startFrom="131"}
 for file in token_count_dict:
-    total_tokens_int = total_tokens_int + token_count_dict.get(file, 0)
+    total_tokens_int = \
+        total_tokens_int + token_count_dict.get(file, 0)
 ```
 
 
@@ -297,7 +300,7 @@ for file in token_count_dict:
 
 Finally, the script uses all these measures to calculate *DP* and then *U~DP~* for each lemma, and places them into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
 
-``` {#create-freq-list .python .numberLines startFrom="140"}
+``` {#create-freq-list .python .numberLines startFrom="143"}
 # Calculate DPs
 for lemma in lemma_by_file_dict.keys():
     for file in lemma_by_file_dict[lemma].keys():
@@ -306,11 +309,12 @@ for lemma in lemma_by_file_dict.keys():
              total_tokens_int) -
             (lemma_by_file_dict[lemma][file] /
              lemma_totals_dict[lemma]))
-lemma_DPs_dict = {lemma: DP/2 for (lemma, DP) in lemma_DPs_dict.items()}
+lemma_DPs_dict = {lemma: DP/2 for (lemma, DP) in
+                  lemma_DPs_dict.items()}
 
 # Calculate UDPs
-lemma_UDPs_dict = {lemma: (1-DP)*lemma_norm_dict[lemma] for (lemma, DP) in
-                   lemma_DPs_dict.items()}
+lemma_UDPs_dict = {lemma: (1-DP)*lemma_norm_dict[lemma] for
+                   (lemma, DP) in lemma_DPs_dict.items()}
 ```
 
 With these values all calculated for each lemma, the only thing left is to sort and create the final list.
@@ -334,23 +338,24 @@ A final table is then created (using a list of tuples, `table_list`), with each 
 
 Because the script has not calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly counts the number of files included in the `lemma_by_file_dict`. Here is the resulting code:
 
-``` {#create-freq-list .python .numberLines startFrom="165"}
+``` {#create-freq-list .python .numberLines startFrom="170"}
 i = 0
 for k, v in UDP_sorted_list[:list_size_int]:
     i = i + 1
-    table_list.append((k,
-                       i,
-                       '{0:,.2f}'.format(v),
-                       '{0:,.2f}'.format(lemma_norm_dict[k]),
-                       '{0:,.2f}'.format(sum(1 for count in
-                                             lemma_by_file_dict[k].values() if
-                                             count > 0) /
-                                         total_files_int * 100)))
+    row = (k,
+           i,
+           '{0:,.2f}'.format(v),
+           '{0:,.2f}'.format(lemma_norm_dict[k]),
+           '{0:,.2f}'.format(sum(1 for count in
+                                 lemma_by_file_dict[k].values() if
+                                 count > 0) /
+                             total_files_int * 100))
+    table_list.append(row)
 ```
 
 Lastly, now that everything is organized into a table, the script opens (or creates, if it doesn't yet exist) a TSV file, writes a header line into it (`LEMMA RANK DISPERSION FREQUENCY RANGE`), and exports the entire table into the file. It then closes it to clear the computer's memory cache.
 
-``` {#create-freq-list .python .numberLines startFrom="218"}
+``` {#create-freq-list .python .numberLines startFrom="226"}
 result = open('./export/frequency-dictionary.tsv', 'w')
 result.write('LEMMA\tRANK\tDISPERSION\tFREQUENCY\tRANGE\n')
 for i in range(list_size_int):
