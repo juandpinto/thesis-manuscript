@@ -4,7 +4,7 @@
 
 The *Frequency Dictionary of Spoken Hebrew* in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-frequencies>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
-For discussion purposes, a small sample of the first 30 items is here presented.
+For discussion purposes, a small sample of the first 30 entries is here presented.
 
 |    LEMMA | RANK | DISPERSION |  FREQUENCY |  RANGE |
 |---------:|-----:|-----------:|-----------:|-------:|
@@ -39,14 +39,16 @@ For discussion purposes, a small sample of the first 30 items is here presented.
 |       רק |   29 |   2,543.93 |   2,996.30 |  99.65 |
 |      חשב |   30 |   2,511.54 |   3,021.85 |  99.09 |
 
-Table: Sample of the first 30 items on the FDOSH.\label{FDOSH_sample}
+Table: Sample of the first 30 entries on the FDOSH.\label{FDOSH_sample}
 
 
-Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and *U~DP~*. Frequency, in this case, is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora. The range is the number of sub-corpora—or, in this case, movies—the lemma appears in.
+Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and dispersion. Frequency, in this case, is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora.
+
+The range has also been normalized. It describes the *percentage* of the number of sub-corpora—or, in this case, movies—that the lemma appears in, in proportion to the number of movies in the entire corpus.
 
 The most important piece of information the list provides, however, is dispersion, which acts as the ranking measure for the FDOSH and is discussed more in-depth in the [*dispersion*](##methods-dispersion) section of the previous chapter.
 
-The percentage of the corpus that is covered by the first *n* items on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* items.
+The percentage of the corpus that is covered by the first *n* entries on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* entries.
 
 For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FDOSH_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the FDOSH one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see the [*introduction*](#introduction) for more on Zipf's Law).
 
@@ -79,17 +81,17 @@ Nation (2016), p. 103:
 
 The purpose of the *Frequency Dictionary of Spoken Hebrew* is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew. As described in this thesis's [*introduction*](#introduction), frequency dictionaries can serve a number of purposes, generally classified as either research applications or practical applications. Though primarily designed with the goal of aiding vocabulary acquisition, the FDOSH can similarly fill a multitude of roles.
 
-This project originally began with a desire to evaluate whether the findings of some influential studies regarding English vocabulary would hold true for Hebrew vocabulary. Specifically, I was interested in measuring the amount of vocabulary necessary for learners of Hebrew to comfortably read extensively for pleasure, similar to previous studies [@HirshWhatvocabularysize1992; @Schmittpercentagewordsknown2011; @NationHowlargevocabulary2006]. I quickly realized that the frequency dictionary necessary for such a project did not exist for Hebrew, so I chose to focus on designing such a dictionary first.
+This project originally began with a desire to evaluate whether the findings of some influential studies regarding English vocabulary would hold true for Hebrew vocabulary. Specifically, I was interested in measuring the amount of vocabulary necessary for learners of Hebrew to comfortably read extensively for pleasure, following the lead of previous studies by Schmitt et al. [-@Schmittpercentagewordsknown2011], Nation [-@NationHowlargevocabulary2006], and Hirsch and Nation [-@HirshWhatvocabularysize1992], among others. I quickly realized that the frequency dictionary necessary for such a project did not exist for Hebrew, so I chose to focus on designing such a dictionary first.
 
-With the FDOSH now created, my hope is that it will serve as a basis for studies of this type. As Gries [-@GriesDispersionsadjustedfrequencies2010] explains:
+With the FDOSH now created, my hope is that it will serve as a basis for future studies of this type. As Gries [-@GriesDispersionsadjustedfrequencies2010] explains:
 
 > In some theoretical approaches, such as cognitive linguistics or usage-based grammar, frequency data are now regularly used in the domains of first- and second/foreign-language acquisition, the study of language and culture, grammaticalization, phonological reduction, morphological processing, syntactic alternations, etc. (p. 197)
 
 The possible research applications of such a dictionary are the reason I chose to include so much data with each entry.
 
-I also hope that educators will find use in the lemmas and their rankings, either for identifying the vocabulary to include in their textbooks, to teach in their classrooms, or to focus on in their conversation groups. The FDOSH can similarly serve independent learners, or students of Hebrew who wish to take greater control of the vocabulary they purposely study.
+I also hope that educators will find use in the lemmas and their rankings, either for identifying the vocabulary to include in their textbooks, to teach in their classrooms, or to focus on in their conversation groups. The FDOSH can similarly serve independent learners, or students of Hebrew who wish to take greater control of the vocabulary they deliberately study.
 
-Even more than all of this, however, the FDOSH can serve as an example. I have chosen to place heavy emphasis on the creation process itself in order to make it easily reproducible for other languages. In so doing, my hope is that similar educational resources and research tools will become widely available.
+Even more than all of this, however, the FDOSH can serve as an example for future frequency dictionaries. I have chosen to place heavy emphasis on the creation process itself in order to make it easily reproducible for comparable projects in other languages. In so doing, my hope is that similar educational resources and research tools will become widely available.
 
 
 ## Challenges and future direction
@@ -201,11 +203,11 @@ In the end, however, I found that the total token count for this entire mini-cor
 
 ### Functional challenges
 
-A quick scan of the FDOSH reveals some notable items. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
+A quick scan of the FDOSH reveals some notable entries. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
 
-For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of spoken dialogue (in many languages), its place at the top of the list ceases to be a surprise.<!-- source (Nation) -->
+For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of the spoken dialogue of many languages (especially the first and second person pronouns), its place at the top of the list ceases to be a surprise.<!-- source -->
 
-Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (item 19) and "דיבר" (item 60).
+Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (entry 19) and "דיבר" (entry 60).
 
 Many of the most common lemmas on the FDOSH are prepositions. Note that even the definite article (-ה) and inseparable prepositions, such as -ל and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ל" ,"ה" and "ב".
 
@@ -216,7 +218,7 @@ Other issues, however, are more difficult to explain.
 
 The flexible spelling conventions of Hebrew are at the root of many of the problems with the FDOSH. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
 
-The lemma "דבר" (item 27) includes instances of both the verb and the noun, which are completely unrelated. A simple search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
+The lemma "דבר" (entry 27) includes instances of both the verb and the noun, which are completely unrelated. A simple search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
 
 ```{.xml}
 <w xpos="NOUN" head="579.3" feats="Gender=Masc|Number=Sing" upos="NOUN" lemma="דבר" id="579.2" deprel="nsubj">דבר</w>
@@ -234,7 +236,7 @@ We also find plenty of examples of the verb with the same lemma tag:
 <w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="368.4" deprel="root">דברו</w>
 ```
 
-A different lemma, "דיבר" (item 61), is the expected lemma for the verb since it follows the standard third masculine plural conjugation. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, at least this issue is consistent.
+A different lemma, "דיבר" (entry 61), is the expected lemma for the verb since it follows the standard third masculine plural conjugation. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, at least this issue is consistent.
 
 ```{.xml}
 <w xpos="VERB" head="840.4" feats="Gender=Fem,Masc|HebBinyan=HITPAEL|Number=Plur|Person=1|Tense=Past" upos="VERB" lemma="דיבר" id="840.16" deprel="conj">דיברנו</w>
@@ -242,7 +244,7 @@ A different lemma, "דיבר" (item 61), is the expected lemma for the verb sinc
 <w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3|VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
 ```
 
-To complicate matters more, we also find the unexpected lemmas "דיברה" (item 1184), "שדיבר" (item 2588), and "שדיברה" (item 4106). Based on their context<!--sentence example(s)-->, these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
+To complicate matters more, we also find the unexpected lemmas "דיברה" (entry 1184), "שדיבר" (entry 2588), and "שדיברה" (entry 4106). Based on their context<!--sentence example(s)-->, these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
 
 These are just a few among many examples of the difficulties encountered by the automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, it is valuable to at least have an idea of how it works its magic. I will here explain the basics of the process and some of the implications entailed.
 

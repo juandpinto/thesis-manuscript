@@ -209,7 +209,7 @@ The `find_and_count()`{.python} function finds each instance of the string descr
 'lemma': {'path of file': 'frequency of lemma in file'}
 ```
 
-A dictionary is at its core a list of *key*:*value* pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
+A Python dictionary is at its core a list of *key*:*value* pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
 
 After the script reads each file, it returns a complete dictionary. Here is a sample:
 
@@ -242,7 +242,7 @@ for lemma in lemma_by_file_dict:
     lemma_totals_dict[lemma] = sum(lemma_by_file_dict[lemma].values())
 ```
 
-This returns Using the short example given above, this would result in the following dictionary:
+Using the short example given above, this would result in the following dictionary:
 
 ```
 262:'ב',
