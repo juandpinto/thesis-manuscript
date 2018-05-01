@@ -2,7 +2,7 @@
 
 # The FDOSH: A vocabulary list of conversational Modern Hebrew
 
-The Frequency Dictionary of Spoken Hebrew in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-frequencies>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
+The *Frequency Dictionary of Spoken Hebrew* in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-frequencies>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 items is here presented.
 
@@ -74,20 +74,22 @@ Nation (2016), p. 103:
 
 -->
 
-<!--
+
 ## Use
 
-The purpose of the FDOSH is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew.
+The purpose of the *Frequency Dictionary of Spoken Hebrew* is to provide a list of the most commonly-used lemmas in conversational Modern Hebrew. As described in this thesis's [*introduction*](#introduction), frequency dictionaries can serve a number of purposes, generally classified as either research applications or practical applications. Though primarily designed with the goal of aiding vocabulary acquisition, the FDOSH can similarly fill a multitude of roles.
 
-See section 2.7 in Sorell, 2013.
+This project originally began with a desire to evaluate whether the findings of some influential studies regarding English vocabulary would hold true for Hebrew vocabulary. Specifically, I was interested in measuring the amount of vocabulary necessary for learners of Hebrew to comfortably read extensively for pleasure, similar to previous studies [@HirshWhatvocabularysize1992; @Schmittpercentagewordsknown2011; @NationHowlargevocabulary2006]. I quickly realized that the frequency dictionary necessary for such a project did not exist for Hebrew, so I chose to focus on designing such a dictionary first.
 
+With the FDOSH now created, my hope is that it will serve as a basis for studies of this type. As Gries [-@GriesDispersionsadjustedfrequencies2010] explains:
 
-Gries (2010), "Dispersions and adjusted frequencies in corpora: further explorations":
-> in some theoretical approaches, such as cognitive linguistics or usage-based grammar, frequency data are now regularly used in the domains of first- and second/foreign-language acquisition, the study of language and culture, grammaticalization, phonological reduction, morphological processing, syntactic alternations, etc.
+> In some theoretical approaches, such as cognitive linguistics or usage-based grammar, frequency data are now regularly used in the domains of first- and second/foreign-language acquisition, the study of language and culture, grammaticalization, phonological reduction, morphological processing, syntactic alternations, etc. (p. 197)
 
- -->
+The possible research applications of such a dictionary are the reason I chose to include so much data with each entry.
 
+I also hope that educators will find use in the lemmas and their rankings, either for identifying the vocabulary to include in their textbooks, to teach in their classrooms, or to focus on in their conversation groups. The FDOSH can similarly serve independent learners, or students of Hebrew who wish to take greater control of the vocabulary they purposely study.
 
+Even more than all of this, however, the FDOSH can serve as an example. I have chosen to place heavy emphasis on the creation process itself in order to make it easily reproducible for other languages. In so doing, my hope is that similar educational resources and research tools will become widely available.
 
 
 ## Challenges and future direction
