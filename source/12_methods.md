@@ -34,7 +34,7 @@ Another factor to consider is whether to download an untokenized, tokenized, or 
 ```{.xml}
 <s id="49">
   <time id="T39S" value="00:03:22,280" />
-?מה אתה אומר, שרלוק
+?שרלוק ,אומר אתה מה
   <time id="T39E" value="00:03:24,120" />
 </s>
 ```
