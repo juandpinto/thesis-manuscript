@@ -114,7 +114,7 @@ Zipped folder in GZ format
 
 This organization is straightforward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. A few of the variant files do seem to be different translations.
 
-Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this in its entirety in [*Appendix B.3*](#appendix-b.3). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
+Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this,`single_file_extract.py`, in [*Appendix B.2*](#appendix-b.2). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 
@@ -168,7 +168,7 @@ A different approach is to use *regular expressions* to search for a specific st
 
 Despite the existence of various Python modules for parsing XML files, I found a simple search using regular expressions to be more efficient for various reasons. First, not all *<w>* elements in the parsed corpus contain *lemma* attributes. Second, punctuation and non-Hebrew words are often lemmatized. This means that even after extracting all the *lemma* values in a file, I would still need to use regular expressions to search through the results and delete any that contain non-Hebrew characters. I chose instead to skip the XML parsing step altogether.
 
-I will now explain the code in the script used to create the FDOSH. As with the other code, the script in its entirety can be found in [*Appendix B.1*](#appendix-b.1).
+I will now explain the code in the script used to create the FDOSH, `create-freq-list.py`. As with the other code, the script in its entirety can be found in [*Appendix B*](#appendix-b).
 
 After importing necessary packages and initializing variables, two functions near the beginning of the script serve to open a file and extract a list of lemmas from it.
 
@@ -236,15 +236,16 @@ For each lemma, the FDOSH includes three measures: frequency, range, and dispers
 
 ### Frequency {#methods-frequency}
 
-Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, {'lemma1':'frequency1', 'lemma2':'frequency2', . . . }
+Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, `{'lemma1':'frequency1', 'lemma2':'frequency2', . . . }`.
 
-``` {#create-freq-list .python .numberLines startFrom="120"}
+``` {#create-freq-list .python .numberLines startFrom="119"}
+# Calculate total raw frequencies per lemma
 for lemma in lemma_by_file_dict:
     lemma_totals_dict[lemma] = \
         sum(lemma_by_file_dict[lemma].values())
 ```
 
-Using the short example given above, this would result in the following dictionary:
+Following the short example provided above, this would result in the following dictionary:
 
 ```
 262:'ב',
@@ -252,10 +253,47 @@ Using the short example given above, this would result in the following dictiona
 9:'קודם'
 ```
 
+We now have raw frequency counts, but we need to turn them into normalized frequencies, using one million as our normalizing figure. To do this, we perform the following equation for each lemma:
+
+$$\textbf{normalized frequency}\ =\ \frac{frequency\ of\ lemma}{total\ tokens\ in\ corpus}\ \times\ 1,000,000$$
+
+In order to find the token count for the entire corpus, we first make a dictionary—`token_count_dict`—that contains an entry for each file in the corpus and the number of tokens in that file, using the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
+
+``` {#create-freq-list .python .numberLines startFrom="124"}
+# Calculate token count per file
+for lemma in lemma_by_file_dict:
+    for file in lemma_by_file_dict[lemma]:
+        token_count_dict[file] = token_count_dict.get(
+            file, 0) + lemma_by_file_dict[lemma][file]
+```
+
+We can now add each of these entries to find the total count and save it in an integer variable, `total_tokens_int`. We took the intermediary step of creating the dictionary `token_count_dict` because we will later need the values it holds (tokens in each file) in order to calculate dispersion.
+
+``` {#create-freq-list .python .numberLines startFrom="130"}
+# Calculate total token count
+for file in token_count_dict:
+    total_tokens_int = \
+        total_tokens_int + token_count_dict.get(file, 0)
+```
+
+The script now calculates all the normalized frequencies using the equation described earlier. The value by which the frequencies will be normalized can easily be modified in line 136 of the code.
+
+``` {#create-freq-list .python .numberLines startFrom="135"}
+# Set value for normalized frequency (freq per x words)
+freq_per_int = 1000000
+
+# Calculate normalized frequencies per lemma
+for lemma in lemma_totals_dict:
+    lemma_norm_dict[lemma] = \
+        lemma_totals_dict[lemma] / total_tokens_int * freq_per_int
+```
+
+The dictionary `lemma_norm_dict` now contains the normalized frequency of each lemma.
+
 
 ### Dispersion (*U~DP~*) {#methods-dispersion}
 
-Dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. The model of dispersion I have chosen to follow for this project is a usage coefficient of Gries' deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010].
+Calculating dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. The model of dispersion I have chosen to follow for this project is a usage coefficient of Gries' deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010].
 
 In order to calculate *U~DP~* for lemma~x~, we must first make two calculations for each file in the corpus (file~i~): the lemma's *expected frequency* if it were perfectly distributed, and its *observed frequency*—or its actual frequency.
 
@@ -265,7 +303,7 @@ $$\textbf{observed frequency}\ =\ \frac{frequency\ of\ lemma_x\ in\ file_i}{freq
 
 We must then subtract the lemma's observed frequency from its expected frequency, which will return a value between -1 and 1. We can normalize this result by finding the absolute value. Now the closer the result is to 0, the closer that lemma's frequency is in that particular file to what we would expect if it were perfectly distributed throughout the corpus. A higher number (closer to 1), would indicate a heavier load in that file that we would expect.
 
-By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values originally in both directions), we now have Gries' *DP*. Where `n` is the number of files:
+By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values that originally existed in both a positive and a negative direction), we now have Gries' *DP*. Where `n` is the number of files:
 
 $$\textbf{DP}\ =\ 0.5 \sum_{i=1}^{n} |\ \text{expected frequency}\ -\ \text{observed frequency}\ |$$
 
@@ -275,30 +313,9 @@ Gries' usage coefficient, or *U~DP~*, is an attempt to make this number more use
 
 $$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
 
-In order to calculate this, the script must first find the number of tokens in each file. Like before, this is done by creating a dictionary, `token_count_dict`, which contains the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
+In order to calculate this, the script must first find the number of tokens in each file. Luckily, we already did this while calculating normalized frequency, above. The dictionary `token_count_dict` contains these token counts. We've also already taken the step of adding these values together into the integer variable `total_tokens_int` while preparing to calculate normalized frequency.
 
-``` {#create-freq-list .python .numberLines startFrom="125"}
-for lemma in lemma_by_file_dict:
-    for file in lemma_by_file_dict[lemma]:
-        token_count_dict[file] = token_count_dict.get(
-            file, 0) + lemma_by_file_dict[lemma][file]
-```
-
-We also need to know the total number of tokens in the entire corpus. This is a simple matter of adding all the values in the `token_count_dict` dictionary. The final count is saved into an integer variable, `total_tokens_int`.
-
-``` {#create-freq-list .python .numberLines startFrom="131"}
-for file in token_count_dict:
-    total_tokens_int = \
-        total_tokens_int + token_count_dict.get(file, 0)
-```
-
-
-
-<!-- small block of code missing here and possibly elsewhere -->
-
-
-
-Finally, the script uses all these measures to calculate *DP* and then *U~DP~* for each lemma, and places them into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
+With all of these measures in place, the script can now calculate *DP* and then *U~DP~* using the equations described above. It does this for each lemma, saving the new measures into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
 
 ``` {#create-freq-list .python .numberLines startFrom="143"}
 # Calculate DPs
@@ -317,7 +334,7 @@ lemma_UDPs_dict = {lemma: (1-DP)*lemma_norm_dict[lemma] for
                    (lemma, DP) in lemma_DPs_dict.items()}
 ```
 
-With these values all calculated for each lemma, the only thing left is to sort and create the final list.
+With these values calculated and saved for each lemma, the only thing left is to sort and export the final list.
 
 
 ## Sort and export
@@ -328,7 +345,8 @@ Rather than setting an arbitrary bar, the FDOSH is sorted entirely by *U~DP~*. T
 
 Since we've already calculated the *U~DP~* for each lemma, sorting the list is simple.
 
-``` {#create-freq-list .python .numberLines startFrom="160"}
+``` {#create-freq-list .python .numberLines startFrom="163"}
+# Sort entries by UDP
 UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
     lemma_UDPs_dict, key=lemma_UDPs_dict.__getitem__,
     reverse=True)]
@@ -336,7 +354,9 @@ UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
 
 A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its overall frequency, its range, and its *U~DP~*. This table is already sorted by *U~DP~* as it's being created.
 
-Because the script has not calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly counts the number of files included in the `lemma_by_file_dict`. Here is the resulting code:
+Because the script has not yet calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly adds the number of files included in the `lemma_by_file_dict`. Since the FDOSH will display range as a percentage, the script takes this new sum of files in which each lemma appears, divides it by the total number of files in the corpus (`total_files_int`), and multiplies the result by 100.
+
+Here is the resulting code:
 
 ``` {#create-freq-list .python .numberLines startFrom="170"}
 i = 0

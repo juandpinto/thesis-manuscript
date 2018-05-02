@@ -4,7 +4,7 @@
 
 ## Appendix B.1: create-freq-list.py {#appendix-b.1 .unnumbered}
 
-``` {#HebrewLemmaCount .python .numberLines}
+``` {#create-freq-list .python .numberLines}
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -243,18 +243,52 @@ result.close()
 # Print final tallies. Uncomment this code to see the results
 # printed instead of writing them to a file.
 #
+# print('LEMMA\tRANK\tDISPERSION\tFREQUENCY\tRANGE\n')
 # for i in range(list_size_int):
-#     print('Lemma: ' + table_list[i][0] +
-#           '\tFrequency: ' + str(table_list[i][1]) +
-#           '\tRange: ' + str(table_list[i][2]) +
-#           '\tUDP: ' + str(table_list[i][3]))
+#     print(str(table_list[i][0]) + '\t' +
+#           str(table_list[i][1]) + '\t' +
+#           str(table_list[i][2]) + '\t' +
+#           str(table_list[i][3]) + '\t' +
+#           str(table_list[i][4]) + '\n')
 ```
 
 
 
 
 \newpage
-## Appendix B.2: OMDb-fetch.py {#appendix-b.2 .unnumbered}
+## Appendix B.2: single_file_extract.py {#appendix-b.2 .unnumbered}
+
+``` {#single_file_extract .python .numberLines}
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import shutil
+import os
+
+source = '../OpenSubtitles2018_parsed'
+destination = './OpenSubtitles2018_parsed_single'
+
+# Copy the directory tree into a new location
+shutil.copytree(source, destination,
+                ignore=shutil.ignore_patterns('*.*'))
+
+# Copy the first file in each folder into the new tree
+for dirName, subdirList, fileList in os.walk(source):
+    for fname in fileList:
+        if fname == '.DS_Store':
+            fileList.remove(fname)
+    if len(fileList) > 0:
+        del fileList[1:]
+        src = dirName + '/' + fileList[0]
+        dst = destination + dirName[27:] + '/'
+        shutil.copy2(src, dst)
+```
+
+
+
+
+\newpage
+## Appendix B.3: OMDb-fetch.py {#appendix-b.3 .unnumbered}
 
 ``` {#OMDb-fetch .python .numberLines}
 #! /usr/bin/env python3
@@ -308,30 +342,37 @@ for i in IDs:
 
 
 \newpage
-## Appendix B.3: single_file_extract.py {#appendix-b.3 .unnumbered}
+## Appendix B.4: list_comparison.py {#appendix-b.4 .unnumbered}
 
-``` {#single_file_extract .python .numberLines}
+``` {#list_comparison .python .numberLines}
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import shutil
-import os
+import re
 
-source = '../OpenSubtitles2018_parsed'
-destination = './OpenSubtitles2018_parsed_single'
+lemmas_original_list = []
+lemmas_all_list = []
+shared_list = []
 
-# Copy the directory tree into a new location
-shutil.copytree(source, destination,
-                ignore=shutil.ignore_patterns('*.*'))
+# Import all lemmas in original-language list
+with open('./export/frequency-dictionary-original-only.tsv', 'r',
+          encoding='utf-8') as f:
+    read_data = f.read()
+    lemmas_original_list = re.findall(r'[א-ת]+', read_data)
 
-# Copy the first file in each folder into the new tree
-for dirName, subdirList, fileList in os.walk(source):
-    for fname in fileList:
-        if fname == '.DS_Store':
-            fileList.remove(fname)
-    if len(fileList) > 0:
-        del fileList[1:]
-        src = dirName + '/' + fileList[0]
-        dst = destination + dirName[27:] + '/'
-        shutil.copy2(src, dst)
+# Import all lemmas in list from all subtitles
+with open('./export/frequency-dictionary.tsv', 'r',
+          encoding='utf-8') as f:
+    read_data = f.read()
+    lemmas_all_list = re.findall(r'[א-ת]+', read_data)
+
+# Find shared lemmas
+for item in lemmas_original_list:
+    if item in lemmas_all_list:
+        shared_list.append(item)
+
+# Print shared lemmas and total count
+for item in shared_list:
+    print(item)
+print('Total shared: ' + str(len(shared_list)))
 ```
