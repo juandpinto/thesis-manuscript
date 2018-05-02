@@ -41,6 +41,23 @@ pdf:
 	--pdf-engine=xelatex \
 	--verbose
 
+pdf2:
+	pandoc "$(INPUTDIR)"/*.md2 \
+	-o "$(OUTPUTDIR)/thesis2.pdf" \
+	-H "$(STYLEDIR)/preamble.tex" \
+	--template="$(STYLEDIR)/template.tex" \
+	--bibliography="$(BIBFILE)" 2>pandoc.log \
+	--csl="$(STYLEDIR)/ref_format.csl" \
+	--metadata link-citations \
+	--highlight-style tango \
+	-V fontsize=12pt \
+	-V papersize=letterpaper \
+	-V documentclass=article \
+	-V links-as-notes \
+	-N \
+	--pdf-engine=xelatex \
+	--verbose
+
 tex:
 	pandoc "$(INPUTDIR)"/*.md \
 	-o "$(OUTPUTDIR)/thesis.tex" \

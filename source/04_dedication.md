@@ -1,8 +1,7 @@
-\vspace*{.8in}
+\vspace*{1in}
 
-# Dedication {.unnumbered}
-
+\begin{center}
 To the giants on whose shoulders we stand.
-
+\end{center}
 
 \newpage
