@@ -10,8 +10,7 @@ The methods chapter described—in detail—the process used to create the FDOSH
 
 The organization and uses of the FDOSH were described in the last chapter. Most importantly, some of the challenges encountered during the process were discussed, along with possible directions for future projects. Some of the weaknesses of the FDOSH were also described.
 
-Finally, the appendices to this thesis include a more full list of the FDOSH and all of the scripts used in their entirety. The code and full dictionary can be found as a supplement to this thesis, or at the [*project's GitHub repository*](https://github.com/juandpinto/opus-frequencies).<!-- include DOI here -->
-
+Finally, the appendices to this thesis include a more full list of the FDOSH and all of the scripts used in their entirety. The code and full dictionary can be accessed as part of this thesis's supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>* [@PintoSupplementarymaterialscreating2018], or at the project's GitHub repository: *<https://github.com/juandpinto/frequency-dictionary>*.
 
 The primary research question asked at the outset of this thesis was the following:
 

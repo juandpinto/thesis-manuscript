@@ -2,7 +2,7 @@
 
 # The FDOSH: A vocabulary list of conversational Modern Hebrew
 
-The *Frequency Dictionary of Spoken Hebrew* in its entirety can be found as an electronic supplement to this thesis (in CSV format) or at the following GitHub repository: *<https://github.com/juandpinto/opus-frequencies>*. It contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
+The *Frequency Dictionary of Spoken Hebrew* in its entirety can be accessed in electronic form as part of this thesis's supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>* [@PintoSupplementarymaterialscreating2018], or at the project's GitHub repository: *<https://github.com/juandpinto/frequency-dictionary>*. The FDOSH contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 entries is here presented.
 
@@ -141,7 +141,7 @@ Though IMDb does provide their own API, I decided instead to use an API created 
 
 Once an API key is obtained, a script can be written to obtain the information desired for every movie all at once. In this case, we want to know the original language(s) for each movie.
 
-This script in its entirety, `OMDb-fetch.py`, is found in [Appendix B.3](#appendix-b.3). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at <https://github.com/dgilland/omdb.py>. This package can be installed through PIP by entering `pip install omdb` into the command line.
+This script in its entirety, `OMDb-fetch.py`, is found in [Appendix B.3](#appendix-b.3). It uses an imported Python wrapper for the API, written by [Derrick Gilland](https://github.com/dgilland), which can be found at *<https://github.com/dgilland/omdb.py>*. This package can be installed through PIP by entering `pip install omdb` into the command line.
 
 For practical purposes, the script requires one to enter a specific year (or, more accurately, corpus folder name). If desired, an asterisk can act as a wildcard: `python OMDb-fetch.py 1988` will fetch data for movies from 1988, while `python OMDb-fetch.py 198*` will do it for all movies in the 1980s. In order to fetch data for all movies in the database at once, use `python OMDb-fetch.py *`. I don't recommend this, however, since it may overload the server and cause the script to time out.
 
@@ -208,7 +208,7 @@ In the end, however, I found that the total token count for the entire mini-corp
 
 A quick scan of the FDOSH reveals some notable entries. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
 
-For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of the spoken dialogue of many languages (especially the first and second person pronouns), its place at the top of the list ceases to be a surprise.<!-- source -->
+For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of the spoken dialogue of many languages (especially the first and second person pronouns), its place at the top of the list ceases to be a surprise.
 
 Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (entry 19) and "דיבר" (entry 60).
 
@@ -218,6 +218,8 @@ Other issues, however, are more difficult to explain.
 
 
 #### Textual ambiguity of Hebrew orthography
+
+<!-- mention possibility of combining lemma and POS tags -->
 
 The flexible spelling conventions of Hebrew are at the root of many of the problems with the FDOSH. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
 
@@ -267,7 +269,7 @@ Automatic parsing refers to the process of having a computer program create a sy
 
 Two distinct types of syntactic parsers exist, constituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
-Constituent grammar is the classic syntax tree structure taught in introductory-level linguistics classes. It is essentially a theory of the logic structure of language as a whole. Dependency grammar is a competing theory that treats words as more directly interconnected to each other. A thorough description of these ideas is outside the scope of this thesis and is not pertinent to the project. What is important to know is that dependency grammar, and thus dependency parsers, have played an important role in the advancement of NLP and computational linguistics as a whole. The term "automatic parser", therefore, most often refers to an automatic *dependency* parser.<!-- source(s)? -->
+Constituent grammar is the classic syntax tree structure taught in introductory-level linguistics classes. It is essentially a theory of the logic structure of language as a whole. Dependency grammar is a competing theory that treats words as more directly interconnected to each other. A thorough description of these ideas is outside the scope of this thesis and is not pertinent to the project. What is important to know is that dependency grammar, and thus dependency parsers, have played an important role in the advancement of NLP and computational linguistics as a whole. The term "automatic parser", therefore, most often refers to an automatic *dependency* parser.
 
 Some parsers proceed in a two-step process of morphological tagging (part of speech) and then dependency parsing (syntactic role and conjugations). In all cases, tokenization must first take place, which refers to splitting the text into individual lemmas.
 

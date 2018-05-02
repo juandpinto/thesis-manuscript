@@ -5,7 +5,7 @@ This repository houses the current state of my Master's thesis, *Creating a Freq
 **Some important links:**
 
 - The latest compilation of the PDF can be found in [output/thesis.pdf](output/thesis.pdf). Note that the markdown files ([here](source/)) may contain more up-to-date sections, since I don't compile and push the PDF every time I make changes. The markdown files also include notes on needed additions / corrections that don't show up in the PDF.
-- I have created a separate repository for the frequency dictionary itself, along with all the code used to create it, [here](https://github.com/juandpinto/opus-frequencies).
+- I have created a separate repository for the frequency dictionary itself, along with all the code used to create it, [here](https://github.com/juandpinto/frequency-dictionary).
 
 I am writing this entire thesis in [Markdown](https://daringfireball.net/projects/markdown/), with some minimal [LaTeX](https://www.latex-project.org) as well. All of the individual *.md* files can be found in the [source](source/) folder. My file structure and [makefile](Makefile) follow a modified version of [@tompollard](https://github.com/tompollard)'s [phd-thesis-markdown](https://github.com/tompollard/phd_thesis_markdown) repository. The compilation is handled by [Pandoc](https://pandoc.org).
 

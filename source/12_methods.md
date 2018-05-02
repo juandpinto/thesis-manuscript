@@ -12,7 +12,7 @@ The two most widely-used languages for the type of data analysis involved in cre
 
 The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
 
-Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found in an online repository at <https://github.com/juandpinto/opus-frequencies>. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system [*Git*](https://git-scm.com). Git keeps track of all changes that have been made to all files at any time and makes it easy to search through these file histories to observe the project's creation process.^[For a thorough introduction to Git and GitHub, see Chacon and Straub [-@ChaconProGit2014].]
+Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found as part of the supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>*. This DOI serves as a permanent link to the latest official release of the materials. Alternatively, the working repository itself can be accessed through GitHub at *<https://github.com/juandpinto/frequency-dictionary>*. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system [*Git*](https://git-scm.com), which keeps track of all changes that have been made to each file. This makes it easy to search through the file histories to observe the project's creation process or to revert to an earlier stage.^[For a thorough introduction to Git and GitHub, see Chacon and Straub [-@ChaconProGit2014].]
 
 Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported *Frequency Dictionary of Spoken Hebrew*, in its entirety, can also be found in the repository.
 
@@ -27,7 +27,7 @@ The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](htt
 
 For the purpose of creating a frequency dictionary, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
 
-Though it's possible to download plain text files, the most useful format available for download is XML. Indeed, the most common file format used for large corpora is XML.<!-- source? --> The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON, which we will use later to extract specific movie metadata directly from a database.
+Though it's possible to download plain text files, the most useful format available for download is XML. Indeed, this is the most common file format used for large corpora. The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON, which we will use later to extract specific movie metadata directly from a database.
 
 Another factor to consider is whether to download an untokenized, tokenized, or parsed corpus. An untokenized corpus contains simply the raw lines of text as found in the original subtitle files (divided into lines as they would appear while watching the movie, and labeled with the appropriate time for them to be shown):
 
@@ -119,8 +119,6 @@ Part of cleaning the corpus, then, entails getting rid of these duplicates. As a
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 
 The first block of code imports necessary modules that are used later in the script (`shutil` and `os`). Lines 7 and 8 define where the original corpus is (`source`), and where the new one will be placed (`destination`).
-
-<!-- Does the downloaded corpus include _parsed in the name? If not, change here and in the actual script. -->
 
 ``` {#single_file_extract .python .numberLines startFrom="4"}
 import shutil
