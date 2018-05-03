@@ -2,7 +2,7 @@
 
 # The FDOSH: A vocabulary list of conversational Modern Hebrew
 
-The *Frequency Dictionary of Spoken Hebrew* in its entirety can be accessed in electronic form as part of this thesis's supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>* [@PintoSupplementarymaterialscreating2018], or at the project's GitHub repository: *<https://github.com/juandpinto/frequency-dictionary>*. The FDOSH contains the most common 5,000 lemmas of conversation Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
+The *Frequency Dictionary of Spoken Hebrew* in its entirety can be accessed in electronic form as part of this thesis's supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>* [@PintoSupplementarymaterialscreating2018], or at the project's GitHub repository: *<https://github.com/juandpinto/frequency-dictionary>*. The FDOSH contains the most common 5,000 lemmas of conversational Modern Hebrew, as found in the *OpenSubtitles2018* corpus. A sample of the first 1,000 lemmas is included in [*Appendix A*](#appendix-a).
 
 For discussion purposes, a small sample of the first 30 entries is here presented.
 
@@ -44,29 +44,26 @@ Table: Sample of the first 30 entries on the FDOSH.\label{FDOSH_sample}
 
 Besides each lemma and its respective rank on the list, the FDOSH includes three pieces of information: frequency, range, and dispersion. Frequency, in this case, is not raw frequency—the total number of times the lemma appears in the corpus—but rather how many times the lemma appears for every million tokens in the corpus. Using this normalized frequency measure makes the number more meaningful since it aims to reflect the per-million count of all spoken Hebrew, not just the OpenSubtitles2018 corpus. It also makes it easier to compare frequencies with those found in other corpora.
 
-The range has also been normalized. It describes the *percentage* of the number of sub-corpora—or, in this case, movies—that the lemma appears in, in proportion to the number of movies in the entire corpus.
+The range has also been normalized. It describes the percentage of the number of sub-corpora—or, in this case, movies—that the lemma appears in, in proportion to the number of movies in the entire corpus.
 
 The most important piece of information the list provides, however, is dispersion, which acts as the ranking measure for the FDOSH and is discussed more in-depth in the [*dispersion*](##methods-dispersion) section of the previous chapter.
 
-The percentage of the corpus that is covered by the first *n* entries on the list is referred to as coverage. This is a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* entries.
+The percentage of the corpus that is covered by the first *n* entries on the list is referred to as coverage. Calculating coverage is typically a simple matter of finding the total number of tokens in the corpus, and dividing from it the sum of all the *raw* frequencies from the first *n* entries. With the *normalized* frequencies that the FDOSH uses, it's even easier—simply dividing the sum of the first *n* entries by 1,000,000 provides the coverage.
 
-For example, the sum of the frequencies of the first 20 lemmas in *Table \ref{FDOSH_sample}* (84,656,819) divided by the total size of the corpus (193,755,220) is 0.436926649. In theory, this means that by knowing just the first 20 lemmas on the FDOSH one would be able to understand 43.7% of the words in the entire OpenSubtitles2018 corpus! That is a clear example of the power of Zipf's Law (see the [*introduction*](#introduction) for more on Zipf's Law).
+For example, the sum of the frequencies of the first 30 lemmas in *Table \ref{FDOSH_sample}* is 479,669.22. Dividing by 1,000,000 results in .47966922, or nearly 48%. In theory, this means that by knowing just the first 30 lemmas on the FDOSH one would be able to understand about 48% of the words in the entire OpenSubtitles2018 corpus! Coverage provides a clear example of the power of Zipf's Law (see the [*introduction*](#introduction) for more on Zipf's Law).
 
 Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
 
-<!-- need to double-check these coverage figures now that I've changed the list using UDP ranking -->
-
-*n* Lemmas | Frequency Sum | ÷ Corpus Size | = Coverage
-----------:|:-------------:|:-------------:|:---------:
-       374 |  135,767,644  |  193,755,220  |    70%
-       939 |  155,016,588  |  193,755,220  |    80%
-     4,246 |  174,380,519  |  193,755,220  |    90%
-    13,758 |  184,067,666  |  193,755,220  |    95%
+*n* Lemmas | Normalized Frequency Sum | Coverage %
+----------:|:------------------------:|:---------:
+       278 |        700,105.97        |    70%
+       888 |        800,064.46        |    80%
+     4,013 |        900,011.21        |    90%
+     5,000 |        911,207.66        |    91%
 
 Table: Breakdown of coverage percentages.\label{coverages}
 
-
-The entire FDOSH consists of 5,000 lemmas. This number was chosen in order for it to include the required items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the FDOSH covers 90.8% of the corpus from which it is created.
+The entire FDOSH consists of 5,000 lemmas. This number was chosen in order for it to include the necessary items for 90% coverage, while also making it an even factor of 1,000. In its entirety, the FDOSH covers over 91% of the corpus from which it is created.
 
 <!-- Other observations:
 - Count words with changed rank due to dispersion (as opposed to freq alone). Use table?
@@ -89,7 +86,7 @@ With the FDOSH now created, my hope is that it will serve as a basis for future 
 
 The possible research applications of such a dictionary are the reason I chose to include so much data with each entry.
 
-I also hope that educators will find use in the lemmas and their rankings, either for identifying the vocabulary to include in their textbooks, to teach in their classrooms, or to focus on in their conversation groups. The FDOSH can similarly serve independent learners, or students of Hebrew who wish to take greater control of the vocabulary they deliberately study.
+I also hope that educators will find use in the lemmas and their rankings, either for identifying the vocabulary to include in their textbooks, to teach in their classrooms, or to focus on in their conversation groups. The FDOSH can similarly serve independent learners or students of Hebrew who wish to take greater control of the vocabulary they deliberately study.
 
 Even more than all of this, however, the FDOSH can serve as an example for future frequency dictionaries. I have chosen to place heavy emphasis on the creation process itself in order to make it easily reproducible for comparable projects in other languages. In so doing, my hope is that similar educational resources and research tools will become widely available.
 
@@ -103,16 +100,16 @@ I have divided all of these issues into two categories: methodological challenge
 
 ### Methodological challenges
 
-One of the more obvious issues of this project is the use of a corpus of movie subtitles as a substitute for a corpus of true conversational language. This issue in a way forms the backbone of the FDOSH, and it is at the heart of what this project is all about. Though I discuss several points related to this in the *Background* section of this thesis, I will here discuss some of its implications for future work.
+One of the more obvious issues of this project is the use of a corpus of movie subtitles as a substitute for a corpus of true conversational language. This issue in a way forms the backbone of the FDOSH, and it is at the heart of what this project is all about. Though I discuss several points related to this in the [*background*](#background) section of this thesis, I will here discuss some of its implications for future work.
 
 
 #### Ideal vs. practical corpora
 
 The use of a subtitle corpus has both positive and negative aspects. As described in the literature review, the early research that has been done on the topic indicates that movie subtitles share many features with spontaneous, spoken language [@Newusefilmsubtitles2007; @BrysbaertMovingKuceraFrancis2009]. This includes a high level of correlation between the two, as well as a strong ability to predict the outcomes of a lexical decision task.
 
-One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as *<http://opensubtitles.com>* and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And they already come pre-processed, as an additional incentive for the time-constrained researcher.
+One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as [OpenSubtitles](http://opensubtitles.com) and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And as an additional incentive for the time-constrained researcher, they can be downloaded in a pre-processed, and even parsed, format.
 
-This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making this type of data-collection more accessible, the costs remain too high for many less-commonly taught languages as of now. This is largely due to the arduous process of transcribing audio recordings.[@IzreelTranscribingSpokenIsraeli2004]
+This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making the necessary types of data-collection more accessible, the costs remain too high for many less-commonly taught languages. This is largely due to the arduous process of transcribing audio recordings [@IzreelTranscribingSpokenIsraeli2004].
 
 An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
 
@@ -120,11 +117,11 @@ The most prominent of these is the [*Corpus of Spoken Israeli Hebrew* (CoSIH)](h
 
 Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself [@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007]. At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens [@Dekelmattertimetense2010, p.7].
 
-Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, which are addressed below under [*functional challenges*](#functional-challenges).
+Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, some of which are addressed below under [*functional challenges*](#functional-challenges).
 
-Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency lists. Even combined into a single corpus (which would introduce a series of new issues to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell [-@Sorellstudyissuestechniques2013] provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.
+Though ideal in some ways, these corpora remain far too small to be effectively used for the creation of frequency dictionaries. Even combined into a single corpus (which could introduce a series of new problems to solve), the total size would not be bigger than two million tokens. As discussed earlier in this thesis, Sorell [-@Sorellstudyissuestechniques2013] provides evidence to suggest that a corpus of 20–50 million tokens is the minimum for a stable word list.
 
-Are movie and television subtitles a suitable substitute for spontaneous, spoken language? Early studies suggest it is at least adequate, but much more research is needed to answer this question definitively. For now, it remains as a practical and appealing option.
+Are movie and television subtitles a suitable substitute for spontaneous, spoken language? Early studies suggest that they are, but much more research is needed to answer this question definitively. For now, it remains as a practical and appealing option.
 
 
 #### Using original-language movies exclusively
