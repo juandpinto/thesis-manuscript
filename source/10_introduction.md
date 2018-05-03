@@ -29,7 +29,7 @@ The resulting study also addresses the following secondary research questions:
 > What implications might these findings have for frequency list creation and use as it pertains to other less commonly taught languages?
 
 
-The literature review will serve as background for many of the important decisions that went into the creation of the FDOSH. These will be explained more in-depth in the [*methods*](#methods) section, where the entire process will be laid out in detail. For the sake of clarity, these key decisions are listed here at the outset. They are as follows:
+The literature review will serve as background for many of the important decisions that went into the creation of the FDOSH. These will be explained more in-depth in the [*methods*](#methods) chapter, where the entire process will be laid out in detail. For the sake of clarity, these key decisions are listed here at the outset. They are as follows:
 
 
 Corpus size

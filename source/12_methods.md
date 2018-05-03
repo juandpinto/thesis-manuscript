@@ -2,32 +2,32 @@
 
 # Methods: Creating the *Frequency Dictionary of Spoken Hebrew* (FDOSH) {#methods}
 
-As we have seen, the majority of research into high quality vocabulary frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it's difficult to find well-researched frequency dictionaries, if they exist at all. Why have not more educators—those who may benefit from these dictionaries the most—decided to undertake such a task?
+As we have seen, the majority of research into high quality frequency list creation has focused on *English* frequency lists. Outside of the English-speaking world, and especially when dealing with less commonly taught languages, it can be difficult to find well-researched frequency dictionaries, if they exist at all. Why have not more educators—those who may benefit from these dictionaries the most—decided to undertake such a task? Does it simply seem like too daunting of a project?
 
-Some tools already exist that aid in the process of creating a frequency dictionary. One affordable example is the web tool [*SketchEngine*](https://www.sketchengine.eu), a European-based database of hundreds of corpora in many different languages. As is common for similar products, however, SketchEngine does not provide access to the raw corpora themselves. Instead, it acts as a search portal through which one may peek into a corpus's data. This and other restrictions severely limit what researchers can do and the insight they can gain.
+Some tools already exist that aid in the process of creating a frequency dictionary. One affordable example is the web tool [*SketchEngine*](https://www.sketchengine.eu), a European-based database of hundreds of corpora in many different languages. As is common for similar products, however, SketchEngine does not provide access to the raw corpora themselves—even though most of the corpora are available free of charge from their creators. Instead, it acts as a search portal through which one may peek into a corpus's data. This and other restrictions severely limit what researchers can do and the insights they can gain.
 
 Rather than using SketchEngine or similar tools, I chose to create a series of simple scripts to create the *Frequency Dictionary of Spoken Hebrew*. They are designed to be easily customizable to suit researchers' needs.
 
 The two most widely-used languages for the type of data analysis involved in creating a frequency dictionary are Python and R. I chose to use Python for this project. Python was designed specifically to be a very readable programming language. That is, it is easy to read and understand the purpose and flow of the code. This was one of my primary reasons for choosing to use it, since it increases the ease with which this project can be reproduced by other researchers and educators to create their own frequency lists. R, on the other hand, requires a deeper familiarity with the syntax and conventions of the language in order to understand and modify its scripts.
 
-The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To this end, I will also carefully explain what, exactly, the code does.
+The second characteristic that makes Python ideal for an open-source project of this nature is its mild learning curve. Though considerable effort must be made to learn any programming language, Python is widely considered good for beginners because of its simplicity. With only a rudimentary knowledge of Python, even educators or enthusiasts without a coding background will be able to modify the scripts used here to suit their own needs. To that end, this chapter will carefully explain what, exactly, the code does.
 
-Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found as part of the supplementary materials at *<https://doi.org/10.5281/zenodo.1239886>*. This DOI serves as a permanent link to the latest official release of the materials. Alternatively, the working repository itself can be accessed through GitHub at *<https://github.com/juandpinto/frequency-dictionary>*. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system [*Git*](https://git-scm.com), which keeps track of all changes that have been made to each file. This makes it easy to search through the file histories to observe the project's creation process or to revert to an earlier stage.^[For a thorough introduction to Git and GitHub, see Chacon and Straub [-@ChaconProGit2014].]
+Though all of the code is included in this thesis ([*Appendix B*](#appendix-b)), it can also be found as part of the project's supplementary materials [@PintoSupplementarymaterialscreating2018] at *<https://doi.org/10.5281/zenodo.1239886>*. This DOI serves as a permanent link to the latest official release of the materials. Alternatively, the working repository itself can be accessed through GitHub at *<https://github.com/juandpinto/frequency-dictionary>*. The repository can easily be cloned, or individual files can be downloaded, for modification and use. The repository uses the version control system [*Git*](https://git-scm.com), which keeps track of all changes that have been made to each file. This makes it easy to search through the file histories to observe the project's creation process or to revert to an earlier stage.^[For a thorough introduction to Git and GitHub, see Chacon and Straub [-@ChaconProGit2014].]
 
-Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported *Frequency Dictionary of Spoken Hebrew*, in its entirety, can also be found in the repository.
+Suggestions for improvements can also be submitted through the GitHub interface, allowing for a system of cooperation and incremental innovation among researchers. The exported *Frequency Dictionary of Spoken Hebrew*, in its entirety, can also be found within the repository.
 
-This thesis, then, beyond explaining the theory behind the creation of the FDOSH, aims to make the process as reproducible as possible. This section contributes to that aim by carefully documenting each step of the process.
+This thesis, then, beyond explaining the theory behind the creation of the FDOSH, aims to make the process as reproducible as possible. This chapter contributes to that aim by carefully documenting each step of the process.
 
 
 ## The corpus
 
-Before coding or analyzing anything, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of movie and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
+Before any coding or analyzing can be done, it's important to find an appropriate corpus to use and to become familiar with its structure. A useful place to begin is [OPUS](http://opus.nlpl.eu), which is part of the Nordic Language Processing Laboratory (NLPL), and hosted by the CSC IT center in Finland. OPUS is a database of many open, parallel corpora. These include corpora of film and television subtitles, TED talks, web-crawled data, newspapers, and of course, books. The corpora are all free and open to the public.
 
-The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be downloaded in a variety of formats, and it can be downloaded either as *parallel* corpora or as a monolingual corpus. A parallel corpus consists of two languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. In theory, this means that each line of the corpus should have the same meaning in two different languages. The creation of parallel corpora has made possible many interesting and useful tools for linguists, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
+The FDOSH was created using one of OPUS's corpora, the [*OpenSubtitles2018*](http://opus.nlpl.eu/OpenSubtitles2018.php) corpus. The corpus can be found in a variety of formats, and it can be downloaded either as a *parallel* corpus or as a monolingual corpus. A parallel corpus consists of two or more languages interwoven together. For example, a line from the English subtitles of a movie will be paired with the same line from the French subtitles of the same movie. This means that each line of the corpus will theoretically carry the same meaning in multiple languages. The creation of parallel corpora has made possible many interesting and useful tools for linguists, translators, and language learners. These include the open-source [CASMACAT](http://www.casmacat.eu) project and the [ReversoContext](http://context.reverso.net/translation/) tool.
 
-For the purpose of creating a frequency dictionary, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in both selected languages.
+For the purpose of creating a frequency dictionary, a monolingual corpus is best. Note that parallel corpora will often be composed of fewer tokens than monolingual ones. This is because parallel corpora will only include movies for which the subtitles exist in all of the selected languages.
 
-Though it's possible to download plain text files, the most useful format available for download is XML. Indeed, this is the most common file format used for large corpora. The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON, which we will use later to extract specific movie metadata directly from a database.
+Though it is possible to download plain text files, the most useful format available is XML. Indeed, this is the most common file format used for large corpora. The XML structure allows for nested key-value pairs, which are especially useful for parsed corpora that contain extensive metadata. XML is comparable to JSON—a similar format of nested tags based on the JavaScript language—which we will use in the next chapter to extract specific movie metadata directly from an online database.
 
 Another factor to consider is whether to download an untokenized, tokenized, or parsed corpus. An untokenized corpus contains simply the raw lines of text as found in the original subtitle files (divided into lines as they would appear while watching the movie, and labeled with the appropriate time for them to be shown):
 
@@ -82,7 +82,7 @@ All of the data used to create the FDOSH came from a monolingual parsed corpus o
 
 ## Cleaning the corpus
 
-Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team.[@LisonOpenSubtitles2016Extractinglarge2016] This is good news, since data cleaning is often the most laborious part of the process. However, there is one task that must be addressed before the corpus can be used to create a frequency list: deduplication.
+Unlike many corpora, the OpenSubtitles2018 corpus as presented in its downloadable form has already undergone significant preprocessing by the OPUS team [@LisonOpenSubtitles2016Extractinglarge2016]. This is good news, since data cleaning is often the most laborious part of the process. However, there is one task that must be addressed before the corpus can be used to create a frequency list: deduplication.
 
 The files inside the downloaded folder are organized as follows:
 
@@ -112,9 +112,9 @@ Zipped folder in GZ format
            └── Zipped XML in GZ format
 ```
 
-This organization is straightforward, except for the fact that there are multiple XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. A few of the variant files do seem to be different translations.
+This organization is straightforward, but there is the issue of having duplicate XML files for each movie. The subtitle files that OPUS has collected, parsed, organized, and made available for mass download were all obtained from the [*Open Subtitles*](https://www.opensubtitles.org/) project (hence the name of the corpus). Because this is a database where users can upload the subtitle files they extract from their own movie collection, there are often multiple uploads for the same movie. For our purposes, this results in movies that can have anywhere from a single subtitle file to dozens of them. Unfortunately, though the tokens in the files themselves are usually the same (with only minor variations in the XML metadata), this is not always true. A few of the variant files do seem to be different translations.
 
-Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this,`single_file_extract.py`, in [*Appendix B.2*](#appendix-b.2). However, I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
+Part of cleaning the corpus, then, entails getting rid of these duplicates. As a means of simplifying the entire process, I chose simply to use the first file in each movie folder. I've included the short Python script for this,`single_file_extract.py`, in [*Appendix B.2*](#appendix-b.2). I will here explain what it does in detail so that it can be easily modified to fit different circumstances.
 
 The script first makes a copy of the entire folder structure in the original downloaded (and unzipped!) corpus into a new directory. It then finds the first XML file in each movie folder and copies it into the appropriate place in the new folder structure. This means that it doesn't delete or otherwise change the files in the original corpus in any way.
 
@@ -130,14 +130,16 @@ destination = './OpenSubtitles2018_parsed_single'
 
 Next, a single line of code copies all directories and subdirectories into their new location.
 
-``` {#single_file_extract .python .numberLines startFrom="11"}
+``` {#single_file_extract .python .numberLines startFrom="10"}
+# Copy the directory tree into a new location
 shutil.copytree(source, destination,
                 ignore=shutil.ignore_patterns('*.*'))
 ```
 
-Lastly, we create a variable that holds all the XML files located in each movie folder, trim the list to just one, and copy that one into its new location. This process is carried out for one movie folder at a time. The originals are left untouched.
+Lastly, we create a variable that holds all the XML files located in each movie folder, trim the list to just the first file, and copy that one into its new location. This process is carried out for one movie folder at a time. The originals are left untouched.
 
-``` {#single_file_extract .python .numberLines startFrom="15"}
+``` {#single_file_extract .python .numberLines startFrom="14"}
+# Copy the first file in each folder into the new tree
 for dirName, subdirList, fileList in os.walk(source):
     for fname in fileList:
         if fname == '.DS_Store':
@@ -149,12 +151,12 @@ for dirName, subdirList, fileList in os.walk(source):
         shutil.copy2(src, dst)
 ```
 
-With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the FDOSH, I will skip that step here. However, a description of the entire process will be discussed later under [*using original-language movies exclusively*](#using-original-language-movies-exclusively).
+With a newly organized version of the corpus, it's now possible to begin the process of reading and processing data. At this stage, I took some time to gather metadata for all the movies in the corpus in order to identify movies that were originally filmed with Hebrew as their primary language (as opposed to translated subtitles). Because I ultimately decided against this approach for the creation of the FDOSH, I will skip that step here. However, a description of that entire process will be discussed in the next chapter under [*using original-language movies exclusively*](#using-original-language-movies-exclusively).
 
 
 ## Extracting data
 
-Before calculating any measures such as frequency, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case, we would be creating a list of all *values* in the `'lemma'` *key* within each `<w>` *tag*. The value that corresponds to the `'lemma'` tag below for the word אומר is אמר.
+Before calculating any measures, such as frequency or range, individual lemmas must be extracted from the XML files in the downloaded corpus. There are two ways to go about this. Because XML consists of nested tags and key-value pairs, a dedicated XML parsing tool can be used to extract specific information. In this case, we would be creating a list of all *values* in the `lemma` *key* within each `<w>` *tag*. The value that corresponds to the `lemma` tag below for the word אומר is "אמר".
 
 ``` {.xml}
 <w xpos="VERB" head="0" feats="Gender=Masc|HebBinyan=PAAL|Number=Sing|
@@ -192,7 +194,7 @@ def find_and_count(doc):
             lemma_by_file_dict[word[7:-1]][file] = 1
 ```
 
-We then run both of these functions for each XML file in the corpus directory (defined earlier in `corpus_path`).
+We then run both of these functions for each XML file in the corpus directory (defined earlier in the `corpus_path` variable).
 
 ``` {#create-freq-list .python .numberLines startFrom="67"}
 for dirName, subdirList, fileList in os.walk(corpus_path):
@@ -202,15 +204,15 @@ for dirName, subdirList, fileList in os.walk(corpus_path):
         find_and_count(open_and_read(f))
 ```
 
-The `find_and_count()`{.python} function finds each instance of the string described above using a regular expression, then adds the Hebrew part of the string—the lemma itself—to a dictionary. The dictionary is named `lemma_by_file_dict`, and its structure looks like this:
+The `find_and_count()`{.python} function finds each instance of the string described above using a regular expression, then adds the Hebrew part of the string—the lemma itself—to a dictionary. The dictionary is named `lemma_by_file_dict`, and its underlying structure looks like this:
 
 ```{.sh}
 'lemma': {'path of file': 'frequency of lemma in file'}
 ```
 
-A Python dictionary is at its core a list of *key*:*value* pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that file (frequency).
+A Python dictionary is at its core a list of *key*:*value* pairs. Much like an actual dictionary consists of words and their definitions, this dictionary's keys are made up of all the individual lemmas found by our search. For each lemma, the value is another dictionary—thus making it a nested dictionary, or a dictionary within a dictionary. The keys for each inner dictionary are the paths of all the XML files (movies) that the lemma appears in, and the value of each is an integer that represents how many times that lemma appears in that particular file (frequency).
 
-After the script reads each file, it returns a complete dictionary. Here is a sample:
+After the script reads each file, it returns a complete dictionary. Here is a simplified example:
 
 ```
 'ב': {
@@ -224,12 +226,12 @@ After the script reads each file, it returns a complete dictionary. Here is a sa
         '/he/0/1278351/3777598.xml': 1}
 ```
 
-Throughout the rest of the script, this nested dictionary serves as the basis for all of the calculations needed.
+Throughout the rest of the script, this nested dictionary serves as the basis for all of the necessary calculations.
 
 
 ## Calculations
 
-For each lemma, the FDOSH includes three measures: frequency, range, and dispersion. It uses dispersion as its sorting value. Though the theoretical underpinnings of each have already been discussed in the [*objective design*](#objective-design) section of the previous chapter, I will here give a brief reminder of what each measure is and explain how it is calculated. Range will be addressed afterward in the (*sort and export*)[#sort-and-export] section, since the script calculates it on the spot as the list is created.
+For each lemma, the FDOSH includes three measures: frequency, range, and dispersion. Dispersion is used as the sorting value. Though the theoretical underpinnings of each have already been discussed in the [*objective design*](#objective-design) section of the previous chapter, I will here give a brief reminder of what each measure is and explain how it is calculated by the `create-freq-list.py` script. Range will be addressed afterward in the (*sort and export*)[#sort-and-export] section, since the script calculates it on the spot as the list is created.
 
 
 ### Frequency {#methods-frequency}
@@ -243,7 +245,7 @@ for lemma in lemma_by_file_dict:
         sum(lemma_by_file_dict[lemma].values())
 ```
 
-Following the short example provided above, this would result in the following dictionary:
+Following the simplified example from the previous section, this would result in the following dictionary:
 
 ```
 262:'ב',
@@ -251,11 +253,11 @@ Following the short example provided above, this would result in the following d
 9:'קודם'
 ```
 
-We now have raw frequency counts, but we need to turn them into normalized frequencies, using one million as our normalizing figure. To do this, we perform the following equation for each lemma:
+We now have raw frequency counts, but we need to turn them into normalized frequencies, using 1,000,000 as our normalizing figure. To do this, we perform the following equation for each lemma:
 
 $$\textbf{normalized frequency}\ =\ \frac{frequency\ of\ lemma}{total\ tokens\ in\ corpus}\ \times\ 1,000,000$$
 
-In order to find the token count for the entire corpus, we first make a dictionary—`token_count_dict`—that contains an entry for each file in the corpus and the number of tokens in that file, using the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary with the number of times that each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
+In order to find the token count for the entire corpus, we first make a dictionary—`token_count_dict`—that contains an entry for each file in the corpus and the number of tokens in that file, using the *key*:*value* pairs of *file*:*tokens*. Since we already have a dictionary variable that contains the number of times each lemma appears in each file, `lemma_by_file_dict`, we don't need to open and read the files again. Instead, we can add the values in this dictionary and rearrange them into what we want.
 
 ``` {#create-freq-list .python .numberLines startFrom="124"}
 # Calculate token count per file
@@ -291,7 +293,7 @@ The dictionary `lemma_norm_dict` now contains the normalized frequency of each l
 
 ### Dispersion (*U~DP~*) {#methods-dispersion}
 
-Calculating dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the word list. The model of dispersion I have chosen to follow for this project is a usage coefficient of Gries' deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010].
+Calculating dispersion is more complicated. In theory, it should provide a single quantifiable measure that incorporates both frequency and range, and which can then be used to sort the frequency list. The model of dispersion I have chosen to follow for this project is a usage coefficient of Gries's deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010].
 
 In order to calculate *U~DP~* for lemma~x~, we must first make two calculations for each file in the corpus (file~i~): the lemma's *expected frequency* if it were perfectly distributed, and its *observed frequency*—or its actual frequency.
 
@@ -299,19 +301,19 @@ $$\textbf{expected frequency}\ =\ \frac{tokens\ in\ file_i}{tokens\ in\ corpus}$
 
 $$\textbf{observed frequency}\ =\ \frac{frequency\ of\ lemma_x\ in\ file_i}{frequency\ of\ lemma_x\ in\ corpus}$$
 
-We must then subtract the lemma's observed frequency from its expected frequency, which will return a value between -1 and 1. We can normalize this result by finding the absolute value. Now the closer the result is to 0, the closer that lemma's frequency is in that particular file to what we would expect if it were perfectly distributed throughout the corpus. A higher number (closer to 1), would indicate a heavier load in that file that we would expect.
+We must then subtract the lemma's observed frequency from its expected frequency, which will return a value between -1 and 1. We can normalize this result by finding the absolute value. Now the closer the result is to 0, the closer that lemma's frequency is in that particular file to what we would expect if it were perfectly distributed throughout the corpus. A higher number (closer to 1), would indicate a heavier load in that file than we would expect.
 
-By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values that originally existed in both a positive and a negative direction), we now have Gries' *DP*. Where `n` is the number of files:
+By performing this calculation for every file in the corpus, adding them all together, and dividing the result by two (since we're using the absolute value and are therefore adding values that originally existed in both a positive and a negative direction), we now have Gries's *DP*. Where `n` is the number of files:
 
 $$\textbf{DP}\ =\ 0.5 \sum_{i=1}^{n} |\ \text{expected frequency}\ -\ \text{observed frequency}\ |$$
 
 A *DP* of 0 represents a perfectly even dispersion, and a *DP* close to 1 means a more uneven distribution, where fewer files contain a larger load of the lemma's overall frequency. A *DP* of 1 is not actually possible.
 
-Gries' usage coefficient, or *U~DP~*, is an attempt to make this number more useful. *DP* is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for *U~DP~* is as follows:
+Gries's usage coefficient, or *U~DP~*, is an attempt to make this number more useful. *DP* is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for *U~DP~* is as follows:
 
 $$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
 
-In order to calculate this, the script must first find the number of tokens in each file. Luckily, we already did this while calculating normalized frequency, above. The dictionary `token_count_dict` contains these token counts. We've also already taken the step of adding these values together into the integer variable `total_tokens_int` while preparing to calculate normalized frequency.
+In order to calculate this, the script must first find the number of tokens in each file. Luckily, we already did this while calculating normalized frequency, above. The dictionary `token_count_dict` contains these token counts. We've also already taken the step of adding these values together into the integer variable `total_tokens_int`, also while preparing to calculate normalized frequency.
 
 With all of these measures in place, the script can now calculate *DP* and then *U~DP~* using the equations described above. It does this for each lemma, saving the new measures into their respective dictionaries, `lemma_DPs_dict` and `lemma_UDPs_dict`.
 
@@ -350,9 +352,9 @@ UDP_sorted_list = [(k, lemma_UDPs_dict[k]) for k in sorted(
     reverse=True)]
 ```
 
-A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its overall frequency, its range, and its *U~DP~*. This table is already sorted by *U~DP~* as it's being created.
+A final table is then created (using a list of tuples, `table_list`), with each line consisting of a lemma, its rank, its *U~DP~*, its normalized frequency, and its normalized range. The table is created in an already-sorted order.
 
-Because the script has not yet calculated range by this point, it must do so on the spot as it's entering each lemma into the table. It does this with a simple dictionary comprehension that quickly adds the number of files included in the `lemma_by_file_dict`. Since the FDOSH will display range as a percentage, the script takes this new sum of files in which each lemma appears, divides it by the total number of files in the corpus (`total_files_int`), and multiplies the result by 100.
+Because the script has not yet calculated range by this point, it must do so on the spot as it is entering each lemma into the table. It does this with a simple dictionary comprehension that quickly adds the number of files included in the `lemma_by_file_dict`. Since the FDOSH will display range as a percentage, the script takes this new sum of files in which each lemma appears, divides it by the total number of files in the corpus (`total_files_int`), and multiplies the result by 100.
 
 Here is the resulting code:
 
@@ -371,7 +373,7 @@ for k, v in UDP_sorted_list[:list_size_int]:
     table_list.append(row)
 ```
 
-Lastly, now that everything is organized into a table, the script opens (or creates, if it doesn't yet exist) a TSV file, writes a header line into it (`LEMMA RANK DISPERSION FREQUENCY RANGE`), and exports the entire table into the file. It then closes it to clear the computer's memory cache.
+Lastly, now that everything is organized into a table, the script opens—or creates, if it doesn't already exist—a TSV file, writes a header line into it (`LEMMA RANK DISPERSION FREQUENCY RANGE`), and exports the entire table into the file. It then closes it to clear the computer's memory cache.
 
 ``` {#create-freq-list .python .numberLines startFrom="226"}
 result = open('./export/frequency-dictionary.tsv', 'w')
@@ -385,4 +387,4 @@ for i in range(list_size_int):
 result.close()
 ```
 
-The frequency dictionary is now complete. The next section will explore the FDOSH itself more in-depth.
+The frequency dictionary is now complete. The next chapter will explore the FDOSH itself more in-depth.
