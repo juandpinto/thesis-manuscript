@@ -130,7 +130,7 @@ One of the potential downsides of using the OpenSubtitles2018 corpus is that it 
 
 This is a question that requires more research in order to answer satisfactorily. Though translated subtitles do not need to try to approximate the utterance length and visual cues that a dubbed script does, their quality still largely depends on the skills of a translator. Most importantly, a translation may not accurately reflect the register of the original, no longer serving as a representation of conversational language. Again, these are important points to consider.
 
-One solution is to simply use movies that were originally filmed in the target language of the corpus. Another possibility is to calculate frequency measures for original and translated subtitles separately, then average them. This latter approach was used by New et al. [-@Newusefilmsubtitles2007]. In either case, the first step is to extract the subtitle files that represent the original language of the movie, in this case Hebrew. In theory, each XML file in a monolingual *OpenSubtitles2018* file contains a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
+One solution is to simply use movies that were originally filmed in the target language of the corpus. Another possibility is to calculate frequency measures for original and translated subtitles separately, then average them. This latter approach was used by New et al. [-@Newusefilmsubtitles2007]. Either way, the first step is to extract the subtitle files that represent the original language of the movie, in this case Hebrew. In theory, each XML file in a monolingual *OpenSubtitles2018* file contains a tag that identifies the original language of the movie [@LisonOpenSubtitles2016Extractinglarge2016]. In practice, I found that the overwhelming majority of the files contained an empty `<lang>` tag instead. Luckily, there is a way to obtain the desired metadata for each movie in the corpus.
 
 This can be done with a script that uses an application programming interface (API) to fetch specific information from an online movie database. The name of each movie folder in the corpus, which is simply a series of numbers, corresponds to that movie's IMDb identifier, which is a unique ID registered with the [Internet Movie Database](http://www.imdb.com/). This makes the process relatively easy, as we simply need to query the database using this ID to receive all of the movie's metadata.
 
@@ -204,22 +204,20 @@ In the end, however, I found that the total token count for the entire mini-corp
 
 A quick scan of the FDOSH reveals some notable entries. Some of these are mere quirks of the automatic parser, while others are the result of ambiguities.
 
-For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A quick look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא." Considering how common pronouns are in the majority of the spoken dialogue of many languages (especially the first and second person pronouns), its place at the top of the list ceases to be a surprise.
+For example, the very first lemma on the list is a bit unexpected. "הוא" is certainly not the most common lemma in Modern Hebrew. A look at some of the files in the corpus, however, reveals that all pronouns are grouped under this lemma. That is, אתה (you), היא (she), and אנחנו (we), just to name a few, are parsed as belonging to the lemma "הוא". Considering how common pronouns are in the majority of the spoken dialogue of many languages (especially the first and second person pronouns), its place at the top of the list ceases to be a surprise.
 
-Another thing to note is that verbs are all listed in their traditional third-masculine-singular past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (entry 19) and "דיבר" (entry 60).
+Another thing to note is that verbs are all listed in their traditional third-masculine-singular-past conjugation. The first verb on the list is "היה"—a lemma referring to all forms of the verb להיות, including the infinitive. The same is true of "ידע" (entry 15) and "דיבר" (entry 63).
 
-Many of the most common lemmas on the FDOSH are prepositions. Note that even the definite article (-ה) and inseparable prepositions, such as -ל and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ל" ,"ה" and "ב".
+Many of the most common lemmas on the FDOSH are prepositions. Note that even the definite article (-ה) and inseparable prepositions, such as -ל and -ב are considered independent lemmas by the parser, and are listed respectively as the lemmas "ה", "ל" and "ב".
 
 Other issues, however, are more difficult to explain.
 
 
 #### Textual ambiguity of Hebrew orthography
 
-<!-- mention possibility of combining lemma and POS tags -->
+The flexible spelling conventions of Hebrew are at the root of many of the deficiencies in the FDOSH. For example, דִּבֵּר *he spoke* can be written as either דיבר using "full spelling" or דבר using "defective spelling". There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling, דבר. Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
 
-The flexible spelling conventions of Hebrew are at the root of many of the problems with the FDOSH. For example, דִּבֵּר *he spoke* can be written as either דיבר ("full spelling") or דבר ("defective spelling"). There is also a noun, דָּבָר *thing*, that looks identical to the verb's defective spelling (דבר). Though the difference is usually clear from context, the automatic parser has some difficulty with this orthographic ambiguity.
-
-The lemma "דבר" (entry 27) includes instances of both the verb and the noun, which are completely unrelated. A simple search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
+The lemma "דבר" (entry 33) includes instances of both the verb and the noun, which are completely unrelated. A search through the corpus reveals multiple examples of the noun דבר tagged with `lemma="דבר"`:
 
 ```{.xml}
 <w xpos="NOUN" head="579.3" feats="Gender=Masc|Number=Sing" upos="NOUN" lemma="דבר" id="579.2" deprel="nsubj">דבר</w>
@@ -237,7 +235,7 @@ We also find plenty of examples of the verb with the same lemma tag:
 <w xpos="VERB" head="0" feats="Gender=Fem,Masc|Number=Plur|Person=3|Tense=Past" upos="VERB" lemma="דבר" id="368.4" deprel="root">דברו</w>
 ```
 
-A different lemma, "דיבר" (entry 61), is the expected lemma for the verb since it follows the standard third masculine plural conjugation. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, at least this issue is consistent.
+A different lemma, "דיבר" (entry 63), is the expected lemma for the verb since it follows the traditional dictionary conjugation form. Interestingly, however, the parser applies this lemma only to attestations of the word with an inserted *yod*, or with a *mem* or *lamed* prefix (present tense or infinitive). All other instances are parsed as the lemma "דבר." Though unexpected and simply wrong, the issue appears to be consistent.
 
 ```{.xml}
 <w xpos="VERB" head="840.4" feats="Gender=Fem,Masc|HebBinyan=HITPAEL|Number=Plur|Person=1| Tense=Past" upos="VERB" lemma="דיבר" id="840.16" deprel="conj">דיברנו</w>
@@ -245,36 +243,44 @@ A different lemma, "דיבר" (entry 61), is the expected lemma for the verb sin
 <w xpos="VERB" head="1451.12" feats="Gender=Masc|HebBinyan=PIEL|Number=Sing|Person=1,2,3| VerbForm=Part|Voice=Act" upos="VERB" lemma="דיבר" id="1451.20" deprel="obl">מדבר</w>
 ```
 
-To complicate matters more, we also find the unexpected lemmas "דיברה" (entry 1184), "שדיבר" (entry 2588), and "שדיברה" (entry 4106). Based on their context<!--sentence example(s)-->, these should clearly be parsed as two separate lemmas, "ש" and "דיבר."
+To complicate matters more, we also find the unexpected lemmas "דיברה" (entry 1410), "שדיבר" (entry 3178), and "שדיברה" (entry 4942). Based on the contexts in which they are found, these should be parsed as two separate lemmas, "ש" and "דיבר."
 
-These are just a few among many examples of the difficulties encountered by the automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, it is valuable to at least have an idea of how it works its magic. I will here explain the basics of the process and some of the implications entailed.
+These sorts of ambiguities are not exclusive to forms that use defective spelling. The general lack of vowels in written Hebrew makes it impossible to tell the difference between עם (people) and עם (with) when devoid of context. Because they are both parsed as belonging to the same lemma, their frequencies are conflated into a single entry in the FDOSH. The lemma "עם" (entry 24), should therefore be two separate entries, both of which would be ranked lower on the list than their current status.
 
+One possible solution to this problem is to alter the word counting script so that it accounts for lemma *and* part of speech (POS), rather than just the former. The following entries in the corpus could then be counted separately—note that one is tagged as `NOUN` and the other as `ADP` (for adposition):
 
-<!--
-Many more examples of specific issues can be included in this section. Examples:
+```{.xml}
+<w xpos="NOUN" head="893.2" feats="Gender=Masc|Number=Sing" upos="NOUN" misc="SpaceAfter=No" lemma="עם" id="893.5" deprel="nsubj">עם</w>
 
-The lack of vowels makes it so that the clearly different words עִם and עַם are combined into the single lemma "עם."
+<w xpos="ADP" head="78.7" upos="ADP" lemma="עם" id="78.6" deprel="case">עם</w>
 
-מ and מן are listed separately.
--->
+```
+
+If counted in this way, the frequency dictionary would be able to distinguish more accurately between words that vary in part of speech, which is one of the standard criteria for identifying different lemmas. Due to time constraints, this technique has not yet been used on the *Frequency Dictionary of Spoken Hebrew*.
+
+Other issues in the FDOSH include separate lemmas for two forms of the same word, such as "מ" (entry 17) and "מן" (entry 69), as well as non-existent or ancient lemmas where they should not be found, such as "והיי" (entry 55), which the automatic parser used for the borrowed greeting היי (hey/hi).
+
+These are just a few examples of the types of difficulties caused by a combination of an ambiguous writing system and an automatic parser. Though the parsing was carried out by the OPUS team as part of the corpus's pre-processing stage, a basic understanding of how the magic is done can prove valuable for understanding some of the deficiencies in the FDOSH. I will here explain the basic principles of the process and some of the implications entailed.
 
 
 #### Automatic parsing
 
-Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language, as opposed to artificial or constructed language, is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligence assistants such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*identifying words (word family levels)*](#identifying-words) in this thesis.
+Automatic parsing refers to the process of having a computer program create a syntactic tree for a corpus of natural language. Natural language—as opposed to artificial or constructed language—is notoriously complex in its structure. Natural language processing (NLP) is an entire field of research, currently at the forefront of computer science. Parsing can serve many purposes, from theoretical linguistic research to machine translation or even the creation of artificial intelligence assistants such as Siri or Alexa. For our purposes, a parsed text is important in order to use lemmas as the word family level for the FDOSH. This decision is discussed under [*identifying words (word family levels)*](#identifying-words) in the background section of this thesis.
 
 Two distinct types of syntactic parsers exist, constituency parsers and dependency parsers. These are based on the two respective linguistic theories of syntax, constituent grammar (sometimes referred to as phrase structure grammar) and dependency grammar.
 
 Constituent grammar is the classic syntax tree structure taught in introductory-level linguistics classes. It is essentially a theory of the logic structure of language as a whole. Dependency grammar is a competing theory that treats words as more directly interconnected to each other. A thorough description of these ideas is outside the scope of this thesis and is not pertinent to the project. What is important to know is that dependency grammar, and thus dependency parsers, have played an important role in the advancement of NLP and computational linguistics as a whole. The term "automatic parser", therefore, most often refers to an automatic *dependency* parser.
 
-Some parsers proceed in a two-step process of morphological tagging (part of speech) and then dependency parsing (syntactic role and conjugations). In all cases, tokenization must first take place, which refers to splitting the text into individual lemmas.
+Some parsers proceed in a two-step process of morphological tagging (part of speech) and then dependency parsing (syntactic role and conjugations). In all cases, tokenization must first take place, which refers to splitting the text into individual words and punctuation marks.
 
-Most automatic parsers are "trained" using a small corpus that has been manually parsed by a human previously, or at least one that was automatically parsed and then checked and corrected by the researcher [@GretzParsingHebrewCHILDES2015]. These "gold-standard" pre-parsed corpora are called treebanks, and repositories of them they have been created for many languages. Building on existing databases of knowledge, these many of these parsers use statistical models to determine the most likely syntactic structure and conjugation for each word in each sentence.
+Most automatic parsers are "trained" using a small corpus that has been manually parsed by a team of humans, or at least one that was automatically parsed and then checked and corrected by the researchers [@GretzParsingHebrewCHILDES2015]. These "gold-standard" pre-parsed corpora are called treebanks, and repositories of them have been created for many languages. Building on existing databases of knowledge, many of these parsers use statistical models to determine the most likely syntactic structure and conjugation for each word in each sentence.
 
-Some parsers, however, are instead simply given entirely unparsed corpora and no knowledge of the language's syntactic structure. Working with nothing but the text itself, the program seeks out patterns and begins to create links and relationships that it deems significant.
+Some parsers are instead simply given entirely unparsed corpora and no knowledge of the language's syntactic structure. Working with nothing but the text itself, the program seeks out patterns and begins to create links and relationships that it deems significant.
 
-Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. Some researchers have claimed 95% or higher accuracy, including for some Hebrew parsers.<!-- I think? source --> When dealing with such a large corpus, such as the Hebrew *OpenSubtitles2018* corpus consisting of nearly 200 million tokens, a best-case scenario for a 5% error threshold results in nearly 10 million incorrectly parsed words.
+Unfortunately, though automatic parsers have achieved surprising levels of accuracy in recent years, even the best continue to produce erroneous parsings. The dependency parser used by the OPUS team for the OpenSubtitles2018 corpus is [*UDPipe*](http://ufal.mff.cuni.cz/udpipe). Tests carried out with this parser have been documented for various languages, including Hebrew [@InstituteofFormalandAppliedLinguisticsUDPipeusermanual2018]. If starting from an untokenized Hebrew corpus, UDPipe has been found to identify lemmas and parts of speech with 79.6% and 80.9% accuracy, respectively. If used on a gold-standard tokenized corpus (i.e. tokenized by humans), these accuracies jump to 93.2% and 95.1%.
 
-Undoubtedly, this can have a negative impact on the accuracy of lemma frequency counts. Many of the issues found in the FDOSH are not due to orthographic ambiguity, but simply to inaccurate parsing. Some, as shown in the previous section, are even caused by erroneous automatic tokenization (consider the lemma "שדיבר").
+Because the files parsed for the OpenSubtitles2018 corpus began as a raw, untokenized text, the accuracy can be expected to be at around 80%. When dealing with such a large corpus, which consists of nearly 200 million tokens, a 20% error threshold results in about 40 million incorrectly parsed words. This, then, helps explain many of the issues found in the FDOSH. Hebrew's orthographic ambiguity simply compounds the problem.
 
-The good news is that automatic parsers are continually improving in accuracy. This is a problem that exists across the board, regardless of the corpus being used—unless it is manually parsed and lemmatized, which is nearly impossible for such large corpora. The tools and techniques outlined in this thesis do not directly deal with the process of parsing.
+Still, the need for only minimal resources to create a frequency dictionary using automatic parsers provides an invaluable opportunity for many educators and researchers. The alternative is to manually parse and lemmatize a corpus—a task that is made practically impossible by the resources needed to do this on such a large scale.
+
+The good news is that automatic parsers are continually improving in accuracy. The funding and efforts being invested into natural language processing research are expected to lead to more accurate results over time. And though the tools and techniques outlined in this thesis do not directly deal with the task of parsing, they are nonetheless affected by it. Some of the suggestions described here, such as using both lemma and part of speech in tandem, are likely to produce even better results.

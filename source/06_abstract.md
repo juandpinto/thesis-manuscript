@@ -33,11 +33,4 @@ Throughout this thesis, the creation process behind the *Frequency Dictionary of
 
 Beyond providing these tools, the present project explores the theory and many of the considerations that play an important role in the creation of a frequency dictionary. These include issues such as corpus size, corpus text type, whether the list is intended for general or specialized use, word family levels, and objective criteria. Issues regarding Hebrew's synthetic morphology and ambiguous non-vocalized writing system are also addressed.
 
-The research questions addressed in this thesis are the following:
-
-1. What are the most common words in spoken Modern Hebrew?
-2. What is an effective alternative for a corpus of spoken language when one is lacking in the desired language, as is often the case for less commonly taught languages?
-3. How can the process of creating a frequency dictionary be simplified so that it is easy to reproduce while maintaining a high level of customizability?
-4. What implications might these findings have for frequency list creation and use as it pertains to other less commonly taught languages?
-
 The project aims to serve as a catalyst for future research that may build upon the ideas discussed here. The development and open dissemination of tools such as these can only lead to greater cooperation among educators and researchers, to the benefit of all involved.
