@@ -23,8 +23,21 @@
 
 \vspace{.5in}
 
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam congue fermentum ante, semper porta nisl consectetur ut. Duis ornare sit amet dui ac faucibus. Phasellus ullamcorper leo vitae arcu ultricies cursus. Duis tristique lacus eget metus bibendum, at dapibus ante malesuada. In dictum nulla nec porta varius. Fusce et elit eget sapien fringilla maximus in sit amet dui.
+<!-- 350 word limit. -->
 
-Mauris eget blandit nisi, faucibus imperdiet odio. Suspendisse blandit dolor sed tellus venenatis, venenatis fringilla turpis pretium. Donec pharetra arcu vitae euismod tincidunt. Morbi ut turpis volutpat, ultrices felis non, finibus justo. Proin convallis accumsan sem ac vulputate. Sed rhoncus ipsum eu urna placerat, sed rhoncus erat facilisis. Praesent vitae vestibulum dui. Proin interdum tellus ac velit varius, sed finibus turpis placerat.
+Studies using word frequency dictionaries—on topics such as vocabulary acquisition, vocabulary load, extensive reading, and vocabulary testing—have historically centered around corpora and morphological issues specific to European languages, especially English. One of the reasons for this is the lack of resources that often plagues departments of less commonly taught languages. Corpora of spoken language are particularly difficult to obtain—the funding and time necessary often make such a project impossible.
 
-\newpage
+This thesis is an effort to provide some of the methodology and tools necessary for educators interested in creating frequency dictionaries for research purposes, for their own classrooms, or even for wider dissemination. In doing so, it will provide an overview of some of the key decisions that must be taken into account for such a project.
+
+Throughout this thesis, the creation process behind the *Frequency Dictionary of Spoken Hebrew* (FDOSH)—a list of the most common words in conversational Modern Hebrew—will be explained. The tools used to create the FDOSH, including corpus resources and customized scripts, are provided as part of a repository of supplementary materials. The goal is to make the entire dictionary-creation process as reproducible as possible while allowing for flexibility and transparency in the tools used. It does this by using well-documented open-source scripts written in an easily readable programming language, Python.
+
+Beyond providing these tools, the present project explores the theory and many of the considerations that play an important role in the creation of a frequency dictionary. These include issues such as corpus size, corpus text type, whether the list is intended for general or specialized use, word family levels, and objective criteria. Issues regarding Hebrew's synthetic morphology and ambiguous non-vocalized writing system are also addressed.
+
+The research questions addressed in this thesis are the following:
+
+1. What are the most common words in spoken Modern Hebrew?
+2. What is an effective alternative for a corpus of spoken language when one is lacking in the desired language, as is often the case for less commonly taught languages?
+3. How can the process of creating a frequency dictionary be simplified so that it is easy to reproduce while maintaining a high level of customizability?
+4. What implications might these findings have for frequency list creation and use as it pertains to other less commonly taught languages?
+
+The project aims to serve as a catalyst for future research that may build upon the ideas discussed here. The development and open dissemination of tools such as these can only lead to greater cooperation among educators and researchers, to the benefit of all involved.
