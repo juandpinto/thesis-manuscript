@@ -52,7 +52,7 @@ The percentage of the corpus that is covered by the first *n* entries on the lis
 
 For example, the sum of the frequencies of the first 30 lemmas in *Table \ref{FDOSH_sample}* is 479,669.22. Dividing by 1,000,000 results in .47966922, or nearly 48%. In theory, this means that by knowing just the first 30 lemmas on the FDOSH one would be able to understand about 48% of the words in the entire OpenSubtitles2018 corpus! Coverage provides a clear example of the power of Zipf's Law (see the [*introduction*](#introduction) for more on Zipf's Law).
 
-Table \ref{coverages} presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
+*Table \ref{coverages}* presents a listing of some important coverages provided by different amounts of lemmas on the FDOSH.
 
 *n* Lemmas | Normalized Frequency Sum | Coverage %
 ----------:|:------------------------:|:---------:
@@ -109,13 +109,13 @@ The use of a subtitle corpus has both positive and negative aspects. As describe
 
 One especially positive aspect of subtitle corpora is their accessibility. Thanks to the efforts of organizations such as [OpenSubtitles](http://opensubtitles.com) and [OPUS](http://opus.nlpl.eu), very large corpora are available to the public for free. And as an additional incentive for the time-constrained researcher, they can be downloaded in a pre-processed, and even parsed, format.
 
-This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making the necessary types of data-collection more accessible, the costs remain too high for many less-commonly taught languages. This is largely due to the arduous process of transcribing audio recordings [@IzreelTranscribingSpokenIsraeli2004].
+This free and open nature makes subtitle corpora excellent tools for research in languages that don't yet have large, high-quality corpora of spoken language. Though advances in technology are rapidly making the necessary types of data-collection more accessible, the costs remain too high for many less-commonly taught languages. This is largely due to the arduous process of transcribing audio recordings [@IzreelTranscribingspokenIsraeli2004].
 
 An ideal corpus for this sort of task would consist of many millions of tokens of recorded, transcribed, and parsed spontaneous spoken language. Several attempts have been made to create a corpus of this nature in Hebrew.
 
 The most prominent of these is the [*Corpus of Spoken Israeli Hebrew* (CoSIH)](http://cosih.com/), created at Tel Aviv University between 2000 and 2002 [@IzreelDesigningCoSIHCorpus2001]. Designed and initiated by a team of distinguished scholars, it unfortunately ran out of funding long before its goals were met. The CoSIH website makes available to the public a total of 13.5 hours of recorded Hebrew, with just over five hours of it having been transcribed.
 
-Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself [@AmirCharacteristicsIntonationUnit2004; @IzreelIntonationUnitsStructure2005; @MettouchiOnlyProsodyPerception2007]. At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens [@Dekelmattertimetense2010, p.7].
+Though a few publications have used data from CoSIH, these have been primarily methodological studies for the design of the project itself [@AmirCharacteristicsintonationunit2004; @IzreelIntonationunitsstructure2005; @MettouchiOnlyprosodyPerception2007]. At least one dissertation, by Nurit Dekel, uses data exclusively from CoSIH. Her entire corpus consists of 44,000 tokens [@DekelmattertimeTense2010, p.7].
 
 Other corpora of spoken Hebrew include the Haifa Corpus of Spoken Hebrew [@YaelHaifaCorpusSpoken2014] and the Hebrew CHILDES corpus [@AlbertHebrewCHILDEScorpus2013; @GretzParsingHebrewCHILDES2015]. The first consists of 17.5 hours of audio recordings, along with a limited selection of transcribed text. The latter is a collection of recordings of interactions between adults and children, comprising a total of 417,938 transcribed tokens. The CHILDES corpus is unique in that the transcriptions are provided using a Latin-based phonemic transliteration. This was done in order to avoid many of the textual ambiguities of using the Hebrew script, some of which are addressed below under [*functional challenges*](#functional-challenges).
 
