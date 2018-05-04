@@ -8,7 +8,7 @@ This exponential distribution is significant because it means that a small numbe
 
 This observation guides the entire endeavor of frequency dictionary creation and use. Though the *Frequency Dictionary of Spoken Hebrew* is not sorted using raw frequency alone^[The sorting method and key measures used by the FDOSH is explained in detail in the [*objective design*](#objective-design) section of this chapter.], the effect of Zipf's law can be easily seen in the listed frequencies that accompany each item.
 
-Beyond understanding this theoretical basis and its implications, other considerations play an important role in the creation of a frequency dictionary. These include corpus size, corpus text type, whether the list will be for general or specialized use, word family levels, and objective criteria. This literature review will treat each of these themes in turn. Because the most comprehensive studies deal with more than one of these issues, some of them will be brought up at various times to illustrate the point under discussion.
+Beyond understanding this theoretical basis and its implications, other considerations play an important role in the creation of a frequency dictionary. These include corpus size, corpus text type, whether the list is intended for general or specialized use, word family levels, and objective criteria. This literature review will treat each of these themes in turn. Because the most comprehensive studies deal with more than one of these issues, some of them will be brought up at various times to illustrate the point under discussion.
 
 
 ## Corpus design
@@ -205,7 +205,11 @@ A thorough overview of all these and more dispersion measures was published by G
 
 The idea behind *DP* is simple. For each word, it aims to find the difference between the frequency one would expect to find in each subcorpus (if the word was perfectly evenly distributed) and the word's actual frequency. Finding the sum of the absolute values of all these distances from perfect dispersion, and then dividing the result in half (since the differences are found in both directions—higher and lower frequencies than expected), one is left with a value between 0 and 1. A *DP* of 0 represents a perfectly even dispersion, and a *DP* close to 1 means a more uneven distribution, where fewer subcorpora contain a larger load of the word's overall frequency. A *DP* of 1 is not actually possible, though Gries explains how to use a normalized value, *DP~norm~*, for those who prefer a true 0–1 range [@GriesDispersionsadjustedfrequencies2008, p. 419; @LijffijtCorrectionStefanTh2012]. The entire equation looks like this:
 
-$$DP\ =\ 0.5 \sum_{i=1}^{n} \left|\ \frac{tokens\ in\ subcorpus_i}{tokens\ in\ corpus}\ -\ \frac{frequency\ of\ lemma_x\ in\ subcorpus_i}{frequency\ of\ lemma_x\ in\ corpus}\ \right|$$
+\begin{small}
+
+$$\textbf{DP}\ =\ 0.5 \sum_{i=1}^{n} \left|\ \frac{tokens\ in\ subcorpus_i}{tokens\ in\ corpus}\ -\ \frac{frequency\ of\ lemma_x\ in\ subcorpus_i}{frequency\ of\ lemma_x\ in\ corpus}\ \right|$$
+
+\end{small}
 
 Because frequency does not play a direct role in calculating *DP*, Gries suggests—as a quick fix—using the product of *DP* and frequency [@GriesDispersionsadjustedfrequencies2008, p. 426]. This is similar to previous adjusted frequency measures such as Juilland's [-@JuillandFrequencydictionaryFrench1970] usage coefficient *U*. Gries goes on to explain how his proposed *U~DP~* may obscure what is actually being measured. However, he does not elaborate on a better measure that could be used to rank items on a frequency dictionary. *U~DP~*, therefore, continues to be used by for this purpose [@Sorellstudyissuestechniques2013, p. 89; @MatsushitaWhatOrderShould2012, p. 99]. It is also the ranking measure used to create the *Frequency Dictionary of Spoken Hebrew*.
 

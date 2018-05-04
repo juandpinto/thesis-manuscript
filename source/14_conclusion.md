@@ -16,7 +16,7 @@ The primary research question asked at the outset of this thesis was the followi
 
 > What are the most common words in spoken Modern Hebrew?
 
-Despite some deficiencies in the *Frequency Dictionary of Spoken Hebrew*, this question has be tentatively answered by the ranking of its words. *Most common words* in this case has been operationalized to mean most highly ranked lemmas by the usage coefficient of Gries's deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010]. Of course, there can be no absolute, definitive answer to such a question, but the FDOSH provides one possibility.
+Despite some deficiencies in the *Frequency Dictionary of Spoken Hebrew*, this question has been tentatively answered by the ranking of its words. *Most common words* in this case has been operationalized to mean most highly ranked lemmas by the usage coefficient of Gries's deviation of proportions, or *U~DP~* [@GriesDispersionsadjustedfrequencies2008; @GriesDispersionsadjustedfrequencies2010]. Of course, there can be no absolute, definitive answer to such a question, but the FDOSH provides one possibility.
 
 The secondary research questions have been answered thus:
 

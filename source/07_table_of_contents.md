@@ -1,3 +1,5 @@
+\newpage
+
 \phantomsection
 \addcontentsline{toc}{section}{Contents}
 

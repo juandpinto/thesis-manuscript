@@ -236,7 +236,7 @@ For each lemma, the FDOSH includes three measures: frequency, range, and dispers
 
 ### Frequency {#methods-frequency}
 
-Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, `{'lemma1':'frequency1', 'lemma2':'frequency2', . . . }`.
+Since we've already calculated the frequency of each lemma for each individual file, calculating total frequency per lemma is straightforward. The script simply creates a new dictionary, `lemma_totals_dict`, and adds to it every lemma in the corpus as its keys, with the corresponding value being a sum of the frequencies in all files for that lemma. In other words, `{'lemma1':'frequency1', 'lemma2':'frequency2', 'lemma3':'frequency3', . . . }`.
 
 ``` {#create-freq-list .python .numberLines startFrom="119"}
 # Calculate total raw frequencies per lemma
@@ -311,7 +311,11 @@ A *DP* of 0 represents a perfectly even dispersion, and a *DP* close to 1 means 
 
 Gries's usage coefficient, or *U~DP~*, is an attempt to make this number more useful. *DP* is first subtracted from 1 and the result is multiplied by the lemma's total frequency. The full equation for *U~DP~* is as follows:
 
-$$\left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\right) \times total\ frequency_x$$
+\begin{small}
+
+$$\mathbf{U_{DP}}\ =\ \left(1 - 0.5 \sum_{i=1}^{n} \left|\ \frac{file_i\ tokens}{total\ tokens}\ -\ \frac{frequency_x\ in\ file_i}{total\ frequency_x}\ \right|\ \right) \times total\ frequency_x$$
+
+\end{small}
 
 In order to calculate this, the script must first find the number of tokens in each file. Luckily, we already did this while calculating normalized frequency, above. The dictionary `token_count_dict` contains these token counts. We've also already taken the step of adding these values together into the integer variable `total_tokens_int`, also while preparing to calculate normalized frequency.
 
